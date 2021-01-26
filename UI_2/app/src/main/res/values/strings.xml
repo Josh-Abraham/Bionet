@@ -1,0 +1,13 @@
+<resources>
+    <string name="hello">Hello!</string>
+    <string name="app_name">Project TBH</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="employee_id">Employee ID #</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_in_as">Sign in as:</string>
+    <string name="system_admin">System Admin</string>
+    <string name="tsa_manager">TSA Manager</string>
+    <string name="page2">page_2</string>
+</resources>
