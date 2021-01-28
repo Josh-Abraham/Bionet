@@ -40,6 +40,10 @@
                     android:layout_height="match_parent" />
             </TableRow>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
             <TextView
                 android:id="@+id/loginError"
                 android:layout_width="match_parent"
@@ -48,15 +52,12 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:gravity="center"
                 android:text="Incorrect Credentials"
                 android:textColor="#474444"
                 android:textSize="16sp"
                 android:textStyle="italic"
                 android:visibility="invisible" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
 
             <EditText
                 android:id="@+id/empIdTextview"
@@ -186,6 +187,14 @@
                     android:textColor="#838383"
                     android:textStyle="bold" />
             </TableRow>
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
 
         </LinearLayout>
 

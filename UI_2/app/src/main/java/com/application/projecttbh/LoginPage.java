@@ -12,9 +12,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -45,17 +47,36 @@ public class LoginPage extends Activity {
         });
 
     }
-    private void validateLogin(String username, String password) {
-        String url = "https://w57jsrc6wj.execute-api.us-east-2.amazonaws.com/test/getuserinfo?userId=1";
+    private void validateLogin(String employee_id, String password) {
+        String url = "https://ssx64936mh.execute-api.us-east-2.amazonaws.com/default/loginService";
         // Create the HTTP Request Queue
         RequestQueue queue = Volley.newRequestQueue(this);
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put("employee_id", employee_id);
+            postData.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postData,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string
-                        Toast.makeText(getApplicationContext(), String.format("%s\n", response), Toast.LENGTH_LONG).show();
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Boolean loginSuccess = Boolean.valueOf(response.getString("result"));
+                            if (loginSuccess) {
+                                Intent intent = new Intent(LoginPage.this, AgentHome.class); // Call a secondary view
+                                startActivity(intent);
+                            } else {
+                                loginError.setVisibility(View.VISIBLE);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -64,9 +85,10 @@ public class LoginPage extends Activity {
                 Toast.makeText(getApplicationContext(), String.format("%s\n", test), Toast.LENGTH_LONG).show();
             }
         });
-//		queue.add(jsonObjectRequest);
-//		loginError.setVisibility(View.VISIBLE);
-      //  Intent intent = new Intent(this, IOIOConnector.class); // Call a secondary view
-       // startActivity(intent);
+		queue.add(jsonObjectRequest);
     }
 }
+
+
+// For Testing
+// Toast.makeText(getApplicationContext(), String.format("%s\n", loginSuccess), Toast.LENGTH_LONG).show();
