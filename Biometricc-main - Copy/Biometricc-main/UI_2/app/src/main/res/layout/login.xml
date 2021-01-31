@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:clickable="true"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="306dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="159dp">
+
+                <Space
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo" />
+
+                <Space
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/loginError"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@drawable/login_error"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Incorrect Credentials"
+                android:textColor="#474444"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:visibility="invisible" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <EditText
+                android:id="@+id/empIdTextview"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/employee_id"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <EditText
+                android:id="@+id/pswdTextField"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPersonName|textPassword"
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#F3E8E8"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Button
+                android:id="@+id/loginBtn"
+                style="@android:style/Widget.DeviceDefault.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0px"
+                android:layout_marginStart="0px"
+                android:layout_marginLeft="0px"
+                android:layout_marginTop="0px"
+                android:height="35dp"
+                android:background="@drawable/button_border"
+                android:minHeight="45dp"
+                android:text="@string/log_in"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Space
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/edit_fields_btn"
+                    style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/text_button"
+                    android:minWidth="50dp"
+                    android:minHeight="40dp"
+                    android:text="@string/forgot_password"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent" />
+            </TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <EditText
+                android:id="@+id/signInAs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:clickable="false"
+                android:ems="10"
+                android:fitsSystemWindows="false"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="@string/sign_in_as"
+                android:inputType="textPersonName"
+                android:text="@string/sign_in_as"
+                android:textColor="#959595"
+                android:textSize="14sp" />
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/forgot_pswd_button5"
+                    style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
+                    android:layout_width="148dp"
+                    android:layout_height="61dp"
+                    android:background="@drawable/text_button"
+                    android:text="@string/system_admin"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:iconPadding="1dp" />
+
+                <Button
+                    android:id="@+id/forgot_pswd_button6"
+                    style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
+                    android:layout_width="157dp"
+                    android:layout_height="61dp"
+                    android:background="@drawable/text_button"
+                    android:text="@string/tsa_manager"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+            </TableRow>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

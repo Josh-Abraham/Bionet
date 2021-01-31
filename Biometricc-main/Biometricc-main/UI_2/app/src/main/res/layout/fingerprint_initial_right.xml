@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true"
+    tools:ignore="MissingDefaultResource">
+
+    <FrameLayout
+        android:layout_width="306dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
+
+            <TextView
+                android:id="@+id/loginError"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@drawable/text_field"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Incorrect Credentials"
+                android:textColor="#474444"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Please place right finger on sensor"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="393dp"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:src="@drawable/fingerprint"
+                app:srcCompat="@mipmap/fingerprint_icon" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                app:srcCompat="@drawable/arrow_down" />
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

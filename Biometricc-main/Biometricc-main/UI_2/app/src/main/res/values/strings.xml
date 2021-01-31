@@ -1,0 +1,19 @@
+<resources>
+    <string name="hello">Hello!</string>
+    <string name="app_name">Project TBH</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="employee_id">Employee ID #</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_in_as">Sign in as:</string>
+    <string name="system_admin">System Admin</string>
+    <string name="tsa_manager">TSA Manager</string>
+    <string name="page2">page_2</string>
+    <string name="review_user">Review User</string>
+    <string name="left_finger_success"></string>
+    <string name="fp_initial_left">Please place left finger on sensor</string>
+    <string name="are_fields_correct">Are these fields correct?</string>
+    <string name="edit">Edit Fields</string>
+    <string name="finish_onboarding">Finish Onboarding</string>
+</resources>
