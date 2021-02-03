@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#FFFFFF"
+    android:clickable="true">
+    <FrameLayout
+        android:layout_width="306dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
+
+            <TextView
+                android:id="@+id/review_user2"
+                android:layout_width="107dp"
+                android:layout_height="59dp"
+                android:text="@string/review_user"
+                android:textColor="@color/purple_500"
+                android:textSize="18sp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="143dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/confirm_fields"
+                    android:layout_width="match_parent"
+                    android:layout_height="113dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/are_fields_correct"
+                    android:textColor="#333333"
+                    android:textSize="36sp" />
+
+            </TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <EditText
+                android:id="@+id/empIdTextview"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/employee_id"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <EditText
+                android:id="@+id/pswdTextField"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPersonName|textPassword"
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#F3E8E8"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <EditText
+                android:id="@+id/pswdTextField2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPersonName|textPassword"
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#F3E8E8"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <Button
+                android:id="@+id/edit_fields_btn"
+                style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:backgroundTint="#00FFFFFF"
+                android:minWidth="50dp"
+                android:minHeight="40dp"
+                android:text="@string/edit"
+                android:textColor="@color/purple_500"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/finish_onboarding_btn"
+                    style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="51dp"
+                    android:background="@drawable/text_button"
+                    android:minWidth="50dp"
+                    android:minHeight="40dp"
+                    android:text="@string/finish_onboarding"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
