@@ -5,4 +5,5 @@
     <item name="imageView" type="id" />
     <item name="button4" type="id" />
     <item name="button" type="id" />
+    <item name="fl_wrapper" type="id">wrapper</item>
 </resources>

@@ -143,7 +143,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="33dp" />
 
             <EditText
                 android:id="@+id/signInAs"
@@ -161,6 +161,10 @@
                 android:textColor="#959595"
                 android:textSize="14sp" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="17dp" />
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
@@ -168,19 +172,23 @@
                 <Button
                     android:id="@+id/forgot_pswd_button5"
                     style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
-                    android:layout_width="148dp"
-                    android:layout_height="61dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_button"
                     android:text="@string/system_admin"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:iconPadding="1dp" />
 
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="60dp" />
+
                 <Button
                     android:id="@+id/forgot_pswd_button6"
                     style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
                     android:layout_width="157dp"
-                    android:layout_height="61dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/text_button"
                     android:text="@string/tsa_manager"
                     android:textColor="#FFFFFF"
