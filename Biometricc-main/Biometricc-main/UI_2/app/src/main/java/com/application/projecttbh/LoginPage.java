@@ -1,7 +1,6 @@
 package com.application.projecttbh;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +13,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
 
 
 public class LoginPage extends Activity {
@@ -31,7 +28,7 @@ public class LoginPage extends Activity {
 
         // Set object instances for UI items
         loginBtn = (Button) findViewById(R.id.loginBtn);
-        empIdTextview = (TextView) findViewById(R.id.empIdTextview);
+        empIdTextview = (TextView) findViewById(R.id.newUserName);
         pswdTextField = (TextView) findViewById(R.id.pswdTextField);
         loginError = (TextView) findViewById(R.id.loginError);
 

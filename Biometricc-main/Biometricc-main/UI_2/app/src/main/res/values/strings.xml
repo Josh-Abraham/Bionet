@@ -11,14 +11,20 @@
     <string name="tsa_manager">TSA Manager</string>
     <string name="page2">page_2</string>
     <string name="review_user">Review User</string>
-    <string name="left_finger_success"></string>
+    <string name="left_finger_success"> Left Finger Scanned Successfully</string>
     <string name="fp_initial_left">Please place left finger on sensor</string>
     <string name="are_fields_correct">Are these fields correct?</string>
     <string name="edit">Edit Fields</string>
+    <string name="begin_onboarding">Begin Onboarding</string>
     <string name="finish_onboarding">Finish Onboarding</string>
     <string name="reports">Reports</string>
     <string name="scan">Start Scan</string>
     <string name="history">History</string>
+    <string name="adduser">Add User</string>
+    <string name="addname">Enter Name</string>
+    <string name="addaddress">Enter Address</string>
+    <string name="addpassport">Enter Passport #</string>
+    <string name="enterCreds">Please enter the following credentials</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

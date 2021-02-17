@@ -58,7 +58,7 @@
                 android:layout_height="25dp" />
 
             <EditText
-                android:id="@+id/empIdTextview"
+                android:id="@+id/newUserName"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:height="35dp"
