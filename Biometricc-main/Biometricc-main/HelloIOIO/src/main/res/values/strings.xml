@@ -11,4 +11,14 @@
     <string name="system_admin">System Admin</string>
     <string name="tsa_manager">TSA Manager</string>
     <string name="page2">page_2</string>
+<<<<<<< Updated upstream:Biometricc-main/Biometricc-main/HelloIOIO/src/main/res/values/strings.xml
 </resources>
+=======
+    <string name="review_user">Review User</string>
+    <string name="left_finger_success"></string>
+    <string name="fp_initial_left">Please place left finger on sensor</string>
+    <string name="are_fields_correct">Are these fields correct?</string>
+    <string name="edit">Edit Fields</string>
+    <string name="finish_onboarding">Finish Onboarding</string>
+</resources>
+>>>>>>> Stashed changes:UI_2/app/src/main/res/values/strings.xml

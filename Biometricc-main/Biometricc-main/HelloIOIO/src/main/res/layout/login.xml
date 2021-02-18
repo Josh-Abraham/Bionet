@@ -6,7 +6,6 @@
     android:background="#FFFFFF"
     android:clickable="true"
     android:orientation="vertical">
-
     <FrameLayout
         android:layout_width="306dp"
         android:layout_height="match_parent"
@@ -110,7 +109,7 @@
                 android:background="@drawable/button_border"
                 android:minHeight="45dp"
                 android:text="@string/log_in"
-                android:textColor="#838383"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
             <Space
@@ -126,7 +125,7 @@
                     android:layout_height="match_parent" />
 
                 <Button
-                    android:id="@+id/forgot_pswd_button"
+                    android:id="@+id/edit_fields_btn"
                     style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
@@ -134,7 +133,7 @@
                     android:minWidth="50dp"
                     android:minHeight="40dp"
                     android:text="@string/forgot_password"
-                    android:textColor="#838383"
+                    android:textColor="#FFFFFF"
                     android:textStyle="bold" />
 
                 <Space
@@ -173,8 +172,9 @@
                     android:layout_height="61dp"
                     android:background="@drawable/text_button"
                     android:text="@string/system_admin"
-                    android:textColor="#838383"
-                    android:textStyle="bold" />
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:iconPadding="1dp" />
 
                 <Button
                     android:id="@+id/forgot_pswd_button6"
@@ -183,7 +183,7 @@
                     android:layout_height="61dp"
                     android:background="@drawable/text_button"
                     android:text="@string/tsa_manager"
-                    android:textColor="#838383"
+                    android:textColor="#FFFFFF"
                     android:textStyle="bold" />
             </TableRow>
 

@@ -1,0 +1,59 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.application.projecttbh"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:5:5-21:19
+12        android:allowBackup="true"
+12-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:6:9-35
+13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+13-->[androidx.core:core:1.3.0] C:\Users\daniel\.gradle\caches\transforms-2\files-2.1\817a61a686dfd849f92445d1d98580bd\core-1.3.0\AndroidManifest.xml:24:18-86
+14        android:debuggable="true"
+15        android:extractNativeLibs="false"
+16        android:icon="@mipmap/ic_launcher"
+16-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:7:9-43
+17        android:label="@string/app_name"
+17-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:8:9-41
+18        android:roundIcon="@mipmap/ic_launcher_round"
+18-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:9:9-54
+19        android:supportsRtl="true"
+19-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:10:9-35
+20        android:theme="@style/Theme.ProjectTBH" >
+20-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:11:9-48
+21        <uses-library
+21-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:12:5-13:36
+22            android:name="com.android.future.usb.accessory"
+22-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:12:19-66
+23            android:required="false" />
+23-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:13:9-33
+24
+25        <activity
+25-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:14:5-20:16
+26            android:name="com.application.projecttbh.MainActivity"
+26-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:14:48-76
+27            android:label="@string/app_name"
+27-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:14:15-47
+28            android:theme="@android:style/Theme.NoTitleBar" >
+28-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:15:9-56
+29            <intent-filter>
+29-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:16:9-19:25
+30                <action android:name="android.intent.action.MAIN" />
+30-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:17:13-65
+30-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:17:21-62
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:18:13-73
+32-->C:\Users\daniel\Bluedot Group Dropbox\MAIN\Personal\Dan\Personal\University\Year 6\ENG 4000\Biometricc-main\Biometricc-main\UI_2\app\src\main\AndroidManifest.xml:18:23-70
+33            </intent-filter>
+34        </activity>
+35    </application>
+36
+37</manifest>
