@@ -1,24 +1,69 @@
 package com.application.projecttbh;
 
 public class OnboardData {
-    private String username = "";
+    public OnboardData() {
+        this.setPassportId("");
+        this.setFirstName("");
+        this.setMiddleInitial("");
+        this.setLastName("");
+        this.setAddress("");
+        this.setDob("");
+    }
+    private String passportId = "";
+    private String firstName = "";
+    private String middleInitial = "";
+    private String lastName = "";
+    private String dob = "";
+    private String address = "";
+
 
     // Getter/setter
-    public String getUsername() {
-        return getInstance().username;
+    public String getPassportId() {
+        return this.passportId;
     }
 
-    public void setUsername(String newUsername) {
-        this.username = newUsername;
+    public void setPassportId(String newPassportId) {
+        this.passportId = newPassportId;
     }
 
-    private static OnboardData instance;
-
-    public static OnboardData getInstance() {
-        if (instance == null)
-            instance = new OnboardData();
-        return instance;
+    public String getFirstName() {
+        return this.firstName;
     }
 
-    private OnboardData() { }
+    public void setFirstName(String newFirstName) {
+        this.firstName = newFirstName;
+    }
+
+    public String getMiddleInitial() {
+        return this.middleInitial;
+    }
+
+    public void setMiddleInitial(String newMiddleInitial) {
+        this.middleInitial = newMiddleInitial;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String newLastName) {
+        this.lastName = newLastName;
+    }
+
+    public String getDob() {
+        return this.dob;
+    }
+
+    public void setDob(String newDob) {
+        this.dob = newDob;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String newAddress) {
+        this.address = newAddress;
+    }
+
 }
