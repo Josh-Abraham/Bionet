@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/outerFrameOnboarding"
+        android:layout_width="306dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/innerList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="105dp">
+
+                <Space
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo" />
+
+                <Space
+                    android:layout_width="100dp"
+                    android:layout_height="103dp" />
+            </TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <EditText
+                android:id="@+id/userTypeTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:clickable="false"
+                android:ems="10"
+                android:fitsSystemWindows="false"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="@string/sign_in_as"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:text="@string/onboarding_form"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <EditText
+                android:id="@+id/passport_id_onboarding"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/passport_number"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="33dp">
+
+                <EditText
+                    android:id="@+id/first_name_onboarding"
+                    android:layout_width="159dp"
+                    android:layout_height="33dp"
+                    android:height="35dp"
+                    android:background="@drawable/text_field"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="@string/first_name"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#838383"
+                    android:textColorHighlight="#009688"
+                    android:textColorHint="#959595"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="30dp" />
+
+                <EditText
+                    android:id="@+id/middle_initial_onboarding"
+                    android:layout_width="120dp"
+                    android:layout_height="33dp"
+                    android:height="35dp"
+                    android:background="@drawable/text_field"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="@string/middle_initial"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#838383"
+                    android:textColorHighlight="#009688"
+                    android:textColorHint="#959595"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <EditText
+                android:id="@+id/last_name_onboarding"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/last_name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="33dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="110dp"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:padding="0dp"
+                    android:text="@string/date_of_birth"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/dob_onboarding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:ems="10"
+                    android:inputType="date" />
+            </TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <EditText
+                android:id="@+id/address_onboarding"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/house_address"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+
+            <Button
+                android:id="@+id/login_button"
+                style="@android:style/Widget.DeviceDefault.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0px"
+                android:layout_marginStart="0px"
+                android:layout_marginTop="0px"
+                android:height="30dp"
+                android:background="@drawable/button_border"
+                android:checkable="false"
+                android:clickable="true"
+                android:enabled="false"
+                android:focusable="true"
+                android:minHeight="45dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
+                android:text="@string/continue_button"
+                android:textSize="18sp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Space
+                    android:layout_width="63dp"
+                    android:layout_height="match_parent" />
+
+                <Space
+                    android:layout_width="63dp"
+                    android:layout_height="match_parent" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:text="@string/name" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

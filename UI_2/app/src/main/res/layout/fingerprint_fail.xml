@@ -22,12 +22,12 @@
                 android:layout_height="147dp" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/welcome_tag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Left finger failed, please try again"
-                android:textColor="@color/white"
+                android:textColor="@color/primary_text"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
                 <solid android:color="@android:color/white" />
                 <stroke
                     android:width="1dip"
-                    android:color="@color/bggrey" />
+                 />
             </shape>
 
 

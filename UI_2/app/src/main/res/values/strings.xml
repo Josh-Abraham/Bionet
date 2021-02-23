@@ -9,6 +9,7 @@
     <string name="sign_in_as">Sign in as:</string>
     <string name="system_admin">System Admin</string>
     <string name="tsa_manager">TSA Manager</string>
+    <string name="tsa_agent">TSA Agent</string>
     <string name="page2">page_2</string>
     <string name="review_user">Review User</string>
     <string name="left_finger_success"/>
@@ -16,4 +17,19 @@
     <string name="are_fields_correct">Are these fields correct?</string>
     <string name="edit">Edit Fields</string>
     <string name="finish_onboarding">Finish Onboarding</string>
+    <string name="welcome">Welcome</string>
+    <string name="user">User</string>
+    <string name="batch_mode">Batch Mode</string>
+    <string name="add_single">Add Single</string>
+    <string name="match_user">Match User</string>
+    <string name="name">Name</string>
+    <string name="incorrect_credentials">Incorrect Credentials</string>
+    <string name="onboarding_form">Onboarding Form</string>
+    <string name="passport_number">Passport Number</string>
+    <string name="continue_button">Continue</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="middle_initial">Middle Initial</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="house_address">House Address</string>
 </resources>

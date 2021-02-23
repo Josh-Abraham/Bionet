@@ -13,7 +13,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -21,10 +20,19 @@ import org.json.JSONObject;
 
 
 public class LoginPage extends Activity {
-    private Button loginBtn;
     private TextView empIdTextview;
     private TextView pswdTextField;
     private TextView loginError;
+    private TextView userTypeTextField;
+
+    private Button loginBtn;
+    private Button sysAdminBtn;
+    private Button tsaManagerBtn;
+
+    private String userType = "TSA Agent";
+    private String TSA_AGENT = "TSA Agent";
+    private String TSA_MANAGER = "Manager";
+    private String SYS_ADMIN = "System Admin";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,10 +40,14 @@ public class LoginPage extends Activity {
         setContentView(R.layout.login);
 
         // Set object instances for UI items
-        loginBtn = (Button) findViewById(R.id.loginBtn);
-        empIdTextview = (TextView) findViewById(R.id.empIdTextview);
+        loginBtn = (Button) findViewById(R.id.login_button);
+        sysAdminBtn = (Button) findViewById(R.id.sysAdminBtn);
+        tsaManagerBtn = (Button) findViewById(R.id.tsaManagerBtn);
+
+        empIdTextview = (TextView) findViewById(R.id.emp_id_onboarding);
         pswdTextField = (TextView) findViewById(R.id.pswdTextField);
         loginError = (TextView) findViewById(R.id.loginError);
+        userTypeTextField = (TextView) findViewById(R.id.userTypeTextField);
 
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -46,6 +58,32 @@ public class LoginPage extends Activity {
             }
         });
 
+        sysAdminBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (userType.equals(SYS_ADMIN)) {
+                    userType = TSA_AGENT;
+
+                } else {
+                    userType = SYS_ADMIN;
+                }
+                userTypeTextField.setText(userType);
+            }
+        });
+
+        tsaManagerBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (userType.equals(TSA_MANAGER)) {
+                    userType = TSA_AGENT;
+
+                } else {
+                    userType = TSA_MANAGER;
+                }
+                userTypeTextField.setText(userType);
+            }
+        });
+
     }
     private void validateLogin(String employee_id, String password) {
         String url = "https://ssx64936mh.execute-api.us-east-2.amazonaws.com/default/loginService";
@@ -53,8 +91,10 @@ public class LoginPage extends Activity {
         RequestQueue queue = Volley.newRequestQueue(this);
         JSONObject postData = new JSONObject();
         try {
-            postData.put("employee_id", employee_id);
-            postData.put("password", password);
+            postData.put("Username", employee_id);
+            postData.put("Password", password);
+            postData.put("Role", userType);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -66,8 +106,17 @@ public class LoginPage extends Activity {
                         try {
                             Boolean loginSuccess = Boolean.valueOf(response.getString("result"));
                             if (loginSuccess) {
-                                Intent intent = new Intent(LoginPage.this, AgentHome.class); // Call a secondary view
-                                startActivity(intent);
+                                AppProperties.getInstance().setUsername(employee_id);
+                                loginError.setVisibility(View.INVISIBLE);
+                                if (userType.equals(TSA_AGENT)) {
+                                    Intent intent = new Intent(LoginPage.this, AgentHome.class); // Call a secondary view
+                                    startActivity(intent);
+                                }
+                                else if (userType.equals(TSA_MANAGER)) {
+                                    Intent intent = new Intent(LoginPage.this, ManagerHome.class); // Call a secondary view
+                                    startActivity(intent);
+                                }
+
                             } else {
                                 loginError.setVisibility(View.VISIBLE);
                             }

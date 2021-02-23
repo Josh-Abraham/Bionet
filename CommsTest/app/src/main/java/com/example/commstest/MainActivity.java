@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
                     Log.d("SERIAL", "PERM NOT GRANTED");
                 }
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_ATTACHED)) {
-                onClickStart(startButton);
+                onClickStart();
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
                 onClickStop(stopButton);
 
@@ -107,7 +107,13 @@ public class MainActivity extends Activity {
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         registerReceiver(broadcastReceiver, filter);
 
+        onClickStart();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        onClickStop(stopButton);
     }
 
     public void setUiEnabled(boolean bool) {
@@ -118,7 +124,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public void onClickStart(View view) {
+    public void onClickStart() {
 
         HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
         if (!usbDevices.isEmpty()) {

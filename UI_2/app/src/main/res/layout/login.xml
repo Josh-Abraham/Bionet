@@ -40,10 +40,6 @@
                     android:layout_height="match_parent" />
             </TableRow>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
             <TextView
                 android:id="@+id/loginError"
                 android:layout_width="match_parent"
@@ -60,7 +56,23 @@
                 android:visibility="invisible" />
 
             <EditText
-                android:id="@+id/empIdTextview"
+                android:id="@+id/userTypeTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:clickable="false"
+                android:ems="10"
+                android:fitsSystemWindows="false"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="@string/sign_in_as"
+                android:inputType="textPersonName"
+                android:text="@string/tsa_agent"
+                android:textColor="#959595"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/emp_id_onboarding"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:height="35dp"
@@ -99,7 +111,7 @@
                 android:layout_height="25dp" />
 
             <Button
-                android:id="@+id/loginBtn"
+                android:id="@+id/login_button"
                 style="@android:style/Widget.DeviceDefault.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,10 +120,9 @@
                 android:layout_marginLeft="0px"
                 android:layout_marginTop="0px"
                 android:height="35dp"
-                android:background="@drawable/button_border"
                 android:minHeight="45dp"
                 android:text="@string/log_in"
-                android:textColor="#838383"
+                android:background="@drawable/button_border"
                 android:textSize="18sp" />
 
             <Space
@@ -123,23 +134,22 @@
                 android:layout_height="wrap_content">
 
                 <Space
-                    android:layout_width="78dp"
+                    android:layout_width="63dp"
                     android:layout_height="match_parent" />
 
                 <Button
                     android:id="@+id/forgot_pswd_button"
                     style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
-                    android:layout_width="150dp"
+                    android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:background="@drawable/text_button"
                     android:minWidth="50dp"
                     android:minHeight="40dp"
                     android:text="@string/forgot_password"
-                    android:textColor="#838383"
                     android:textStyle="bold" />
 
                 <Space
-                    android:layout_width="78dp"
+                    android:layout_width="63dp"
                     android:layout_height="match_parent" />
             </TableRow>
 
@@ -166,24 +176,23 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
-
                 <Button
-                    android:id="@+id/sys_admin"
-                    style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
-                    android:layout_width="148dp"
-                    android:layout_height="61dp"
-                    android:background="@drawable/text_button"
-                    android:text="@string/system_admin"
-                    android:textColor="#838383"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/tsa_manager"
+                    android:id="@+id/tsaManagerBtn"
                     style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
                     android:layout_width="157dp"
                     android:layout_height="61dp"
                     android:background="@drawable/text_button"
                     android:text="@string/tsa_manager"
+                    android:textColor="#838383"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/sysAdminBtn"
+                    style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
+                    android:layout_width="148dp"
+                    android:layout_height="61dp"
+                    android:background="@drawable/text_button"
+                    android:text="@string/system_admin"
                     android:textColor="#838383"
                     android:textStyle="bold" />
             </TableRow>
