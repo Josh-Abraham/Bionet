@@ -1,8 +1,10 @@
 package com.application.projecttbh;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,12 +17,12 @@ public class OnboardingOne extends Activity {
     private TextView addressOnboarding;
 
     private Button continueButton;
-    private Boolean passportNumCheck;
-    private Boolean firstNameCheck;
-
-    private Boolean lastNameCheck;
-    private Boolean dobCheck;
-    private Boolean addressCheck;
+    private Boolean passportNumCheck = false;
+    private Boolean firstNameCheck = false;
+    private Boolean middleInitialCheck = true;  // Not a required param
+    private Boolean lastNameCheck = false;
+    private Boolean dobCheck = false;
+    private Boolean addressCheck = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,26 +42,31 @@ public class OnboardingOne extends Activity {
             @Override public void validate(TextView textView, String text) {
                 passportNumCheck = text.length() > 0;
                 userData.setPassportId(text);
+                checkContinueButtonEnable();
             }
         });
 
         firstNameOnboarding.addTextChangedListener(new TextValidator(firstNameOnboarding) {
             @Override public void validate(TextView textView, String text) {
-                firstNameCheck = text.length() > 0;
+                firstNameCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
                 userData.setFirstName(text);
+                checkContinueButtonEnable();
             }
         });
 
         middleInitialOnboarding.addTextChangedListener(new TextValidator(middleInitialOnboarding) {
             @Override public void validate(TextView textView, String text) {
+                middleInitialCheck = text.matches("[a-zA-Z]+");
                 userData.setFirstName(text);
+                checkContinueButtonEnable();
             }
         });
 
         lastNameOnboarding.addTextChangedListener(new TextValidator(lastNameOnboarding) {
             @Override public void validate(TextView textView, String text) {
-                lastNameCheck = text.length() > 0;
+                lastNameCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
                 userData.setLastName(text);
+                checkContinueButtonEnable();
             }
         });
 
@@ -67,6 +74,7 @@ public class OnboardingOne extends Activity {
             @Override public void validate(TextView textView, String text) {
                 dobCheck = text.length() > 0;
                 userData.setDob(text);
+                checkContinueButtonEnable();
             }
         });
 
@@ -74,8 +82,24 @@ public class OnboardingOne extends Activity {
             @Override public void validate(TextView textView, String text) {
                 addressCheck = text.length() > 0;
                 userData.setAddress(text);
+                checkContinueButtonEnable();
+            }
+        });
+
+        continueButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                onContinueClick();
             }
         });
     }
 
+    private void onContinueClick() {
+        Intent intent = new Intent(OnboardingOne.this, OnboardingTwo.class); // Call a secondary view
+        startActivity(intent);
+    }
+
+    private void checkContinueButtonEnable() {
+        continueButton.setEnabled(passportNumCheck && firstNameCheck && middleInitialCheck && lastNameCheck && dobCheck && addressCheck);
+    }
 }
