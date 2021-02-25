@@ -1,120 +1,96 @@
 package com.application.projecttbh;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.core.Camera;
-import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ImageAnalysis;
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageProxy;
-import androidx.camera.core.Preview;
-import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
+import com.hbb20.CountryCodePicker;
 
+public class OnboardingTwo extends Activity {
+    private TextView streetAddressOnboarding;
+    private TextView unitNumberOnboarding;
+    private TextView cityOnboarding;
+    private TextView provinceOnboarding;
+    private CountryCodePicker  countryOnboarding;
+    private TextView postalCodeOnboarding;
 
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Size;
-import android.widget.Toast;
-
-import com.google.common.util.concurrent.ListenableFuture;
-
-import java.util.concurrent.ExecutionException;
-
-public class OnboardingTwo extends AppCompatActivity {
-
-    PreviewView previewView;
-    private int REQUEST_CODE_PERMISSIONS = 101;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
-
-
+    private Button continueButton;
+    private Boolean streetAddressCheck = false;
+    private Boolean cityCheck = false;
+    private Boolean provinceCheck = false;
+    private Boolean postalCodeCheck = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_two);
 
+        streetAddressOnboarding = (TextView) findViewById(R.id.street_address_onboarding);
+        unitNumberOnboarding = (TextView) findViewById(R.id.apt_num_onboarding);
+        cityOnboarding = (TextView) findViewById(R.id.city_onboarding);
+        provinceOnboarding = (TextView) findViewById(R.id.province_onboarding);
+        countryOnboarding= (CountryCodePicker) findViewById(R.id.country_onboarding);
+        postalCodeOnboarding = (TextView) findViewById(R.id.postal_code_onboarding);
 
-        previewView = findViewById(R.id.previewView);
+        continueButton = (Button) findViewById(R.id.continue_button);
 
-        if(allPermissionsGranted()){
-            startCamera();
-        } else{
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
-        }
-
-    }
-
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(allPermissionsGranted()){
-            startCamera();
-        } else{
-            Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-
-    }
-
-
-    private boolean allPermissionsGranted(){
-
-        for(String permission : REQUIRED_PERMISSIONS){
-            if(ContextCompat.checkSelfPermission(getApplicationContext(), permission) != PackageManager.PERMISSION_GRANTED){
-                return false;
+        streetAddressOnboarding.addTextChangedListener(new TextValidator(streetAddressOnboarding) {
+            @Override public void validate(TextView textView, String text) {
+                streetAddressCheck = text.length() > 0;
+                OnboardData.getInstance().setStreetAddress(text);
+                checkContinueButtonEnable();
             }
-        }
+        });
 
-        return true;
+        cityOnboarding.addTextChangedListener(new TextValidator(cityOnboarding) {
+            @Override public void validate(TextView textView, String text) {
+                cityCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
+                OnboardData.getInstance().setCity(text);
+                checkContinueButtonEnable();
+            }
+        });
+
+        provinceOnboarding.addTextChangedListener(new TextValidator(provinceOnboarding) {
+            @Override public void validate(TextView textView, String text) {
+                provinceCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
+                OnboardData.getInstance().setProvince(text);
+                checkContinueButtonEnable();
+            }
+        });
+
+        countryOnboarding.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                OnboardData.getInstance().setCountry(countryOnboarding.getSelectedCountryName());
+            }
+        });
+
+        postalCodeOnboarding.addTextChangedListener(new TextValidator(postalCodeOnboarding) {
+            @Override public void validate(TextView textView, String text) {
+                postalCodeCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
+                OnboardData.getInstance().setPostalCode(text);
+                checkContinueButtonEnable();
+            }
+        });
+
+        continueButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                onContinueClick();
+            }
+        });
     }
 
+    private void onContinueClick() {
+        Intent intent = new Intent(OnboardingTwo.this, OnboardingCamera.class); // Call a secondary view
+        startActivity(intent);
+    }
 
-    public void startCamera(){
-        ListenableFuture cameraProviderFuture = ProcessCameraProvider.getInstance(this);
-
-        cameraProviderFuture.addListener(() -> {
-            try {
-                // Camera provider is now guaranteed to be available
-                ProcessCameraProvider cameraProvider = (ProcessCameraProvider) cameraProviderFuture.get();
-                // Set up the view finder use case to display camera preview
-                Preview preview = new Preview.Builder().build();
-                // Choose the camera by requiring a lens facing
-                CameraSelector cameraSelector = new CameraSelector.Builder()
-                        .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                        .build();
-                //Images are processed by passing an executor in which the image analysis is run
-                ImageAnalysis imageAnalysis =
-                        new ImageAnalysis.Builder()
-                                //set the resolution of the view
-                                .setTargetResolution(new Size(1280, 720))
-                                //the executor receives the last available frame from the camera at the time that the analyze() method is called
-                                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                                .build();
-                // Connect the preview use case to the previewView
-                preview.setSurfaceProvider(previewView.getSurfaceProvider());
-                // Attach use cases to the camera with the same lifecycle owner
-                Camera camera = cameraProvider.bindToLifecycle(
-                        ((LifecycleOwner)this),
-                        cameraSelector,
-                        preview,
-                        imageAnalysis);
-
-            } catch (InterruptedException | ExecutionException e) {
-                // Currently no exceptions thrown. cameraProviderFuture.get() should
-                // not block since the listener is being called, so no need to
-
-                // handle InterruptedException.
-            }
-        }, ContextCompat.getMainExecutor(this));
+    private void checkContinueButtonEnable() {
+        continueButton.setEnabled((cityCheck && provinceCheck && streetAddressCheck && postalCodeCheck) || AppProperties.getInstance().getDebugMode());
     }
 
 }

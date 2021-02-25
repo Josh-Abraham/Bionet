@@ -2,6 +2,7 @@ package com.application.projecttbh;
 
 public class AppProperties {
     private String username = "";
+    private Boolean debugMode = false;
 
     // Getter/setter
     public String getUsername() {
@@ -10,6 +11,10 @@ public class AppProperties {
 
     public void setUsername(String newUsername) {
         this.username = newUsername;
+    }
+
+    public Boolean getDebugMode() {
+        return getInstance().debugMode;
     }
 
     private static AppProperties instance;

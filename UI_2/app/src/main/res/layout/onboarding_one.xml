@@ -16,12 +16,12 @@
         <LinearLayout
             android:id="@+id/innerList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="658dp"
             android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="25dp" />
+                android:layout_height="30dp" />
 
             <TableRow
                 android:layout_width="match_parent"
@@ -56,7 +56,7 @@
                 android:fitsSystemWindows="false"
                 android:focusable="false"
                 android:gravity="center"
-                android:hint="@string/sign_in_as"
+                android:hint="@string/onboarding_form"
                 android:importantForAutofill="no"
                 android:inputType="none"
                 android:text="@string/onboarding_form"
@@ -65,88 +65,105 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="25dp" />
 
-            <EditText
-                android:id="@+id/passport_id_onboarding"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:height="35dp"
-                android:background="@drawable/text_field"
-                android:ems="10"
-                android:gravity="center_vertical"
-                android:hint="@string/passport_number"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textColor="#838383"
-                android:textColorHighlight="#009688"
-                android:textColorHint="#959595"
-                android:textSize="16sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="33dp">
+                android:layout_height="55dp">
 
-                <EditText
-                    android:id="@+id/first_name_onboarding"
-                    android:layout_width="159dp"
-                    android:layout_height="33dp"
-                    android:height="35dp"
-                    android:background="@drawable/text_field"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="@string/first_name"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:textColor="#838383"
-                    android:textColorHighlight="#009688"
-                    android:textColorHint="#959595"
-                    android:textSize="16sp" />
+                <LinearLayout
+                    android:id="@+id/first_name_panel"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <Space
-                    android:layout_width="25dp"
-                    android:layout_height="30dp" />
+                    <TextView
+                        android:id="@+id/first_name"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="10px"
+                        android:text="@string/first_name"
+                        android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/middle_initial_onboarding"
-                    android:layout_width="120dp"
-                    android:layout_height="33dp"
-                    android:height="35dp"
-                    android:background="@drawable/text_field"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="@string/middle_initial"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:textColor="#838383"
-                    android:textColorHighlight="#009688"
-                    android:textColorHint="#959595"
-                    android:textSize="16sp" />
+                    <EditText
+                        android:id="@+id/first_name_onboarding"
+                        android:layout_width="160dp"
+                        android:layout_height="33dp"
+                        android:height="33dp"
+                        android:background="@drawable/text_field"
+                        android:ems="10"
+                        android:gravity="center_vertical"
+                        android:hint="@string/ie_john"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:textColor="#838383"
+                        android:textColorHighlight="#009688"
+                        android:textColorHint="#959595"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/middle_initial_panel"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/middleNameTag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="10px"
+                        android:text="@string/middle_initial"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/middle_initial_onboarding"
+                        android:layout_width="126dp"
+                        android:layout_height="33dp"
+                        android:height="33dp"
+                        android:background="@drawable/text_field"
+                        android:ems="10"
+                        android:gravity="center_vertical"
+                        android:hint="@string/ie_middle"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:textColor="#838383"
+                        android:textColorHighlight="#009688"
+                        android:textColorHint="#959595"
+                        android:textSize="16sp" />
+                </LinearLayout>
             </TableRow>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="23dp" />
+
+            <TextView
+                android:id="@+id/last_name_tag"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:paddingLeft="10px"
+                android:text="@string/last_name"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/last_name_onboarding"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:height="35dp"
+                android:height="33dp"
                 android:background="@drawable/text_field"
                 android:ems="10"
                 android:gravity="center_vertical"
-                android:hint="@string/last_name"
+                android:hint="@string/ie_smith"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:paddingStart="10dp"
@@ -158,55 +175,74 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="23dp" />
 
-            <TableRow
+
+            <LinearLayout
+                android:id="@+id/dob_panel"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="56dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="110dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="-11dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
                     android:gravity="center_vertical"
                     android:text="@string/date_of_birth"
-                    android:textAlignment="center"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/dob_onboarding"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="33dp"
+                    android:height="33dp"
+                    android:background="@drawable/text_field"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:ems="10"
+                    android:hint="@string/ie_dd.mm.yyyy"
                     android:inputType="date" />
-            </TableRow>
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="23dp" />
 
-            <EditText
-                android:id="@+id/address_onboarding"
+            <LinearLayout
+                android:id="@+id/passport_id_panel"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:height="35dp"
-                android:background="@drawable/text_field"
-                android:ems="10"
-                android:gravity="center_vertical"
-                android:hint="@string/house_address"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textColor="#838383"
-                android:textColorHighlight="#009688"
-                android:textColorHint="#959595"
-                android:textSize="16sp" />
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="139dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/passport_number"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/passport_id_onboarding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:height="33dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:background="@drawable/text_field"
+                    android:ems="10"
+                    android:hint="@string/ie_passport"
+                    android:inputType="text" />
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="45dp" />
+                android:layout_height="60dp" />
 
             <Button
                 android:id="@+id/login_button"

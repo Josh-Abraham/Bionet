@@ -3,7 +3,6 @@ package com.application.projecttbh;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ public class OnboardingOne extends Activity {
     private TextView middleInitialOnboarding;
     private TextView lastNameOnboarding;
     private TextView dobOnboarding;
-    private TextView addressOnboarding;
 
     private Button continueButton;
     private Boolean passportNumCheck = false;
@@ -22,26 +20,25 @@ public class OnboardingOne extends Activity {
     private Boolean middleInitialCheck = true;  // Not a required param
     private Boolean lastNameCheck = false;
     private Boolean dobCheck = false;
-    private Boolean addressCheck = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_one);
-        OnboardData userData = new OnboardData();
+
         // Add UI items
         passportIdOnboarding = (TextView) findViewById(R.id.passport_id_onboarding);
         firstNameOnboarding = (TextView) findViewById(R.id.first_name_onboarding);
         middleInitialOnboarding = (TextView) findViewById(R.id.middle_initial_onboarding);
         lastNameOnboarding = (TextView) findViewById(R.id.last_name_onboarding);
         dobOnboarding = (TextView) findViewById(R.id.dob_onboarding);
-        addressOnboarding = (TextView) findViewById(R.id.address_onboarding);
+
         continueButton = (Button) findViewById(R.id.login_button);
 
         passportIdOnboarding.addTextChangedListener(new TextValidator(passportIdOnboarding) {
             @Override public void validate(TextView textView, String text) {
                 passportNumCheck = text.length() > 0;
-                userData.setPassportId(text);
+                OnboardData.getInstance().setPassportId(text);
                 checkContinueButtonEnable();
             }
         });
@@ -49,7 +46,7 @@ public class OnboardingOne extends Activity {
         firstNameOnboarding.addTextChangedListener(new TextValidator(firstNameOnboarding) {
             @Override public void validate(TextView textView, String text) {
                 firstNameCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
-                userData.setFirstName(text);
+                OnboardData.getInstance().setFirstName(text);
                 checkContinueButtonEnable();
             }
         });
@@ -57,7 +54,7 @@ public class OnboardingOne extends Activity {
         middleInitialOnboarding.addTextChangedListener(new TextValidator(middleInitialOnboarding) {
             @Override public void validate(TextView textView, String text) {
                 middleInitialCheck = text.matches("[a-zA-Z]+");
-                userData.setFirstName(text);
+                OnboardData.getInstance().setFirstName(text);
                 checkContinueButtonEnable();
             }
         });
@@ -65,7 +62,7 @@ public class OnboardingOne extends Activity {
         lastNameOnboarding.addTextChangedListener(new TextValidator(lastNameOnboarding) {
             @Override public void validate(TextView textView, String text) {
                 lastNameCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
-                userData.setLastName(text);
+                OnboardData.getInstance().setLastName(text);
                 checkContinueButtonEnable();
             }
         });
@@ -73,15 +70,7 @@ public class OnboardingOne extends Activity {
         dobOnboarding.addTextChangedListener(new TextValidator(dobOnboarding) {
             @Override public void validate(TextView textView, String text) {
                 dobCheck = text.length() > 0;
-                userData.setDob(text);
-                checkContinueButtonEnable();
-            }
-        });
-
-        addressOnboarding.addTextChangedListener(new TextValidator(addressOnboarding) {
-            @Override public void validate(TextView textView, String text) {
-                addressCheck = text.length() > 0;
-                userData.setAddress(text);
+                OnboardData.getInstance().setDob(text);
                 checkContinueButtonEnable();
             }
         });
@@ -100,6 +89,6 @@ public class OnboardingOne extends Activity {
     }
 
     private void checkContinueButtonEnable() {
-        continueButton.setEnabled(passportNumCheck && firstNameCheck && middleInitialCheck && lastNameCheck && dobCheck && addressCheck);
+        continueButton.setEnabled((passportNumCheck && firstNameCheck && middleInitialCheck && lastNameCheck && dobCheck) || AppProperties.getInstance().getDebugMode());
     }
 }

@@ -105,8 +105,9 @@ public class LoginPage extends Activity {
                     public void onResponse(JSONObject response) {
                         try {
                             Boolean loginSuccess = Boolean.valueOf(response.getString("result"));
-                            if (loginSuccess) {
-                                AppProperties.getInstance().setUsername(employee_id);
+                            AppProperties.getInstance().setUsername(employee_id);
+                            if (loginSuccess || AppProperties.getInstance().getDebugMode()) {
+
                                 loginError.setVisibility(View.INVISIBLE);
                                 if (userType.equals(TSA_AGENT)) {
                                     Intent intent = new Intent(LoginPage.this, AgentHome.class); // Call a secondary view

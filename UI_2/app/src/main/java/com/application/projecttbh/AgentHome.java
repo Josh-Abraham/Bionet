@@ -28,6 +28,9 @@ public class AgentHome extends Activity {
                 onboardClick();
             }
         });
+
+        // Reset User Data
+        OnboardData.getInstance().resetInstance();
     }
 
     private void onboardClick() {

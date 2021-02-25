@@ -1,25 +1,23 @@
 package com.application.projecttbh;
 
 public class OnboardData {
-    public OnboardData() {
-        this.setPassportId("");
-        this.setFirstName("");
-        this.setMiddleInitial("");
-        this.setLastName("");
-        this.setAddress("");
-        this.setDob("");
-    }
+
     private String passportId = "";
     private String firstName = "";
     private String middleInitial = "";
     private String lastName = "";
     private String dob = "";
-    private String address = "";
-
+    // Address Data
+    private String streetAddress = "";
+    private String unitNumber = "";
+    private String city = "";
+    private String province = "";
+    private String country = "";
+    private String postalCode = "";
 
     // Getter/setter
     public String getPassportId() {
-        return this.passportId;
+        return getInstance().passportId;
     }
 
     public void setPassportId(String newPassportId) {
@@ -27,7 +25,7 @@ public class OnboardData {
     }
 
     public String getFirstName() {
-        return this.firstName;
+        return getInstance().firstName;
     }
 
     public void setFirstName(String newFirstName) {
@@ -35,7 +33,7 @@ public class OnboardData {
     }
 
     public String getMiddleInitial() {
-        return this.middleInitial;
+        return getInstance().middleInitial;
     }
 
     public void setMiddleInitial(String newMiddleInitial) {
@@ -43,7 +41,7 @@ public class OnboardData {
     }
 
     public String getLastName() {
-        return this.lastName;
+        return getInstance().lastName;
     }
 
     public void setLastName(String newLastName) {
@@ -51,19 +49,97 @@ public class OnboardData {
     }
 
     public String getDob() {
-        return this.dob;
+        return getInstance().dob;
     }
 
     public void setDob(String newDob) {
         this.dob = newDob;
     }
 
-    public String getAddress() {
-        return this.address;
+
+    // ADDRESS DATA
+
+    public String getStreetAddress() {
+        return getInstance().streetAddress;
     }
 
-    public void setAddress(String newAddress) {
-        this.address = newAddress;
+    public void setStreetAddress(String newAddress) {
+        this.streetAddress = newAddress;
     }
 
+    public String getUnitNumber() {
+        return getInstance().unitNumber;
+    }
+
+    public void setUnitNumber(String newUnitNumber) {
+        this.unitNumber = newUnitNumber;
+    }
+
+    public String getCity() {
+        return getInstance().city;
+    }
+
+    public void setCity(String newCity) {
+        this.city = newCity;
+    }
+
+    public String getProvince() {
+        return getInstance().province;
+    }
+
+    public void setProvince(String newProvince) {
+        this.province = newProvince;
+    }
+
+    public String getCountry() {
+        return getInstance().country;
+    }
+
+    public void setCountry(String newCountry) {
+        this.country = country;
+    }
+
+    public String getPostalCode() {
+        return getInstance().postalCode;
+    }
+
+    public void setPostalCode(String newPostalCode) {
+        this.postalCode = newPostalCode;
+    }
+
+
+    public String getFormattedAddress() {
+        if (this.getUnitNumber().equals("")) {
+
+        }
+        return this.getStreetAddress() + " " + this.getUnitNumber() + ", " + this.getCity() + ", " + this.getProvince() + ", " + this.getCountry() + " - " + this.getPostalCode();
+    }
+
+
+    // Singleton Instance
+    private static OnboardData instance;
+
+    public static OnboardData getInstance() {
+        if (instance == null)
+            instance = new OnboardData();
+        return instance;
+    }
+
+    public void resetInstance() {
+        this.setPassportId("");
+        this.setFirstName("");
+        this.setMiddleInitial("");
+        this.setLastName("");
+        this.setStreetAddress("");
+        this.setDob("");
+    }
+
+    private OnboardData() {
+        this.setPassportId("");
+        this.setFirstName("");
+        this.setMiddleInitial("");
+        this.setLastName("");
+        this.setStreetAddress("");
+        this.setDob("");
+    }
 }

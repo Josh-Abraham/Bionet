@@ -6,24 +6,47 @@
     android:clickable="false"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/outerFrameOnboarding"
+        android:layout_width="306dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/innerList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="30dp" />
 
+    <TableRow
+        android:layout_width="355dp"
+        android:layout_height="142dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="304dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo" />
+
+    </TableRow>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="109dp"
-        android:orientation="horizontal">
+        android:layout_height="80dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/welcomeTag"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:paddingStart="20dp"
-            android:paddingEnd="0dp"
             android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
             android:textSize="18sp" />
 
         <TextView
@@ -34,51 +57,68 @@
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:text="@string/user"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
             android:textSize="18sp" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/batchModeButton"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/button_border"
-        android:insetLeft="50dp"
-        android:insetRight="50dp"
-        android:text="@string/batch_mode" />
+        android:layout_height="120dp">
 
-    <Button
-        android:id="@+id/addSingleButton"
+        <Button
+            android:id="@+id/batchModeButton"
+            android:layout_width="138dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_border"
+            android:insetLeft="0dp"
+            android:text="@string/batch_mode"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/addSingleButton"
+            android:layout_width="138dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_border"
+            android:text="@string/add_single"
+            android:textSize="16sp" />
+    </TableRow>
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/button_border"
-        android:insetLeft="50dp"
-        android:insetTop="12dp"
-        android:insetRight="50dp"
-        android:insetBottom="12dp"
-        android:text="@string/add_single" />
-
-    <Button
-        android:id="@+id/matchUserButton"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp" />
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/button_border"
-        android:insetLeft="50dp"
-        android:insetTop="12dp"
-        android:insetRight="50dp"
-        android:insetBottom="12dp"
-        android:text="@string/match_user" />
+        android:layout_height="120dp">
 
+        <Button
+            android:id="@+id/matchUserButton"
+            android:layout_width="138dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_border"
+            android:text="@string/match_user"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/clearData"
+            android:layout_width="138dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="-10.5dp"
+            android:background="@drawable/button_border"
+            android:text="@string/clear_data"
+            android:textSize="16sp" />
+
+    </TableRow>
+
+        </LinearLayout>
+
+    </FrameLayout>
 </LinearLayout>
