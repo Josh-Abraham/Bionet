@@ -14,4 +14,13 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void AEStest() {
+        String original = "howtodoinjava.com";
+        String encryptedString = AES.encrypt(original) ;
+        String decryptedString = AES.decrypt(encryptedString) ;
+        assertEquals(original, decryptedString);
+    }
+
 }
