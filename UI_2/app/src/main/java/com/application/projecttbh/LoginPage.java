@@ -91,9 +91,13 @@ public class LoginPage extends Activity {
         RequestQueue queue = Volley.newRequestQueue(this);
         JSONObject postData = new JSONObject();
         try {
-            postData.put("Username", AES.encrypt(employee_id));
-            postData.put("Password", AES.encrypt(password));
-            postData.put("Role", AES.encrypt(userType));
+//            postData.put("Username", AES.encrypt(employee_id));
+//            postData.put("Password", AES.encrypt(password));
+//            postData.put("Role", AES.encrypt(userType));
+
+            postData.put("Username", employee_id);
+            postData.put("Password", password);
+            postData.put("Role", userType);
 
         } catch (JSONException e) {
             e.printStackTrace();

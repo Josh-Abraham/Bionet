@@ -1,6 +1,7 @@
 package com.application.projecttbh;
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
@@ -11,18 +12,18 @@ import com.amazonaws.auth.BasicAWSCredentials;
 
 import java.io.File;
 
-public class S3Client extends Activity{
+public class S3Client {
 
-    public void uploadFile(String location, Object file) {
+    public static void uploadFile(String location, Context context) {
         String accessKey = "";
         String secret = "";
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey,secret);
         AmazonS3Client s3 = new AmazonS3Client(credentials);
         s3.setRegion(Region.getRegion(Regions.US_EAST_2));
 
-        TransferUtility transferUtility = TransferUtility.builder().context(getApplicationContext()).s3Client(s3).build();
-        File myObj = new File("hellloooo.txt");
-        TransferObserver observer = transferUtility.upload("profiles-capstone", "video_test.jpg", myObj);
+        TransferUtility transferUtility = TransferUtility.builder().context(context).s3Client(s3).build();
+        File myObj = new File(location);
+        TransferObserver observer = transferUtility.upload("profiles-capstone", "josh_test_1.jpg", myObj);
     }
 
 

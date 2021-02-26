@@ -15,6 +15,10 @@ public class OnboardData {
     private String country = "";
     private String postalCode = "";
 
+    //Picture Information
+    private String directory = "";
+    private String file = "";
+
     // Getter/setter
     public String getPassportId() {
         return getInstance().passportId;
@@ -113,6 +117,22 @@ public class OnboardData {
 
         }
         return this.getStreetAddress() + " " + this.getUnitNumber() + ", " + this.getCity() + ", " + this.getProvince() + ", " + this.getCountry() + " - " + this.getPostalCode();
+    }
+
+    public String getDirectory() {
+        return getInstance().directory;
+    }
+
+    public void setDirectory(String newDirectory) {
+        this.directory = newDirectory;
+    }
+
+    public String getFile() {
+        return getInstance().file;
+    }
+
+    public void setFile(String newFile) {
+        this.file = newFile;
     }
 
 

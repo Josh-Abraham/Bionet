@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.application.projecttbh"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -48,6 +48,7 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-alpha19"
     // If you want to additionally use the CameraX Extensions library
     implementation "androidx.camera:camera-extensions:1.0.0-alpha19"
+    implementation "androidx.camera:camera-view:1.0.0-alpha03"
 
     // Country Picker
     implementation 'com.hbb20:ccp:2.4.5'
@@ -55,4 +56,9 @@ dependencies {
     implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.7@aar') { transitive = true }
     implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+
+    // Encryption
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+    // For Identity Credential APIs
+    implementation "androidx.security:security-identity-credential:1.0.0-alpha02"
 }
