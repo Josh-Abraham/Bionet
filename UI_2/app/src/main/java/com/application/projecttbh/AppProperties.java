@@ -2,7 +2,7 @@ package com.application.projecttbh;
 
 public class AppProperties {
     private String username = "";
-    private Boolean debugMode = true;
+    private Boolean debugMode = false;
 
     // Getter/setter
     public String getUsername() {
