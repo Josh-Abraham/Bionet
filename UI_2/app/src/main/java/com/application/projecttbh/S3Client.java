@@ -32,8 +32,8 @@ public class S3Client {
     private static final String FACIAL_CAPTURE = "facial-captures/";
 
     public static void uploadFile(String fileName, String fileDir, Context context, String type) {
-        String accessKey = "AKIASSDK5I27GBNEH74M";
-        String secret = "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";
+        String accessKey = "";
+        String secret = "";
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secret);
         AmazonS3Client s3 = new AmazonS3Client(credentials);
         s3.setRegion(Region.getRegion(Regions.US_EAST_2));
