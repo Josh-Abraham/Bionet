@@ -120,9 +120,10 @@
                 android:layout_marginLeft="0px"
                 android:layout_marginTop="0px"
                 android:height="35dp"
+                android:background="@drawable/button_border"
                 android:minHeight="45dp"
                 android:text="@string/log_in"
-                android:background="@drawable/button_border"
+                android:textColor="@color/primary_text"
                 android:textSize="18sp" />
 
             <Space

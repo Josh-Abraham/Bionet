@@ -22,7 +22,7 @@
                 android:layout_height="42dp" />
 
             <TextView
-                android:id="@+id/review_user2"
+                android:id="@+id/review_image_cap"
                 android:layout_width="107dp"
                 android:layout_height="59dp"
                 android:text="@string/review_user"

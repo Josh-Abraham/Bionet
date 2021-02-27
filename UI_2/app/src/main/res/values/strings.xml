@@ -39,15 +39,21 @@
     <string name="date_of_birth">Date of Birth</string>
     <string name="address_data">Insert Address Information</string>
     <string name="street_address">Street Address</string>
-    <string name="ie_street_address">11 Arboretum Lane</string>
+    <string name="ie_street_address">ie. 11 Arboretum Lane</string>
     <string name="apt_num">Unit Number</string>
-    <string name="ie_apt_num">707</string>
+    <string name="ie_apt_num">ie. 105</string>
     <string name="city">City</string>
-    <string name="ie_city">Toronto</string>
+    <string name="ie_city">ie. Toronto</string>
     <string name="postal_code">Postal/Zip Code</string>
-    <string name="ie_postal_code">M3J 2S5</string>
+    <string name="ie_postal_code">ie. M3J 2S5</string>
     <string name="province">Province/State</string>
-    <string name="ie_province">Ontario</string>
+    <string name="ie_province">ie. Ontario</string>
     <string name="capture">capture</string>
     <string name="preview_area">preview</string>
+    <string name="facial_recognition_result">Facial Recognition Result</string>
+    <string name="review_image_cap">Review Image</string>
+    <string name="verify_photo">Please confirm image quality</string>
+    <string name="retake_facial_capture">Retake Image</string>
+    <string name="confirm_facial_capture">Confirm Image</string>
+    <string name="finger_print_form">Register Fingerprints</string>
 </resources>

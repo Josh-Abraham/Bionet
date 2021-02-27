@@ -252,7 +252,6 @@
                 android:layout_margin="0px"
                 android:layout_marginStart="0px"
                 android:layout_marginTop="0px"
-                android:height="30dp"
                 android:background="@drawable/button_border"
                 android:checkable="false"
                 android:clickable="true"
@@ -262,6 +261,7 @@
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"
                 android:text="@string/continue_button"
+                android:textColor="@color/primary_text"
                 android:textSize="18sp" />
 
             <TableRow

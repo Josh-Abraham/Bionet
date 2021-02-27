@@ -290,6 +290,7 @@
                 android:layout_marginStart="0px"
                 android:layout_marginTop="0px"
                 android:height="30dp"
+                android:textColor="@color/primary_text"
                 android:background="@drawable/button_border"
                 android:checkable="false"
                 android:clickable="true"

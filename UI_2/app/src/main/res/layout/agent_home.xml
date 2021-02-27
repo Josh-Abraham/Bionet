@@ -70,10 +70,13 @@
             android:id="@+id/batchModeButton"
             android:layout_width="138dp"
             android:layout_height="120dp"
+            android:minHeight="120dp"
             android:background="@drawable/button_border"
-            android:insetLeft="0dp"
             android:text="@string/batch_mode"
-            android:textSize="16sp" />
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
+            android:layout_marginTop="-11dp"
+            />
 
         <Space
             android:layout_width="30dp"
@@ -85,7 +88,8 @@
             android:layout_height="120dp"
             android:background="@drawable/button_border"
             android:text="@string/add_single"
-            android:textSize="16sp" />
+            android:textColor="@color/primary_text"
+            android:textSize="18sp" />
     </TableRow>
     <Space
         android:layout_width="match_parent"
@@ -101,7 +105,8 @@
             android:layout_height="120dp"
             android:background="@drawable/button_border"
             android:text="@string/match_user"
-            android:textSize="16sp" />
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"/>
 
         <Space
             android:layout_width="30dp"
@@ -114,7 +119,8 @@
             android:layout_marginTop="-10.5dp"
             android:background="@drawable/button_border"
             android:text="@string/clear_data"
-            android:textSize="16sp" />
+            android:textColor="@color/primary_text"
+            android:textSize="18sp" />
 
     </TableRow>
 

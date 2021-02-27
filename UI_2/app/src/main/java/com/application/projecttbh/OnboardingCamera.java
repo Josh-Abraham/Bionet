@@ -22,11 +22,8 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.security.crypto.EncryptedFile;
-import androidx.security.crypto.MasterKey;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -42,15 +39,7 @@ import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -141,9 +130,15 @@ public class OnboardingCamera extends AppCompatActivity {
 
                 SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
                 String fileName = mDateFormat.format(new Date()) + ".jpg";
+
+                // Deals with storing in s3 for testing, doesn't create extra objects
+                if (AppProperties.getInstance().getDebugMode()) {
+                    fileName = "DEBUG_ON_FACIAL.jpg";
+                }
                 File file = new File(getBatchDirectoryName(), fileName);
 
                 ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
+                String finalFileName = fileName;
                 imageCapture.takePicture(outputFileOptions, executor, new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
@@ -152,9 +147,9 @@ public class OnboardingCamera extends AppCompatActivity {
                             @Override
                             public void run() {
                                 OnboardData.getInstance().setDirectory(getBatchDirectoryName());
-                                OnboardData.getInstance().setFile(fileName);
+                                OnboardData.getInstance().setFile(finalFileName);
                                 // Toast.makeText(OnboardingCamera.this, "Image Saved successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(OnboardingCamera.this, FinishOnboarding.class); // Call a secondary view
+                                Intent intent = new Intent(OnboardingCamera.this, OnboardingConfirmPhoto.class); // Call a secondary view
                                 startActivity(intent);
                             }
                         });

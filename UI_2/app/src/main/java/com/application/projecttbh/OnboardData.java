@@ -19,6 +19,8 @@ public class OnboardData {
     private String directory = "";
     private String file = "";
 
+    private String s3_facial_key = "";
+
     // Getter/setter
     public String getPassportId() {
         return getInstance().passportId;
@@ -119,6 +121,7 @@ public class OnboardData {
         return this.getStreetAddress() + " " + this.getUnitNumber() + ", " + this.getCity() + ", " + this.getProvince() + ", " + this.getCountry() + " - " + this.getPostalCode();
     }
 
+    // File Data
     public String getDirectory() {
         return getInstance().directory;
     }
@@ -135,6 +138,13 @@ public class OnboardData {
         this.file = newFile;
     }
 
+    public String getS3_facial_key() {
+        return getInstance().s3_facial_key;
+    }
+
+    public void setS3_facial_key(String new_s3_facial_key) {
+        this.s3_facial_key = new_s3_facial_key;
+    }
 
     // Singleton Instance
     private static OnboardData instance;

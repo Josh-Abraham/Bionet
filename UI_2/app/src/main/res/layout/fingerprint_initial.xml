@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:layout_centerHorizontal="true"
+    android:background="#FFFFFF"
     android:clickable="true"
-    android:layout_centerHorizontal="true">
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="306dp"
@@ -12,13 +13,53 @@
         android:layout_gravity="center">
 
         <LinearLayout
+            android:id="@+id/innerList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="658dp"
             android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="68dp" />
+                android:layout_height="30dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="105dp">
+
+                <Space
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/logo_image"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo" />
+
+                <Space
+                    android:layout_width="100dp"
+                    android:layout_height="103dp" />
+            </TableRow>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:id="@+id/userTypeTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:clickable="false"
+                android:fitsSystemWindows="false"
+                android:gravity="center"
+                android:text="@string/finger_print_form"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
 
             <TextView
                 android:id="@+id/welcome_tag"
@@ -26,23 +67,38 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/fp_initial_left"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/dark_text"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/imageView2"
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
-                android:scaleX="2"
-                android:scaleY="2"
-                android:src="@drawable/fingerprint" />
+                android:layout_height="30dp" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/chevron1"
                 android:layout_width="match_parent"
                 android:layout_height="163dp"
-                android:src="@drawable/arrow_down" />
+                android:rotation="90"
+                android:layout_marginTop="-30dp"
+                android:src="@drawable/chevron" />
+
+            <ImageView
+                android:id="@+id/chevron2"
+                android:layout_width="match_parent"
+                android:layout_height="163dp"
+                android:layout_marginTop="-70dp"
+                android:rotation="90"
+                android:scaleY="1"
+                android:src="@drawable/chevron" />
+
+            <ImageView
+                android:id="@+id/chevron3"
+                android:layout_width="match_parent"
+                android:layout_height="163dp"
+                android:layout_marginTop="-70dp"
+                android:rotation="90"
+                android:src="@drawable/chevron" />
 
         </LinearLayout>
 

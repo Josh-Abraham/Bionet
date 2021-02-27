@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/Theme.ProjectTBH">
         <uses-library
             android:name="com.android.future.usb.accessory"
@@ -60,7 +61,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FinishOnboarding"
+            android:name=".OnboardingConfirmPhoto"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FingerprintScan"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
