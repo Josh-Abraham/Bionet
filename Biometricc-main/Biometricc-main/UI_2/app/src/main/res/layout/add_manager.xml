@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.StartScan">
+    
+    <FrameLayout
+        android:layout_width="306sp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="119dp" />
+
+            <TextView
+                android:layout_width="197dp"
+                android:layout_height="30dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/addmanager"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/purple_700"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enterCreds"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="32sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="66dp" />
+
+            <TextView
+                android:id="@+id/newId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/newID"/>
+
+            <EditText
+                android:id="@+id/newManagerName"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/addname"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <EditText
+                android:id="@+id/newManagerAddress"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/employee_id"
+                android:inputType=""
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <EditText
+                android:id="@+id/newUserPassport"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:height="35dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/addpassport"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="#838383"
+                android:textColorHighlight="#009688"
+                android:textColorHint="#959595"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="41dp" />
+
+            <Button
+                android:id="@+id/addManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/addmanager"
+                />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
+
+
