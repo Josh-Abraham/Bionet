@@ -21,10 +21,14 @@
     <string name="scan">Start Scan</string>
     <string name="history">History</string>
     <string name="adduser">Add User</string>
+    <string name="addmanager">Add Manager</string>
     <string name="addname">Enter Name</string>
     <string name="addaddress">Enter Address</string>
     <string name="addpassport">Enter Passport #</string>
     <string name="enterCreds">Please enter the following credentials</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="newID">%1$d</string>
+    <string name="left_finger_ok">Left finger ok</string>
+    <string name="tap_anywhere_to_continue">Tap anywhere to continue</string>
 </resources>

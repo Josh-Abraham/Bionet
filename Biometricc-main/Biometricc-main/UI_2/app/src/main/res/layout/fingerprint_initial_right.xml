@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background"
+    android:layout_centerHorizontal="true"
     android:clickable="true"
     android:orientation="vertical"
-    android:layout_centerHorizontal="true"
     tools:ignore="MissingDefaultResource">
 
     <FrameLayout
@@ -44,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Please place right finger on sensor"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -62,7 +61,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="88dp"
                 app:srcCompat="@drawable/arrow_down" />
-
 
 
         </LinearLayout>

@@ -5,7 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_centerHorizontal="true"
-    android:background="@drawable/background"
     android:clickable="true"
     android:gravity="bottom|center_horizontal"
     android:orientation="vertical"
@@ -24,7 +23,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="183dp" />
+                android:layout_height="66dp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -33,7 +32,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/iris_scan_status"
+                    android:layout_width="292dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="Scan __ of __ ..."
+                    android:textSize="28sp" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/floatingActionButton2"
@@ -41,7 +50,23 @@
                     android:layout_height="391dp"
                     android:baselineAligned="false"
                     android:clickable="true"
-                    app:srcCompat="@drawable/camera_button" />
+                    app:backgroundTint="#FFFFFF"
+                    app:srcCompat="@drawable/camera_button"
+                    app:useCompatPadding="false"
+                    tools:srcCompat="@android:drawable/ic_menu_view" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Please place iris in frame"
+                    android:textSize="24sp" />
             </LinearLayout>
 
         </LinearLayout>

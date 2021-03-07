@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
+                android:layout_height="58dp"
                 android:rotation="180"
                 android:rotationX="0"
                 android:rotationY="0"
