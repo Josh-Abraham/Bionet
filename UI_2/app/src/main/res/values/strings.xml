@@ -56,4 +56,6 @@
     <string name="retake_facial_capture">Retake Image</string>
     <string name="confirm_facial_capture">Confirm Image</string>
     <string name="finger_print_form">Register Fingerprints</string>
+    <string name="logo">Logo</string>
+    <string name="chevron">chevron</string>
 </resources>

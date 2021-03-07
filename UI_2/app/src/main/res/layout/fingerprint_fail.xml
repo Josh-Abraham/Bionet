@@ -22,7 +22,7 @@
                 android:layout_height="147dp" />
 
             <TextView
-                android:id="@+id/welcome_tag"
+                android:id="@+id/sensorTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"

@@ -1,6 +1,7 @@
 package com.application.projecttbh;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,7 +32,9 @@ public class OnboardingConfirmPhoto extends Activity {
 //        S3Client.uploadFile(file_name, file_dir, context, type);
 
         // Set's preview Image
-        String pathName = OnboardData.getInstance().getDirectory() + "/" + OnboardData.getInstance().getFile();
+        Context context = getApplicationContext();
+        String pathName = context.getFilesDir() + "/Images/" + OnboardData.getInstance().getFile();
+        System.out.println(pathName);
         setImagePreview(pathName);
 
         onRetakeFacialCap = (Button) findViewById(R.id.retake_facial_capture);
@@ -43,7 +46,9 @@ public class OnboardingConfirmPhoto extends Activity {
             public void onClick(View v) {
                // On Retake, delete photo and swap back to camera view
                 String app_folder_path = "";
-                app_folder_path = Environment.getExternalStorageDirectory().toString() + "/TSA";
+
+
+                app_folder_path = context.getFilesDir() + "/" + OnboardData.getInstance().getDirectory();
                 File dir = new File(app_folder_path);
                 if (!dir.exists() && !dir.mkdirs()) {
 

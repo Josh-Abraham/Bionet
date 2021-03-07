@@ -135,7 +135,11 @@ public class OnboardingCamera extends AppCompatActivity {
                 if (AppProperties.getInstance().getDebugMode()) {
                     fileName = "DEBUG_ON_FACIAL.jpg";
                 }
-                File file = new File(getBatchDirectoryName(), fileName);
+                File dir = new File(context.getFilesDir(), "Images");
+                if(!dir.exists()){
+                    dir.mkdir();
+                }
+                File file = new File(dir, fileName);
 
                 ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
                 String finalFileName = fileName;
@@ -146,9 +150,8 @@ public class OnboardingCamera extends AppCompatActivity {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void run() {
-                                OnboardData.getInstance().setDirectory(getBatchDirectoryName());
+                                OnboardData.getInstance().setDirectory("Images");
                                 OnboardData.getInstance().setFile(finalFileName);
-                                // Toast.makeText(OnboardingCamera.this, "Image Saved successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(OnboardingCamera.this, OnboardingConfirmPhoto.class); // Call a secondary view
                                 startActivity(intent);
                             }
@@ -243,19 +246,6 @@ public class OnboardingCamera extends AppCompatActivity {
                 return true;
             }
         });
-    }
-
-
-    public String getBatchDirectoryName() {
-
-        String app_folder_path = "";
-        app_folder_path = Environment.getExternalStorageDirectory().toString() + "/TSA";
-        File dir = new File(app_folder_path);
-        if (!dir.exists() && !dir.mkdirs()) {
-
-        }
-
-        return app_folder_path;
     }
 
     private boolean allPermissionsGranted() {

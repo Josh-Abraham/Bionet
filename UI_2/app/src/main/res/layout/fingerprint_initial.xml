@@ -5,100 +5,73 @@
     android:layout_centerHorizontal="true"
     android:background="#FFFFFF"
     android:clickable="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true">
 
-    <FrameLayout
-        android:layout_width="306dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="45dp" />
 
-        <LinearLayout
-            android:id="@+id/innerList"
+    <ImageView
+        android:id="@+id/chevron3"
+        android:layout_width="match_parent"
+        android:layout_height="163dp"
+        android:layout_marginTop="-30dp"
+        android:contentDescription="@string/chevron"
+        android:rotation="-90"
+        android:src="@drawable/chevron" />
+
+    <ImageView
+        android:id="@+id/chevron2"
+        android:layout_width="match_parent"
+        android:layout_height="163dp"
+        android:layout_marginTop="-60dp"
+        android:contentDescription="@string/chevron"
+        android:rotation="-90"
+        android:scaleY="1"
+        android:src="@drawable/chevron" />
+
+    <ImageView
+        android:id="@+id/chevron1"
+        android:layout_width="match_parent"
+        android:layout_height="163dp"
+        android:layout_marginTop="-60dp"
+        android:contentDescription="@string/chevron"
+        android:rotation="-90"
+        android:src="@drawable/chevron" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:id="@+id/sensorTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:rotation="-180"
+        android:rotationX="-1"
+        android:text="@string/fp_initial_left"
+        android:textColor="@color/dark_text"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/logo_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="150dp"
+            android:contentDescription="@string/logo"
+            android:rotation="-180"
+            android:src="@drawable/logo" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="45dp" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="150dp">
-
-                <Space
-                    android:layout_width="84dp"
-                    android:layout_height="match_parent" />
-
-                <ImageView
-                    android:id="@+id/logo_image"
-                    android:layout_width="131dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/logo" />
-
-            </TableRow>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="5dp" />
-
-            <TextView
-                android:id="@+id/userTypeTextField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:clickable="false"
-                android:fitsSystemWindows="false"
-                android:gravity="center"
-                android:text="@string/finger_print_form"
-                android:textColor="@color/primary"
-                android:textSize="18sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
-
-            <TextView
-                android:id="@+id/welcome_tag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/fp_initial_left"
-                android:textColor="@color/dark_text"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
-
-            <ImageView
-                android:id="@+id/chevron1"
-                android:layout_width="match_parent"
-                android:layout_height="163dp"
-                android:layout_marginTop="-20dp"
-                android:rotation="90"
-                android:src="@drawable/chevron" />
-
-            <ImageView
-                android:id="@+id/chevron2"
-                android:layout_width="match_parent"
-                android:layout_height="163dp"
-                android:layout_marginTop="-60dp"
-                android:rotation="90"
-                android:scaleY="1"
-                android:src="@drawable/chevron" />
-
-            <ImageView
-                android:id="@+id/chevron3"
-                android:layout_width="match_parent"
-                android:layout_height="163dp"
-                android:layout_marginTop="-60dp"
-                android:rotation="90"
-                android:src="@drawable/chevron" />
-
-        </LinearLayout>
-
-    </FrameLayout>
+    </TableRow>
 
 </LinearLayout>
