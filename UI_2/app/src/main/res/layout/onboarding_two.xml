@@ -9,37 +9,34 @@
 
     <FrameLayout
         android:id="@+id/outerFrameOnboarding"
-        android:layout_width="306dp"
+        android:layout_width="336dp"
         android:layout_height="match_parent"
         android:layout_gravity="center">
 
         <LinearLayout
             android:id="@+id/innerList"
             android:layout_width="match_parent"
-            android:layout_height="658dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="45dp" />
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="105dp">
+                android:layout_height="150dp">
 
                 <Space
-                    android:layout_width="100dp"
+                    android:layout_width="92dp"
                     android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="100dp"
+                    android:layout_width="119dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/logo" />
 
-                <Space
-                    android:layout_width="100dp"
-                    android:layout_height="103dp" />
             </TableRow>
 
             <Space
@@ -69,11 +66,11 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="70dp">
 
                 <LinearLayout
                     android:id="@+id/address_panel_1"
-                    android:layout_width="180dp"
+                    android:layout_width="196dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -84,14 +81,14 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="10px"
                         android:text="@string/street_address"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
 
                     <EditText
                         android:id="@+id/street_address_onboarding"
-                        android:layout_width="160dp"
-                        android:layout_height="33dp"
-                        android:height="35dp"
+                        android:layout_width="165dp"
+                        android:layout_height="40dp"
+                        android:height="40dp"
                         android:background="@drawable/text_field"
                         android:ems="10"
                         android:gravity="center_vertical"
@@ -110,7 +107,7 @@
 
                 <LinearLayout
                     android:id="@+id/apt_num_panel"
-                    android:layout_width="120dp"
+                    android:layout_width="135dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -121,13 +118,13 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="10px"
                         android:text="@string/apt_num"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/apt_num_onboarding"
-                        android:layout_width="120dp"
-                        android:layout_height="33dp"
-                        android:height="33dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:height="40dp"
                         android:background="@drawable/text_field"
                         android:ems="10"
                         android:gravity="center_vertical"
@@ -145,15 +142,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="26dp" />
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="70dp">
 
                 <LinearLayout
                     android:id="@+id/address_panel_2"
-                    android:layout_width="180dp"
+                    android:layout_width="191dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -164,14 +161,14 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="10px"
                         android:text="@string/city"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
 
                     <EditText
                         android:id="@+id/city_onboarding"
-                        android:layout_width="160dp"
-                        android:layout_height="33dp"
-                        android:height="35dp"
+                        android:layout_width="165dp"
+                        android:layout_height="40dp"
+                        android:height="40dp"
                         android:background="@drawable/text_field"
                         android:ems="10"
                         android:gravity="center_vertical"
@@ -190,7 +187,7 @@
 
                 <LinearLayout
                     android:id="@+id/postal_code_panel"
-                    android:layout_width="130dp"
+                    android:layout_width="145dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -201,13 +198,13 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="10px"
                         android:text="@string/postal_code"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/postal_code_onboarding"
-                        android:layout_width="120dp"
-                        android:layout_height="33dp"
-                        android:height="33dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:height="40dp"
                         android:background="@drawable/text_field"
                         android:ems="10"
                         android:gravity="center_vertical"
@@ -225,7 +222,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="26dp" />
 
             <TextView
                 android:id="@+id/province_tag"
@@ -234,26 +231,25 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingLeft="10px"
                 android:text="@string/province"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <AutoCompleteTextView
                 android:id="@+id/province_onboarding"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:hint="@string/ie_province"
+                android:layout_height="40dp"
                 android:background="@drawable/text_field"
+                android:hint="@string/ie_province"
                 android:inputType="text"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="#838383"
                 android:textColorHighlight="#009688"
                 android:textColorHint="#959595"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="26dp" />
 
 
             <LinearLayout
@@ -265,15 +261,14 @@
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/country_onboarding"
                     android:layout_width="match_parent"
-                    android:background="@drawable/text_field"
-                    app:ccpDialog_backgroundColor="@color/primary_text"
                     android:layout_height="40dp"
-                    app:ccp_showFullName="true"
-                    app:ccp_showPhoneCode="false"
-                    app:ccp_showNameCode="false"
-                    app:ccp_defaultNameCode="CA"
+                    android:background="@drawable/text_field"
                     android:theme="@style/Platform.MaterialComponents.Light"
-                    />
+                    app:ccpDialog_backgroundColor="@color/primary_text"
+                    app:ccp_defaultNameCode="CA"
+                    app:ccp_showFullName="true"
+                    app:ccp_showNameCode="false"
+                    app:ccp_showPhoneCode="false" />
 
             </LinearLayout>
 
@@ -290,7 +285,6 @@
                 android:layout_marginStart="0px"
                 android:layout_marginTop="0px"
                 android:height="30dp"
-                android:textColor="@color/primary_text"
                 android:background="@drawable/button_border"
                 android:checkable="false"
                 android:clickable="true"
@@ -300,6 +294,7 @@
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"
                 android:text="@string/continue_button"
+                android:textColor="@color/primary_text"
                 android:textSize="18sp" />
 
             <TableRow

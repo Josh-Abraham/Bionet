@@ -11,37 +11,36 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="match_parent"
-        android:layout_height="567dp"
+        android:layout_height="660dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="73dp"
+        android:layout_marginBottom="114dp"
         android:contentDescription="@string/preview_area"
         android:importantForAccessibility="no">
 
     </androidx.camera.view.PreviewView>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/InnerRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="82dp"
+        android:layout_height="120dp"
         android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="false"
         android:background="#000000">
 
-        <Space
-            android:layout_width="144.5dp"
-            android:layout_height="82dp" />
-
         <androidx.cardview.widget.CardView
-            android:layout_width="79dp"
-            android:layout_height="80dp"
-            app:cardBackgroundColor="#939393"
+            android:layout_width="96dp"
+            android:layout_height="98dp"
+            android:layout_gravity="center"
             android:layout_marginTop="2dp"
-            app:cardCornerRadius="10dp"
-            android:elevation="10dp">
+            android:elevation="10dp"
+            app:cardBackgroundColor="#939393"
+            app:cardCornerRadius="10dp">
 
             <ImageView
                 android:id="@+id/captureImg"
-                android:layout_width="73dp"
-                android:layout_height="73dp"
+                android:layout_width="92dp"
+                android:layout_height="97dp"
 
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="3dp"
@@ -51,7 +50,7 @@
         </androidx.cardview.widget.CardView>
 
 
-    </LinearLayout>
+    </FrameLayout>
 
 
 </RelativeLayout>

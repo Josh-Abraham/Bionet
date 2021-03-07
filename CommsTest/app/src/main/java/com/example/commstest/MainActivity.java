@@ -20,6 +20,8 @@ import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import android.widget.Toast;
@@ -34,15 +36,24 @@ public class MainActivity extends Activity {
     UsbDevice device;
     UsbSerialDevice serialPort;
     UsbDeviceConnection connection;
+    ArrayList<Byte> allData = new ArrayList<Byte>();
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
         public void onReceivedData(byte[] arg0) {
             String data = null;
             try {
+                Byte[] byteObj = new Byte[arg0.length];
+                int i = 0;
+                for(byte b: arg0) {
+                    byteObj[i++] = b;
+                }
+                allData.addAll(Arrays.asList(byteObj));
                 data = new String(arg0, "UTF-8");
                 data.concat("/n");
-                tvAppend(textView, data);
+                // Getting data length
+                // We want 52116 bytes
+                tvAppend(textView, String.valueOf(allData.size()));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

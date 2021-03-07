@@ -44,7 +44,7 @@
     <string name="ie_apt_num">ie. 105</string>
     <string name="city">City</string>
     <string name="ie_city">ie. Toronto</string>
-    <string name="postal_code">Postal/Zip Code</string>
+    <string name="postal_code">Postal Code</string>
     <string name="ie_postal_code">ie. M3J 2S5</string>
     <string name="province">Province/State</string>
     <string name="ie_province">ie. Ontario</string>

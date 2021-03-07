@@ -15,30 +15,27 @@
         <LinearLayout
             android:id="@+id/innerList"
             android:layout_width="match_parent"
-            android:layout_height="658dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="45dp" />
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="105dp">
+                android:layout_height="150dp">
 
                 <Space
-                    android:layout_width="100dp"
+                    android:layout_width="84dp"
                     android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/logo_image"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="131dp"
+                    android:layout_height="150dp"
                     android:src="@drawable/logo" />
 
-                <Space
-                    android:layout_width="100dp"
-                    android:layout_height="103dp" />
             </TableRow>
 
             <Space
@@ -79,15 +76,15 @@
                 android:id="@+id/chevron1"
                 android:layout_width="match_parent"
                 android:layout_height="163dp"
+                android:layout_marginTop="-20dp"
                 android:rotation="90"
-                android:layout_marginTop="-30dp"
                 android:src="@drawable/chevron" />
 
             <ImageView
                 android:id="@+id/chevron2"
                 android:layout_width="match_parent"
                 android:layout_height="163dp"
-                android:layout_marginTop="-70dp"
+                android:layout_marginTop="-60dp"
                 android:rotation="90"
                 android:scaleY="1"
                 android:src="@drawable/chevron" />
@@ -96,7 +93,7 @@
                 android:id="@+id/chevron3"
                 android:layout_width="match_parent"
                 android:layout_height="163dp"
-                android:layout_marginTop="-70dp"
+                android:layout_marginTop="-60dp"
                 android:rotation="90"
                 android:src="@drawable/chevron" />
 
