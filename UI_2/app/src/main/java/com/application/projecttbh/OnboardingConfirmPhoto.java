@@ -34,7 +34,7 @@ public class OnboardingConfirmPhoto extends Activity {
         // Set's preview Image
         Context context = getApplicationContext();
         String pathName = context.getFilesDir() + "/Images/" + OnboardData.getInstance().getFile();
-        System.out.println(pathName);
+
         setImagePreview(pathName);
 
         onRetakeFacialCap = (Button) findViewById(R.id.retake_facial_capture);
@@ -64,8 +64,14 @@ public class OnboardingConfirmPhoto extends Activity {
         onConfirmFacialCapture.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OnboardingConfirmPhoto.this, FingerprintScan.class); // Call a secondary view
-                startActivity(intent);
+                if (AppProperties.getInstance().getEnableFP()) {
+                    Intent intent = new Intent(OnboardingConfirmPhoto.this, FingerprintScan.class); // Call a secondary view
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(OnboardingConfirmPhoto.this, FingerprintScan.class); // Call a secondary view
+                    startActivity(intent);
+                }
+
             }
         });
     }

@@ -13,7 +13,6 @@
     <string name="page2">page_2</string>
     <string name="review_user">Review User</string>
     <string name="left_finger_success"/>
-    <string name="fp_initial_left">Please place left finger on sensor</string>
     <string name="are_fields_correct">Are these fields correct?</string>
     <string name="edit">Edit Fields</string>
     <string name="finish_onboarding">Finish Onboarding</string>
@@ -23,6 +22,8 @@
     <string name="add_single">Add Single Scan</string>
     <string name="match_user">1:1 Match User</string>
     <string name="clear_data">Delete Onboard Data</string>
+
+    <!-- PASSPORT DATA -->
     <string name="name">Name</string>
     <string name="ie_john">ie. John</string>
     <string name="ie_middle">ie. M</string>
@@ -48,6 +49,8 @@
     <string name="ie_postal_code">ie. M3J 2S5</string>
     <string name="province">Province/State</string>
     <string name="ie_province">ie. Ontario</string>
+
+    <!-- IMAGE CAPTURE -->
     <string name="capture">capture</string>
     <string name="preview_area">preview</string>
     <string name="facial_recognition_result">Facial Recognition Result</string>
@@ -58,4 +61,12 @@
     <string name="finger_print_form">Register Fingerprints</string>
     <string name="logo">Logo</string>
     <string name="chevron">chevron</string>
+    <string name="start_scan">Start Scan</string>
+    <string name="scanning">Scanning ...</string>
+
+    <!-- FINGERPRINT SEQUENCE -->
+    <string name="fp_scan_left_thumb">Please place left thumb on sensor</string>
+    <string name="fp_scan_right_thumb">Please place right thumb on sensor</string>
+    <string name="fp_scan_left_index">Please place left index finger on sensor</string>
+    <string name="fp_scan_right_index">Please place right index on sensor</string>
 </resources>

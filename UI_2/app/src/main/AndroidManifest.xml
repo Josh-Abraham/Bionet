@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature android:name="android.hardware.usb.host"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -75,6 +76,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Scanning"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
+            </intent-filter>
+
+            <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@xml/device_filter"/>
+
         </activity>
         <activity
             android:name=".ManagerHome"

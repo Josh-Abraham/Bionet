@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/fp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:autofillHints=""
+        android:duplicateParentState="false"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:text="@string/scanning"
+        android:textColor="#009688"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+</LinearLayout>

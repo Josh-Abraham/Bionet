@@ -15,17 +15,40 @@ public class FingerprintScan extends Activity {
     ImageView chevron1;
     ImageView chevron2;
     ImageView chevron3;
+    private Button startScan;
+    private TextView scanTag;
+    private String[] fp_keys = new String[4];
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_initial);
-        chevron1 = (ImageView) findViewById(R.id.chevron1);
-        chevron2 = (ImageView) findViewById(R.id.chevron2);
-        chevron3 = (ImageView) findViewById(R.id.chevron3);
+        fp_keys[0] = "@string/fp_scan_left_thumb";
+        fp_keys[1] = "@string/fp_scan_right_thumb";
+        fp_keys[2] = "@string/fp_scan_left_index";
+        fp_keys[3] = "@string/fp_scan_left_index";
+
+
+        chevron1 = findViewById(R.id.chevron1);
+        chevron2 = findViewById(R.id.chevron2);
+        chevron3 = findViewById(R.id.chevron3);
+        startScan = findViewById(R.id.start_scan);
+        scanTag = findViewById(R.id.sensorTag);
+        int key = AppProperties.getInstance().getFp_seq_num();
+        scanTag.setText(fp_keys[key]);
         animateChevron1 (chevron1);
         animateChevron2 (chevron2);
         animateChevron3(chevron3);
+
+        startScan.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FingerprintScan.this, Scanning.class); // Call a secondary view
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void animateChevron1(ImageView view) {

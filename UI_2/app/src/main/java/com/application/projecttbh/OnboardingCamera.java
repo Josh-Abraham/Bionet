@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MotionEvent;
@@ -40,17 +39,14 @@ import android.widget.Toast;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class OnboardingCamera extends AppCompatActivity {
 
-    private Executor executor = Executors.newSingleThreadExecutor();
-    private int REQUEST_CODE_PERMISSIONS = 101;
+    private final Executor executor = Executors.newSingleThreadExecutor();
+    private final int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
 
     PreviewView mPreviewView;
@@ -127,9 +123,8 @@ public class OnboardingCamera extends AppCompatActivity {
         captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-                String fileName = mDateFormat.format(new Date()) + ".jpg";
+                String id = OnboardData.getInstance().getPassportId();
+                String fileName = id + "_face" + ".jpg";
 
                 // Deals with storing in s3 for testing, doesn't create extra objects
                 if (AppProperties.getInstance().getDebugMode()) {
@@ -152,6 +147,8 @@ public class OnboardingCamera extends AppCompatActivity {
                             public void run() {
                                 OnboardData.getInstance().setDirectory("Images");
                                 OnboardData.getInstance().setFile(finalFileName);
+                                // S3 Info
+                                OnboardData.getInstance().setS3_facial_key(finalFileName);
                                 Intent intent = new Intent(OnboardingCamera.this, OnboardingConfirmPhoto.class); // Call a secondary view
                                 startActivity(intent);
                             }

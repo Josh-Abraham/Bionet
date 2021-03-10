@@ -25,14 +25,10 @@ public class LoginPage extends Activity {
     private TextView loginError;
     private TextView userTypeTextField;
 
-    private Button loginBtn;
-    private Button sysAdminBtn;
-    private Button tsaManagerBtn;
-
     private String userType = "TSA Agent";
-    private String TSA_AGENT = "TSA Agent";
-    private String TSA_MANAGER = "Manager";
-    private String SYS_ADMIN = "System Admin";
+    private final String TSA_AGENT = "TSA Agent";
+    private final String TSA_MANAGER = "Manager";
+    private final String SYS_ADMIN = "System Admin";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,14 +36,14 @@ public class LoginPage extends Activity {
         setContentView(R.layout.login);
 
         // Set object instances for UI items
-        loginBtn = (Button) findViewById(R.id.login_button);
-        sysAdminBtn = (Button) findViewById(R.id.sysAdminBtn);
-        tsaManagerBtn = (Button) findViewById(R.id.tsaManagerBtn);
+        Button loginBtn = findViewById(R.id.login_button);
+        Button sysAdminBtn = findViewById(R.id.start_scan);
+        Button tsaManagerBtn = findViewById(R.id.tsaManagerBtn);
 
-        empIdTextview = (TextView) findViewById(R.id.emp_id_onboarding);
-        pswdTextField = (TextView) findViewById(R.id.pswdTextField);
-        loginError = (TextView) findViewById(R.id.loginError);
-        userTypeTextField = (TextView) findViewById(R.id.userTypeTextField);
+        empIdTextview = findViewById(R.id.emp_id_onboarding);
+        pswdTextField = findViewById(R.id.pswdTextField);
+        loginError = findViewById(R.id.loginError);
+        userTypeTextField = findViewById(R.id.userTypeTextField);
 
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override

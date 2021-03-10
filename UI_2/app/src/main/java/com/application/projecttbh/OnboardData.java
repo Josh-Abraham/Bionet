@@ -18,8 +18,12 @@ public class OnboardData {
     //Picture Information
     private String directory = "";
     private String file = "";
-
     private String s3_facial_key = "";
+
+
+    // Fingerprint Data
+    private String[] fp_data = new String[] {"", "", "", ""};
+
 
     // Getter/setter
     public String getPassportId() {
@@ -146,6 +150,19 @@ public class OnboardData {
         this.s3_facial_key = new_s3_facial_key;
     }
 
+    // FP DATA
+    public String[] getFp_data() {
+        return fp_data;
+    }
+
+    public void setFp_data(String[] fp_data) {
+        this.fp_data = fp_data;
+    }
+
+    public void updateFP_data(String newFP, int index) {
+        this.fp_data[index] = newFP;
+    }
+
     // Singleton Instance
     private static OnboardData instance;
 
@@ -156,20 +173,31 @@ public class OnboardData {
     }
 
     public void resetInstance() {
-        this.setPassportId("");
-        this.setFirstName("");
-        this.setMiddleInitial("");
-        this.setLastName("");
-        this.setStreetAddress("");
-        this.setDob("");
+        this.passportId = "";
+        this.firstName = "";
+        this.middleInitial = "";
+        this.lastName = "";
+        this.dob = "";
+        // Address Data
+        this.streetAddress = "";
+        this.unitNumber = "";
+        this.city = "";
+        this.province = "";
+        this.country = "";
+        this.postalCode = "";
+
+        //Picture Information
+        this.directory = "";
+        this.file = "";
+        this.s3_facial_key = "";
+
+        // FP S3 Locations
+        this.fp_data = new String[]{"", "", "", ""};
+
+        AppProperties.getInstance().setFp_seq_num(0);
     }
 
     private OnboardData() {
-        this.setPassportId("");
-        this.setFirstName("");
-        this.setMiddleInitial("");
-        this.setLastName("");
-        this.setStreetAddress("");
-        this.setDob("");
+        this.resetInstance();
     }
 }
