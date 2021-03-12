@@ -14,18 +14,13 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/fp" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName3"
+    <TextView
+        android:id="@+id/scanning"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:autofillHints=""
-        android:duplicateParentState="false"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="textPersonName"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/scanning"
-        android:textColor="#009688"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textColor="@color/primary"
+        android:textSize="34sp" />
+
 </LinearLayout>

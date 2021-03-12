@@ -54,7 +54,7 @@ public class OnboardingOne extends Activity {
         middleInitialOnboarding.addTextChangedListener(new TextValidator(middleInitialOnboarding) {
             @Override public void validate(TextView textView, String text) {
                 middleInitialCheck = text.matches("[a-zA-Z]+");
-                OnboardData.getInstance().setFirstName(text);
+                OnboardData.getInstance().setMiddleInitial(text);
                 checkContinueButtonEnable();
             }
         });

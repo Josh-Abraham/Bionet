@@ -78,7 +78,7 @@
                     android:layout_height="50dp" />
 
                 <Button
-                    android:id="@+id/confirm_facial_capture"
+                    android:id="@+id/confirm_and_upload"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_border"

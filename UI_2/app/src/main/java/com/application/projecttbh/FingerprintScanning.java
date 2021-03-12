@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Scanning extends Activity {
+public class FingerprintScanning extends Activity {
     public final String ACTION_USB_PERMISSION = "com.hariharan.arduinousb.USB_PERMISSION";
     UsbManager usbManager;
     UsbDevice device;
@@ -49,20 +49,15 @@ public class Scanning extends Activity {
                 // tvAppend(textView, String.valueOf(allData.size()));
                 // TODO: Add correct logic here
                 // TODO: and flow to next page properly
-                int seq_num = AppProperties.getInstance().getFp_seq_num();
-                String tag = OnboardData.getInstance().getPassportId() + seq_num;
-                OnboardData.getInstance().updateFP_data(tag, seq_num);
-                if (seq_num == 3) {
-                    AppProperties.getInstance().setFp_seq_num(0);
-                    Intent intent = new Intent(Scanning.this, IrisScan.class); // Call a secondary view
-                    startActivity(intent);
-                    // Go to next page
-                } else {
-                    int currentScan = seq_num + 1;
-                    AppProperties.getInstance().setFp_seq_num(currentScan);
-                    Intent intent = new Intent(Scanning.this, FingerprintScan.class); // Call a secondary view
-                    startActivity(intent);
-                }
+                int seq_num = AppProperties.getInstance().getSeqNum();
+                String tag = OnboardData.getInstance().getPassportId() + "_FP_" + seq_num;
+                OnboardData.getInstance().update_S3_fp_data(tag, seq_num);
+
+                int currentScan = seq_num + 1;
+                AppProperties.getInstance().setSeqNum(currentScan);
+                Intent intent = new Intent(FingerprintScanning.this, InitialScan.class); // Call a secondary view
+                startActivity(intent);
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -109,7 +104,7 @@ public class Scanning extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scanning);
+        setContentView(R.layout.scanning_finger);
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
 
         IntentFilter filter = new IntentFilter();
@@ -162,6 +157,9 @@ public class Scanning extends Activity {
     }
 
     public void onUsbStop() {
-        serialPort.close();
+        if (serialPort != null) {
+            serialPort.close();
+        }
+        unregisterReceiver(broadcastReceiver);
     }
 }

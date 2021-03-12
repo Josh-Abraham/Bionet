@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,7 +37,7 @@ public class OnboardingConfirmPhoto extends Activity {
         setImagePreview(pathName);
 
         onRetakeFacialCap = (Button) findViewById(R.id.retake_facial_capture);
-        onConfirmFacialCapture = (Button) findViewById(R.id.confirm_facial_capture);
+        onConfirmFacialCapture = (Button) findViewById(R.id.confirm_and_upload);
 
 
         onRetakeFacialCap.setOnClickListener(new View.OnClickListener(){
@@ -64,13 +63,12 @@ public class OnboardingConfirmPhoto extends Activity {
         onConfirmFacialCapture.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (AppProperties.getInstance().getEnableFP()) {
-                    Intent intent = new Intent(OnboardingConfirmPhoto.this, FingerprintScan.class); // Call a secondary view
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(OnboardingConfirmPhoto.this, FingerprintScan.class); // Call a secondary view
-                    startActivity(intent);
+                if (!AppProperties.getInstance().getEnableFP()) {
+                    AppProperties.getInstance().setSeqNum(4);
                 }
+
+                Intent intent = new Intent(OnboardingConfirmPhoto.this, InitialScan.class); // Call a secondary view
+                startActivity(intent);
 
             }
         });

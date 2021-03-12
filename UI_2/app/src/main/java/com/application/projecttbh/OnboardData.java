@@ -21,9 +21,11 @@ public class OnboardData {
     private String s3_facial_key = "";
 
 
-    // Fingerprint Data
-    private String[] fp_data = new String[] {"", "", "", ""};
+    // Fingerprint Data S3 Locations
+    private String[] s3_fp_data = new String[] {"", "", "", ""};
 
+    // Iris Data S3 Locations
+    private String[] s3_iris_data = new String[] {"", "", "", ""};
 
     // Getter/setter
     public String getPassportId() {
@@ -66,7 +68,13 @@ public class OnboardData {
         this.dob = newDob;
     }
 
+    public String getFullName() {
+        if (this.getMiddleInitial().equals("")) {
+            return this.getFirstName() + " " + this.getLastName();
+        }
 
+        return this.getFirstName() + " " + this.getMiddleInitial() + " " + this.getLastName();
+    }
     // ADDRESS DATA
 
     public String getStreetAddress() {
@@ -120,7 +128,7 @@ public class OnboardData {
 
     public String getFormattedAddress() {
         if (this.getUnitNumber().equals("")) {
-
+            return this.getStreetAddress() + ", " + this.getCity() + ", " + this.getProvince() + ", " + this.getCountry() + " - " + this.getPostalCode();
         }
         return this.getStreetAddress() + " " + this.getUnitNumber() + ", " + this.getCity() + ", " + this.getProvince() + ", " + this.getCountry() + " - " + this.getPostalCode();
     }
@@ -151,16 +159,21 @@ public class OnboardData {
     }
 
     // FP DATA
-    public String[] getFp_data() {
-        return fp_data;
+    public String[] get_S3_fp_data() {
+        return s3_fp_data;
     }
 
-    public void setFp_data(String[] fp_data) {
-        this.fp_data = fp_data;
+    public void update_S3_fp_data(String newCode, int index) {
+        this.s3_fp_data[index] = newCode;
     }
 
-    public void updateFP_data(String newFP, int index) {
-        this.fp_data[index] = newFP;
+    // IRIS DATA
+    public String[] get_S3_iris_data() {
+        return s3_iris_data;
+    }
+
+    public void update_S3_iris_data(String newCode, int index) {
+        this.s3_iris_data[index] = newCode;
     }
 
     // Singleton Instance
@@ -192,9 +205,9 @@ public class OnboardData {
         this.s3_facial_key = "";
 
         // FP S3 Locations
-        this.fp_data = new String[]{"", "", "", ""};
+        this.s3_fp_data = new String[]{"", "", "", ""};
 
-        AppProperties.getInstance().setFp_seq_num(0);
+        AppProperties.getInstance().setSeqNum(0);
     }
 
     private OnboardData() {
