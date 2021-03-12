@@ -11,23 +11,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class FingerprintScan extends Activity {
+public class InitialScan extends Activity {
     ImageView chevron1;
     ImageView chevron2;
     ImageView chevron3;
     private Button startScan;
     private TextView scanTag;
-    private String[] fp_keys = new String[4];
+    private String[] keys = new String[6];
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fingerprint_initial);
-        fp_keys[0] = "@string/fp_scan_left_thumb";
-        fp_keys[1] = "@string/fp_scan_right_thumb";
-        fp_keys[2] = "@string/fp_scan_left_index";
-        fp_keys[3] = "@string/fp_scan_left_index";
+        setContentView(R.layout.inital_scan);
+        keys[0] = getString(R.string.fp_scan_left_thumb);
+        keys[1] = getString(R.string.fp_scan_right_thumb);
+        keys[2] = getString(R.string.fp_scan_left_index);
+        keys[3] = getString(R.string.fp_scan_right_index);
+        keys[4] = getString(R.string.eye_scan_left);
+        keys[5] = getString(R.string.eye_scan_right);
 
 
         chevron1 = findViewById(R.id.chevron1);
@@ -35,8 +37,8 @@ public class FingerprintScan extends Activity {
         chevron3 = findViewById(R.id.chevron3);
         startScan = findViewById(R.id.start_scan);
         scanTag = findViewById(R.id.sensorTag);
-        int key = AppProperties.getInstance().getFp_seq_num();
-        scanTag.setText(fp_keys[key]);
+        int key = AppProperties.getInstance().getSeqNum();
+        scanTag.setText(keys[key]);
         animateChevron1 (chevron1);
         animateChevron2 (chevron2);
         animateChevron3(chevron3);
@@ -44,7 +46,12 @@ public class FingerprintScan extends Activity {
         startScan.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FingerprintScan.this, Scanning.class); // Call a secondary view
+                Intent intent;// Call a secondary view
+                if (key < 4) {
+                    intent = new Intent(InitialScan.this, FingerprintScanning.class);
+                } else {
+                    intent = new Intent(InitialScan.this, IrisScan.class);
+                }
                 startActivity(intent);
             }
         });

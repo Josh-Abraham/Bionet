@@ -3,7 +3,8 @@ package com.application.projecttbh;
 public class AppProperties {
     private String username = "";
     private final Boolean debugMode = true;
-    private int fp_seq_num = 0;
+    private final Boolean enableFP = false;
+    private int seq_num = 0;
 
     // Getter/setter
     public String getUsername() {
@@ -18,12 +19,12 @@ public class AppProperties {
         return getInstance().debugMode;
     }
 
-    public int getFp_seq_num() {
-        return fp_seq_num;
+    public int getSeqNum() {
+        return seq_num;
     }
 
-    public void setFp_seq_num(int fp_seq_num) {
-        this.fp_seq_num = fp_seq_num;
+    public void setSeqNum(int seq_num) {
+        this.seq_num = seq_num;
     }
 
     private static AppProperties instance;
@@ -37,6 +38,6 @@ public class AppProperties {
     private AppProperties() { }
 
     public Boolean getEnableFP() {
-        return false;
+        return enableFP;
     }
 }

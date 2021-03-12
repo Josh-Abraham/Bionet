@@ -69,4 +69,9 @@
     <string name="fp_scan_right_thumb">Please place right thumb on sensor</string>
     <string name="fp_scan_left_index">Please place left index finger on sensor</string>
     <string name="fp_scan_right_index">Please place right index on sensor</string>
+    <string name="eye_scan_left">Please place left eye in front of sensor</string>
+    <string name="eye_scan_right">Please place right eye in front of sensor</string>
+    <string name="next">Next</string>
+    <string name="confirm_data">Please confirm that all data is correct.</string>
+    <string name="confirm_and_upload">Confirm &amp; Upload</string>
 </resources>

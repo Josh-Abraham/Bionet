@@ -45,6 +45,12 @@ public class OnboardingTwo extends Activity {
             }
         });
 
+        unitNumberOnboarding.addTextChangedListener(new TextValidator(unitNumberOnboarding) {
+            @Override public void validate(TextView textView, String text) {
+                OnboardData.getInstance().setUnitNumber(text);
+            }
+        });
+
         cityOnboarding.addTextChangedListener(new TextValidator(cityOnboarding) {
             @Override public void validate(TextView textView, String text) {
                 cityCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
