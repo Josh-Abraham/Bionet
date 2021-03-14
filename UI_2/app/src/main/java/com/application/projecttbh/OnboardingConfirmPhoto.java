@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+
 import java.io.File;
 
 
@@ -22,16 +24,15 @@ public class OnboardingConfirmPhoto extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_confirm_photo);
         // Move to on confirm all data
-        // AWSMobileClient.getInstance().initialize(this).execute();
-//        Context context = getApplicationContext();
-//        String file_name =  OnboardData.getInstance().getFile();
-//        String file_dir = OnboardData.getInstance().getDirectory();
-//        // Loading starts Here but should end in the S3 CB
-//        String type = "facial";
-//        S3Client.uploadFile(file_name, file_dir, context, type);
+        Context context = getApplicationContext();
+        // String file_name =  OnboardData.getInstance().getFile();
+        // String file_dir = OnboardData.getInstance().getDirectory();
+        // Loading starts Here but should end in the S3 CB
+        // String type = "facial";
+        // S3Client.uploadFile(file_name, file_dir, context, type);
 
         // Set's preview Image
-        Context context = getApplicationContext();
+        // Context context = getApplicationContext();
         String pathName = context.getFilesDir() + "/Images/" + OnboardData.getInstance().getFile();
 
         setImagePreview(pathName);
@@ -49,6 +50,7 @@ public class OnboardingConfirmPhoto extends Activity {
 
                 app_folder_path = context.getFilesDir() + "/" + OnboardData.getInstance().getDirectory();
                 File dir = new File(app_folder_path);
+                System.out.println(app_folder_path);
                 if (!dir.exists() && !dir.mkdirs()) {
 
                 }
