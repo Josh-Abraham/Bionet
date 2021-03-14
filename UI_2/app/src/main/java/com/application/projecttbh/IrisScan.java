@@ -102,13 +102,13 @@ public class IrisScan extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.iris_scan);
-        usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
+       // usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
         Button nextButton = findViewById(R.id.next);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
-        registerReceiver(broadcastReceiver, filter);
+        // registerReceiver(broadcastReceiver, filter);
 
         if (AppProperties.getInstance().getDebugMode()) {
             nextButton.setVisibility(View.VISIBLE);

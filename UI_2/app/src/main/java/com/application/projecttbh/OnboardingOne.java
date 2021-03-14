@@ -78,6 +78,8 @@ public class OnboardingOne extends Activity {
         continueButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+                System.out.println( OnboardData.getInstance().getPassportId());
                 onContinueClick();
             }
         });

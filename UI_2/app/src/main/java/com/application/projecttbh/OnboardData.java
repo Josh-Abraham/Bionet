@@ -12,7 +12,7 @@ public class OnboardData {
     private String unitNumber = "";
     private String city = "";
     private String province = "";
-    private String country = "";
+    private String country = "Canada";
     private String postalCode = "";
 
     //Picture Information
