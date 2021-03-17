@@ -1,5 +1,9 @@
 package com.application.projecttbh;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -34,6 +38,7 @@ public class AES {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String encrypt(String strToEncrypt)
     {
         String secret = AES.keyStr;
@@ -53,9 +58,9 @@ public class AES {
                 }
             }
 
-            return intArrayToString(newBytes);
+            // return intArrayToString(newBytes);
 
-            // return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
 
         }
         catch (Exception e)

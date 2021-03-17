@@ -196,7 +196,7 @@ public class OnboardData {
         this.unitNumber = "";
         this.city = "";
         this.province = "";
-        this.country = "";
+        this.country = "Canada";
         this.postalCode = "";
 
         //Picture Information

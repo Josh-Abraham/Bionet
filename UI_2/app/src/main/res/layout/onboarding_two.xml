@@ -240,14 +240,14 @@
 
     <LinearLayout
         android:id="@+id/dob_panel"
-        android:layout_width="match_parent"
+        android:layout_width="336dp"
         android:layout_height="40dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <com.hbb20.CountryCodePicker
             android:id="@+id/country_onboarding"
-            android:layout_width="336dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/text_field"
             android:theme="@style/Platform.MaterialComponents.Light"
