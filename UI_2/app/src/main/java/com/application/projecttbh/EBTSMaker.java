@@ -28,17 +28,21 @@ public class EBTSMaker {
         GenericRecord type2Record = new GenericRecord(2); // General Info
         GenericRecord type10Record = new GenericRecord(10); // Facial Scan
         GenericRecord type17Record = new GenericRecord(17); // Iris Scan
-        System.out.println(userData);
-        type2Record.setField(15, new Field((String) userData.get("Passport ID"))); // SID An identification of a person based on a country issued ID card
-        type2Record.setField(18, new Field((String) userData.get("Full Name"))); // Field 18 - Name tag
+
+        type2Record.setField(15, new Field((String) userData.get("PassportNumber"))); // SID An identification of a person based on a country issued ID card
+        type2Record.setField(18, new Field((String) OnboardData.getInstance().getFullName())); // Field 18 - Name tag
         type2Record.setField(22, new Field((String) userData.get("DOB"))); // Field 22 - DOB
-        type2Record.setField(41, new Field((String) userData.get("Address"))); // Field 22 - DOB
-        type2Record.setField(33, new Field((String) userData.get("Passport ID"))); // In this implementation, the finger print set is saved under the passport id with identifiers _FP_0..3
+        type2Record.setField(41, new Field((String) userData.get("StreetAddress"))); // Field 22 - Address
+        type2Record.setField(42, new Field((String) userData.get("City"))); // Field 22 - Address
+        type2Record.setField(43, new Field((String) userData.get("Province"))); // Field 22 - Address
+        type2Record.setField(44, new Field((String) userData.get("Country"))); // Field 22 - Address
+        type2Record.setField(45, new Field((String) userData.get("PostalCode"))); // Field 22 - Address
+        type2Record.setField(33, new Field((String) userData.get("PassportNumber"))); // In this implementation, the finger print set is saved under the passport id with identifiers _FP_0..3
 
         type10Record.setField(2, new Field((String) userData.get("FACE")));
 
         type17Record.setField(2, new Field((String) userData.get("IRIS_L")));
-        type17Record.setField(2, new Field((String) userData.get("IRIS_R")));
+        type17Record.setField(3, new Field((String) userData.get("IRIS_R")));
 
         ebts.addRecord(type2Record);
         ebts.addRecord(type10Record);

@@ -2,11 +2,14 @@ package com.application.projecttbh;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -46,6 +49,7 @@ public class LoginPage extends Activity {
         userTypeTextField = findViewById(R.id.userTypeTextField);
 
         loginBtn.setOnClickListener(new View.OnClickListener(){
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 String username = empIdTextview.getText().toString();
@@ -81,20 +85,16 @@ public class LoginPage extends Activity {
         });
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void validateLogin(String employee_id, String password) {
         String url = "https://ssx64936mh.execute-api.us-east-2.amazonaws.com/default/loginService";
         // Create the HTTP Request Queue
         RequestQueue queue = Volley.newRequestQueue(this);
         JSONObject postData = new JSONObject();
         try {
-//            postData.put("Username", AES.encrypt(employee_id));
-//            postData.put("Password", AES.encrypt(password));
-//            postData.put("Role", AES.encrypt(userType));
-
-            postData.put("Username", employee_id);
-            postData.put("Password", password);
-            postData.put("Role", userType);
-
+            postData.put("Username", AES.encrypt(employee_id));
+            postData.put("Password", AES.encrypt(password));
+            postData.put("Role", AES.encrypt(userType));
         } catch (JSONException e) {
             e.printStackTrace();
         }

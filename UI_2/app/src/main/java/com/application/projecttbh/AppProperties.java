@@ -2,7 +2,7 @@ package com.application.projecttbh;
 
 public class AppProperties {
     private String username = "";
-    private final Boolean debugMode = true;
+    private final Boolean debugMode = false;
     private final Boolean enableFP = false;
     private int seq_num = 0;
 
