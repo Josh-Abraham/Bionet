@@ -39,7 +39,7 @@ public class LoginPage extends Activity {
         setContentView(R.layout.login);
 
         // Set object instances for UI items
-        Button loginBtn = findViewById(R.id.login_button);
+        Button loginBtn = findViewById(R.id.homeButton);
         Button sysAdminBtn = findViewById(R.id.start_scan);
         Button tsaManagerBtn = findViewById(R.id.tsaManagerBtn);
 

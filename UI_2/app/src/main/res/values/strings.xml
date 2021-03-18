@@ -74,4 +74,19 @@
     <string name="next">Next</string>
     <string name="confirm_data">Please confirm that all data is correct.</string>
     <string name="confirm_and_upload">Confirm &amp; Upload</string>
+    <string name="upload_success">User Profile Uploaded!</string>
+    <string name="new_scan">New Scan</string>
+    <string name="home">Home</string>
+
+    <!-- MATCHING -->
+    <string name="matching_form">Matching Form</string>
+    <string name="enable_face">Enable Facial Scan</string>
+    <string name="left_thumb">Left Thumb</string>
+    <string name="left_index">Left Index</string>
+    <string name="right_thumb">Right Thumb</string>
+    <string name="right_index">Right Index</string>
+    <string name="enable_fingerprint_scan">Enable Fingerprint Scan</string>
+    <string name="enable_iris_scan">Enable Iris Scan</string>
+    <string name="right_iris">Right Iris</string>
+    <string name="left_iris">Left Iris</string>
 </resources>

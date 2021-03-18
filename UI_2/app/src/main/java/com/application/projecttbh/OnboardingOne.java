@@ -15,6 +15,7 @@ public class OnboardingOne extends Activity {
     private TextView dobOnboarding;
 
     private Button continueButton;
+    private Button homeButton;
     private Boolean passportNumCheck = false;
     private Boolean firstNameCheck = false;
     private Boolean middleInitialCheck = true;  // Not a required param
@@ -33,7 +34,8 @@ public class OnboardingOne extends Activity {
         lastNameOnboarding = (TextView) findViewById(R.id.last_name_onboarding);
         dobOnboarding = (TextView) findViewById(R.id.dob_onboarding);
 
-        continueButton = (Button) findViewById(R.id.login_button);
+        continueButton = (Button) findViewById(R.id.continue_btn);
+        homeButton = (Button) findViewById(R.id.homeButton);
 
         passportIdOnboarding.addTextChangedListener(new TextValidator(passportIdOnboarding) {
             @Override public void validate(TextView textView, String text) {
@@ -78,9 +80,15 @@ public class OnboardingOne extends Activity {
         continueButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                System.out.println( OnboardData.getInstance().getPassportId());
                 onContinueClick();
+            }
+        });
+
+        homeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OnboardingOne.this, AgentHome.class); // Call a secondary view
+                startActivity(intent);
             }
         });
     }

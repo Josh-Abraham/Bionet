@@ -68,7 +68,11 @@ public class S3Client {
         TransferUtility transferUtility = TransferUtility.builder().context(context).s3Client(s3).build();
         TransferObserver observer = null;
 
-        observer = transferUtility.upload("profiles-capstone", EBTS_CAPTURE + OnboardData.getInstance().getPassportId() + "_EBTS.txt", ebts);
+        if (AppProperties.getInstance().getDebugMode()) {
+            observer = transferUtility.upload("profiles-capstone", EBTS_CAPTURE + "DEBUG_MODE_EBTS.txt", ebts);
+        } else {
+            observer = transferUtility.upload("profiles-capstone", EBTS_CAPTURE + OnboardData.getInstance().getPassportId() + "_EBTS.txt", ebts);
+        }
     }
 
 
