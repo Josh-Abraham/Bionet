@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.client.AWSMobileClient;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,19 +23,20 @@ import org.mitre.jet.exceptions.EbtsBuildingException;
 import java.io.IOException;
 
 
-public class UploadData extends Activity {
+public class UploadOnboardData extends Activity {
+    TextView confirmField;
+    Button uploadBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // AWSMobileClient.getInstance().initialize(this).execute();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.upload_data);
+        setContentView(R.layout.upload_onboarding_data);
 
-        Button uploadBtn = findViewById(R.id.confirm_and_upload);
+        uploadBtn = findViewById(R.id.confirm_and_upload);
+        confirmField = findViewById(R.id.confirm_fields);
 
-        // TODO: S3 Storage function
-        // TODO: Encrypt all data
-        // TODO: Call BE endpoint
+
+
         uploadBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -103,7 +104,18 @@ public class UploadData extends Activity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Boolean loginSuccess = Boolean.valueOf(response.getString("result"));
+                            Boolean dataSent = Boolean.valueOf(response.getString("result"));
+
+                            if (dataSent) {
+                                OnboardData.getInstance().resetInstance();
+                                Intent intent;
+                              if (AppProperties.getInstance().getBatchMode()) {
+                                  intent = new Intent(UploadOnboardData.this, OnboardingOne.class); // Call a secondary view
+                              } else {
+                                  intent = new Intent(UploadOnboardData.this, AgentHome.class); // Call a secondary view
+                              }
+                                startActivity(intent);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

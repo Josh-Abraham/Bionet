@@ -50,7 +50,7 @@ public class IrisScan extends Activity {
             int currentScan = seq_num + 1;
             AppProperties.getInstance().setSeqNum(currentScan);
             if (AppProperties.getInstance().getSeqNum() == 6) {
-                Intent intent = new Intent(IrisScan.this, UploadData.class); // Call a secondary view
+                Intent intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(IrisScan.this, InitialScan.class); // Call a secondary view
@@ -118,7 +118,7 @@ public class IrisScan extends Activity {
             @Override
             public void onClick(View v) {
                 // On Retake, delete photo and swap back to camera view
-                Intent intent = new Intent(IrisScan.this, UploadData.class); // Call a secondary view
+                Intent intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
                 startActivity(intent);
             }
         });

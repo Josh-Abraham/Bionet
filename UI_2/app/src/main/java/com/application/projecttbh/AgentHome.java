@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class AgentHome extends Activity {
     private TextView welcomeNameTextField;
     private Button singleOnboarding;
+    private Button btachModeOnboarding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,15 +26,24 @@ public class AgentHome extends Activity {
         singleOnboarding.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                onboardClick();
+                onboardClick(false);
             }
         });
 
+        btachModeOnboarding = (Button) findViewById(R.id.batchModeButton);
+
+        btachModeOnboarding.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                onboardClick(true);
+            }
+        });
         // Reset User Data
         OnboardData.getInstance().resetInstance();
     }
 
-    private void onboardClick() {
+    private void onboardClick(boolean batchMode) {
+        AppProperties.getInstance().setBatchMode(batchMode);
         Intent intent = new Intent(AgentHome.this, OnboardingOne.class); // Call a secondary view
         startActivity(intent);
     }

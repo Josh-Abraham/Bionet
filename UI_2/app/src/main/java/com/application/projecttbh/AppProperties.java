@@ -2,9 +2,10 @@ package com.application.projecttbh;
 
 public class AppProperties {
     private String username = "";
-    private final Boolean debugMode = false;
+    private final Boolean debugMode = true;
     private final Boolean enableFP = false;
     private int seq_num = 0;
+    private Boolean batchMode = false;
 
     // Getter/setter
     public String getUsername() {
@@ -39,5 +40,13 @@ public class AppProperties {
 
     public Boolean getEnableFP() {
         return enableFP;
+    }
+
+    public Boolean getBatchMode() {
+        return batchMode;
+    }
+
+    public void setBatchMode(boolean batchMode) {
+        this.batchMode = batchMode;
     }
 }
