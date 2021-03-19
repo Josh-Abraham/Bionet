@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Custom.SwitchCompat.WhiteTrack" parent="Theme.AppCompat">
+        <!-- Inactive track color(60% transparency) -->
+        <item name="android:colorForeground">#808080</item>
+    </style>
+
+</resources>
