@@ -11,17 +11,18 @@ import android.widget.TextView;
 public class AgentHome extends Activity {
     private TextView welcomeNameTextField;
     private Button singleOnboarding;
-    private Button btachModeOnboarding;
+    private Button batchModeOnboarding;
+    private Button matchingMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agent_home);
-        welcomeNameTextField = (TextView) findViewById(R.id.welcomeNameTextField);
+        welcomeNameTextField = findViewById(R.id.welcomeNameTextField);
         String username = AppProperties.getInstance().getUsername();
         welcomeNameTextField.setText(username);
 
-        singleOnboarding = (Button) findViewById(R.id.addSingleButton);
+        singleOnboarding = findViewById(R.id.addSingleButton);
 
         singleOnboarding.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -30,12 +31,22 @@ public class AgentHome extends Activity {
             }
         });
 
-        btachModeOnboarding = (Button) findViewById(R.id.batchModeButton);
+        batchModeOnboarding = findViewById(R.id.batchModeButton);
 
-        btachModeOnboarding.setOnClickListener(new View.OnClickListener(){
+        batchModeOnboarding.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 onboardClick(true);
+            }
+        });
+
+        matchingMode = findViewById(R.id.matchUserButton);
+
+        matchingMode.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AgentHome.this, MatchingForm.class); // Call a secondary view
+                startActivity(intent);
             }
         });
         // Reset User Data

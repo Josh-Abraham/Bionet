@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    >
 
     <Space
         android:layout_width="match_parent"
@@ -68,7 +70,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="34dp" />
 
     <FrameLayout
         android:layout_width="336dp"
@@ -76,20 +78,21 @@
         android:layout_gravity="center_horizontal">
 
         <Switch
-            android:id="@+id/switch1"
-            android:layout_width="273dp"
+            android:id="@+id/face_switch"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:checked="true"
             android:text="@string/enable_face"
-            android:textColor="@android:color/secondary_text_material_light"
+            android:textColor="#8D8D8D"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:theme="@style/Custom.SwitchCompat.WhiteTrack"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
     </FrameLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="35dp" />
 
     <FrameLayout
         android:layout_width="336dp"
@@ -97,13 +100,14 @@
         android:layout_gravity="center_horizontal">
 
         <Switch
-            android:id="@+id/switch2"
-            android:layout_width="276dp"
+            android:id="@+id/fp_switch"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="@string/enable_fingerprint_scan"
-            android:textColor="@android:color/secondary_text_material_light"
+            android:textColor="#8D8D8D "
             android:textSize="18sp"
             android:textStyle="bold"
+            android:theme="@style/Custom.SwitchCompat.WhiteTrack"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
     </FrameLayout>
 
@@ -120,19 +124,21 @@
             <CheckBox
                 android:id="@+id/l_thumb"
                 android:layout_width="150dp"
+                android:theme="@style/checkBoxStyle"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:text="@string/left_thumb"
-                android:textColor="@android:color/primary_text_material_light"
+                android:textColor="#8D8D8D "
                 android:textSize="16sp" />
 
             <CheckBox
                 android:id="@+id/l_index"
                 android:layout_width="119dp"
+                android:theme="@style/checkBoxStyle"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:text="@string/left_index"
-                android:textColor="@android:color/primary_text_material_light"
+                android:textColor="#8D8D8D "
                 android:textSize="16sp" />
         </TableRow>
 
@@ -143,19 +149,21 @@
             <CheckBox
                 android:id="@+id/r_thumb"
                 android:layout_width="150dp"
+                android:theme="@style/checkBoxStyle"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:text="@string/right_thumb"
-                android:textColor="@android:color/primary_text_material_light"
+                android:textColor="#8D8D8D"
                 android:textSize="16sp" />
 
             <CheckBox
                 android:id="@+id/r_index"
+                android:theme="@style/checkBoxStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:text="@string/right_index"
-                android:textColor="@android:color/primary_text_material_light"
+                android:textColor="#8D8D8D"
                 android:textSize="16sp" />
         </TableRow>
 
@@ -164,7 +172,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="25dp" />
 
     <FrameLayout
         android:layout_width="336dp"
@@ -172,13 +180,14 @@
         android:layout_gravity="center_horizontal">
 
         <Switch
-            android:id="@+id/switch3"
-            android:layout_width="276dp"
+            android:id="@+id/iris_switch"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="@string/enable_iris_scan"
-            android:textColor="@android:color/secondary_text_material_light"
+            android:textColor="#8D8D8D"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:theme="@style/Custom.SwitchCompat.WhiteTrack"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </FrameLayout>
@@ -190,20 +199,22 @@
 
         <CheckBox
             android:id="@+id/r_iris"
+            android:theme="@style/checkBoxStyle"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:enabled="false"
             android:text="@string/left_iris"
-            android:textColor="@android:color/primary_text_material_light"
+            android:textColor="#8D8D8D"
             android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/l_iris"
+            android:theme="@style/checkBoxStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="false"
             android:text="@string/right_iris"
-            android:textColor="@android:color/primary_text_material_light"
+            android:textColor="#8D8D8D"
             android:textSize="16sp" />
     </TableRow>
 
@@ -218,7 +229,7 @@
         android:layout_marginTop="0px"
         android:height="30dp"
         android:background="@drawable/button_border"
-        android:checkable="false"
+        android:enabled="false"
         android:clickable="true"
         android:focusable="true"
         android:minHeight="45dp"
