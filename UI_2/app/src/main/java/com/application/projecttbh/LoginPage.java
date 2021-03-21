@@ -40,7 +40,7 @@ public class LoginPage extends Activity {
 
         // Set object instances for UI items
         Button loginBtn = findViewById(R.id.homeButton);
-        Button sysAdminBtn = findViewById(R.id.start_scan);
+        Button sysAdminBtn = findViewById(R.id.sys_admin);
         Button tsaManagerBtn = findViewById(R.id.tsaManagerBtn);
 
         empIdTextview = findViewById(R.id.emp_id_onboarding);

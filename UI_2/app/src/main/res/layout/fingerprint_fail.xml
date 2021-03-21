@@ -39,13 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="206dp"
-                android:scaleX="2"
-                android:scaleY="2"
-                android:src="@drawable/fingerprint"/>
 
             <Space
                 android:layout_width="match_parent"

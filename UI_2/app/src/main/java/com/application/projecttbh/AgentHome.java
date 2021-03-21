@@ -13,6 +13,7 @@ public class AgentHome extends Activity {
     private Button singleOnboarding;
     private Button batchModeOnboarding;
     private Button matchingMode;
+    private Button clearData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,15 @@ public class AgentHome extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AgentHome.this, MatchingForm.class); // Call a secondary view
+                startActivity(intent);
+            }
+        });
+
+        clearData = findViewById(R.id.clearData);
+        clearData.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AgentHome.this, FingerprintScanning.class); // Call a secondary view
                 startActivity(intent);
             }
         });

@@ -22,10 +22,10 @@ public class OnboardData {
 
 
     // Fingerprint Data S3 Locations
-    private String[] s3_fp_data = new String[] {"", "", "", ""};
+    private String[] s3_fp_data = new String[] {"", ""};
 
     // Iris Data S3 Locations
-    private String[] s3_iris_data = new String[] {"", "", "", ""};
+    private String[] s3_iris_data = new String[] {"", ""};
 
     // Getter/setter
     public String getPassportId() {
