@@ -1,4 +1,3 @@
-#include <FPS_GT511C3.h>
 
 /*****************************************************************
   FPS_Enroll.ino - Library example for controlling the GT-511C3 Finger Print Scanner (FPS)
@@ -52,13 +51,14 @@ Note: You can add the two 10kOhm resistors in series for 20kOhms. =)
 --------------------------------------------------------------------------------
 
 *****************************************************************/
+
 #include "FPS_GT511C3.h"
 #include "SoftwareSerial.h"
 
 // set up software serial pins for Arduino's w/ Atmega328P's
 // FPS (TX) is connected to pin 4 (Arduino's Software RX)
 // FPS (RX) is connected through a converter to pin 5 (Arduino's Software TX)
-FPS_GT511C3 fps(4, 5); // (Arduino SS_RX = pin 4, Arduino SS_TX = pin 5)
+FPS_GT511C3 fps(2, 4); // (Arduino SS_RX = pin 4, Arduino SS_TX = pin 5)
 
 /*If using another Arduino microcontroller, try commenting out line 60 and
 uncommenting line 69 due to the limitations listed in the
@@ -71,7 +71,7 @@ not forget to rewire the connection to the Arduino*/
 
 void setup()
 {
-  Serial.begin(9600); //set up Arduino's hardware serial UART
+  Serial.begin(57600); //set up Arduino's hardware serial UART
   delay(100);
   pinMode(LED_BUILTIN, OUTPUT);
 }
@@ -83,11 +83,13 @@ void loop()
   //Serial.println("sanity");
   switch(Serial.read()) {
     case 'a':
+    Serial.println("sanity");
       fps.Open(); 
+      Serial.println("\nDONE");
       fps.SetLED(true);
-      delay(100);
+      delay(1000);
       
-      fps.GetRawImage();
+      //fps.GetRawImage();
       Serial.println("\nDONE");
       fps.SetLED(false);
       fps.Close();
@@ -100,5 +102,9 @@ void loop()
       break;
     
   }
+  
           //send serial command to initialize fps
+
+
+  
 }

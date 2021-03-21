@@ -2,8 +2,8 @@ package com.application.projecttbh;
 
 public class AppProperties {
     private String username = "";
-    private final Boolean debugMode = true;
-    private final Boolean enableFP = false;
+    private final Boolean debugMode = false;
+    private final Boolean enableFP = true;
     private int seq_num = 0;
     private Boolean batchMode = false;
 

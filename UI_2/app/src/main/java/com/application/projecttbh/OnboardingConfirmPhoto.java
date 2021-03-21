@@ -39,9 +39,6 @@ public class OnboardingConfirmPhoto extends Activity {
         });
 
         onConfirmFacialCapture.setOnClickListener(v -> {
-            if (!AppProperties.getInstance().getEnableFP()) {
-                AppProperties.getInstance().setSeqNum(4);
-            }
             Intent intent = new Intent(OnboardingConfirmPhoto.this, InitialScan.class); // Call a secondary view
             startActivity(intent);
         });

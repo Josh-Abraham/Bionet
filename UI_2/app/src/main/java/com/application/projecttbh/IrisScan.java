@@ -110,9 +110,9 @@ public class IrisScan extends Activity {
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         // registerReceiver(broadcastReceiver, filter);
 
-        if (AppProperties.getInstance().getDebugMode()) {
-            nextButton.setVisibility(View.VISIBLE);
-        }
+//        if (AppProperties.getInstance().getDebugMode()) {
+           nextButton.setVisibility(View.VISIBLE);
+//        }
 
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override

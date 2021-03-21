@@ -17,7 +17,7 @@ public class InitialScan extends Activity {
     ImageView chevron3;
     private Button startScan;
     private TextView scanTag;
-    private String[] keys = new String[6];
+    private String[] keys = new String[4];
 
 
     @Override
@@ -26,16 +26,14 @@ public class InitialScan extends Activity {
         setContentView(R.layout.inital_scan);
         keys[0] = getString(R.string.fp_scan_left_thumb);
         keys[1] = getString(R.string.fp_scan_right_thumb);
-        keys[2] = getString(R.string.fp_scan_left_index);
-        keys[3] = getString(R.string.fp_scan_right_index);
-        keys[4] = getString(R.string.eye_scan_left);
-        keys[5] = getString(R.string.eye_scan_right);
+        keys[2] = getString(R.string.eye_scan_left);
+        keys[3] = getString(R.string.eye_scan_right);
 
 
         chevron1 = findViewById(R.id.chevron1);
         chevron2 = findViewById(R.id.chevron2);
         chevron3 = findViewById(R.id.chevron3);
-        startScan = findViewById(R.id.start_scan);
+        startScan = findViewById(R.id.sys_admin);
         scanTag = findViewById(R.id.sensorTag);
         int key = AppProperties.getInstance().getSeqNum();
         scanTag.setText(keys[key]);
@@ -47,7 +45,7 @@ public class InitialScan extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent;// Call a secondary view
-                if (key < 4) {
+                if (key < 2) {
                     intent = new Intent(InitialScan.this, FingerprintScanning.class);
                 } else {
                     intent = new Intent(InitialScan.this, IrisScan.class);
