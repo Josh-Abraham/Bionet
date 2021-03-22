@@ -19,7 +19,9 @@ import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class IrisScan extends Activity {
@@ -117,9 +119,18 @@ public class IrisScan extends Activity {
         nextButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // On Retake, delete photo and swap back to camera view
-                Intent intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
+                Intent intent;
+                if (AppProperties.getInstance().getType().equals("onboarding")) {
+                     intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
+                } else if(AppProperties.getInstance().getSeqNum() == 2 && MatchingProperties.getInstance().getIrisOptions()[1]) {
+                    AppProperties.getInstance().setSeqNum(3);
+                    intent = new Intent(IrisScan.this, InitialScan.class); // Call a secondary view
+                } else {
+                    intent = new Intent(IrisScan.this, AgentHome.class); // Call a secondary view
+                }
+
                 startActivity(intent);
+
             }
         });
 

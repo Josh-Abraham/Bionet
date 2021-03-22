@@ -121,7 +121,7 @@ public class MatchingCamera extends AppCompatActivity {
                 if (AppProperties.getInstance().getDebugMode()) {
                     fileName = "DEBUG_ON_FACIAL.jpg";
                 }
-                File dir = new File(context.getFilesDir(), "MATCHING");
+                File dir = new File(context.getFilesDir(), MatchingProperties.getInstance().getDirectory());
                 if(!dir.exists()){
                     dir.mkdir();
                 }
@@ -136,9 +136,7 @@ public class MatchingCamera extends AppCompatActivity {
                             @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void run() {
-                                MatchingProperties.getInstance().setDirectory("MATCHING");
                                 MatchingProperties.getInstance().setFacialScan(finalFileName);
-
                                 Intent intent = new Intent(MatchingCamera.this, MatchingConfirmPhoto.class); // Call a secondary view
                                 startActivity(intent);
                             }

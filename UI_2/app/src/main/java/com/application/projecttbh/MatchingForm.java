@@ -11,12 +11,7 @@ import android.widget.TextView;
 
 public class MatchingForm extends Activity {
     private TextView passportIdMatching;
-    private CheckBox lThumb;
-    private CheckBox lIndex;
-    private CheckBox rThumb;
-    private CheckBox rIndex;
-    private CheckBox rIris;
-    private CheckBox lIris;
+    private CheckBox lThumb, rThumb, rIris, lIris;
     private Boolean passportNumCheck = false;
 
 
@@ -29,9 +24,7 @@ public class MatchingForm extends Activity {
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch fpSwitch = findViewById(R.id.fp_switch);
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch irisSwitch = findViewById(R.id.iris_switch);
         lThumb = findViewById(R.id.l_thumb);
-        lIndex = findViewById(R.id.l_index);
         rThumb = findViewById(R.id.r_thumb);
-        rIndex = findViewById(R.id.r_index);
         lIris = findViewById(R.id.l_iris);
         rIris = findViewById(R.id.r_iris);
         Button continueButton = findViewById(R.id.continue_button);
@@ -40,41 +33,33 @@ public class MatchingForm extends Activity {
             @Override public void validate(TextView textView, String text) {
                 passportNumCheck = text.length() > 0;
                 MatchingProperties.getInstance().setPassportId(text);
-                continueButton.setEnabled(passportNumCheck && (MatchingProperties.getInstance().isEnableIris() || MatchingProperties.getInstance().isEnableIris() || MatchingProperties.getInstance().isEnableFace()));
+                continueButton.setEnabled(checkContinueButton());
             }
         });
 
-        facialSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> MatchingProperties.getInstance().setEnableFace(isChecked));
+        facialSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            MatchingProperties.getInstance().setEnableFace(isChecked);
+            continueButton.setEnabled(checkContinueButton());
+        });
 
         fpSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             MatchingProperties.getInstance().setEnableFP(isChecked);
             lThumb.setEnabled(isChecked);
-            lIndex.setEnabled(isChecked);
             rThumb.setEnabled(isChecked);
-            rIndex.setEnabled(isChecked);
+            continueButton.setEnabled(checkContinueButton());
         });
 
         lThumb.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(MatchingProperties.getInstance().isEnableFP()) {
                 MatchingProperties.getInstance().updateFpOptions(0, isChecked);
-            }
-        });
-
-        lIndex.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(MatchingProperties.getInstance().isEnableFP()) {
-                MatchingProperties.getInstance().updateFpOptions(1, isChecked);
+                continueButton.setEnabled(checkContinueButton());
             }
         });
 
         rThumb.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(MatchingProperties.getInstance().isEnableFP()) {
-                MatchingProperties.getInstance().updateFpOptions(2, isChecked);
-            }
-        });
-
-        rIndex.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(MatchingProperties.getInstance().isEnableFP()) {
-                MatchingProperties.getInstance().updateFpOptions(3, isChecked);
+                MatchingProperties.getInstance().updateFpOptions(1, isChecked);
+                continueButton.setEnabled(checkContinueButton());
             }
         });
 
@@ -82,17 +67,20 @@ public class MatchingForm extends Activity {
             MatchingProperties.getInstance().setEnableIris(isChecked);
             lIris.setEnabled(isChecked);
             rIris.setEnabled(isChecked);
+            continueButton.setEnabled(checkContinueButton());
         });
 
         lIris.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(MatchingProperties.getInstance().isEnableIris()) {
                 MatchingProperties.getInstance().updateIrisOptions(0, isChecked);
+                continueButton.setEnabled(checkContinueButton());
             }
         });
 
         rIris.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(MatchingProperties.getInstance().isEnableIris()) {
                 MatchingProperties.getInstance().updateIrisOptions(1, isChecked);
+                continueButton.setEnabled(checkContinueButton());
             }
         });
 
@@ -102,28 +90,42 @@ public class MatchingForm extends Activity {
                     Intent intent = new Intent(MatchingForm.this, MatchingCamera.class); // Call a secondary view
                     startActivity(intent);
                 } else if (MatchingProperties.getInstance().isEnableFP()) {
-                    for (int i = 0; i < 4; i++) {
-                        if (MatchingProperties.getInstance().getFpOptions()[i]) {
-                            Intent intent = new Intent(MatchingForm.this, MatchingCamera.class); // Call a secondary view
-                            startActivity(intent);
-                        }
+                    // FP SENSOR
+                    if (MatchingProperties.getInstance().getFpOptions()[0]) {
+                        AppProperties.getInstance().setSeqNum(0);
+                        Intent intent = new Intent(MatchingForm.this, FingerprintScanning.class); // Call a secondary view
+                        startActivity(intent);
+                    } else if (MatchingProperties.getInstance().getFpOptions()[1]) {
+                        AppProperties.getInstance().setSeqNum(1);
+                        Intent intent = new Intent(MatchingForm.this, FingerprintScanning.class); // Call a secondary view
+                        startActivity(intent);
                     }
                 }  else {
-
+                    // IRIS SENSOR
                     if (MatchingProperties.getInstance().getIrisOptions()[0]) {
-                        Intent intent = new Intent(MatchingForm.this, MatchingCamera.class); // Call a secondary view
+                        AppProperties.getInstance().setSeqNum(2);
+                        Intent intent = new Intent(MatchingForm.this, IrisScan.class); // Call a secondary view
                         startActivity(intent);
                     } else if (MatchingProperties.getInstance().getIrisOptions()[1]) {
-                        Intent intent = new Intent(MatchingForm.this, MatchingCamera.class); // Call a secondary view
+                        AppProperties.getInstance().setSeqNum(3);
+                        Intent intent = new Intent(MatchingForm.this, IrisScan.class); // Call a secondary view
                         startActivity(intent);
                     }
-
                 }
-
             }
         });
-
     }
 
+    private boolean checkContinueButton() {
+        boolean someBiometric = MatchingProperties.getInstance().isEnableIris() || MatchingProperties.getInstance().isEnableIris() || MatchingProperties.getInstance().isEnableFace();
+        boolean valid = true;
+        if (MatchingProperties.getInstance().isEnableIris()) {
+            valid = valid && (MatchingProperties.getInstance().getIrisOptions()[0] || MatchingProperties.getInstance().getIrisOptions()[1]);
+        }
 
+        if (MatchingProperties.getInstance().isEnableFP()) {
+            valid = valid && (MatchingProperties.getInstance().getFpOptions()[0] || MatchingProperties.getInstance().getFpOptions()[1]);
+        }
+        return passportNumCheck && valid && someBiometric;
+    }
 }

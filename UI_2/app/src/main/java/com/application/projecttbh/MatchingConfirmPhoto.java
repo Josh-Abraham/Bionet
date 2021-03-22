@@ -17,7 +17,7 @@ public class MatchingConfirmPhoto extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_confirm_photo);
         Context context = getApplicationContext();
-        String pathName = context.getFilesDir() + "/" + MatchingProperties.getInstance().getMatchingDirectoy() + "/" + MatchingProperties.getInstance().getFacialScan();
+        String pathName = context.getFilesDir() + "/" + MatchingProperties.getInstance().getDirectory() + "/" + MatchingProperties.getInstance().getFacialScan();
         setImagePreview(pathName);
         Button onRetakeFacialCap = findViewById(R.id.retake_facial_capture);
         Button onConfirmFacialCapture = findViewById(R.id.confirm_and_upload);
@@ -26,7 +26,7 @@ public class MatchingConfirmPhoto extends Activity {
         onRetakeFacialCap.setOnClickListener(v -> {
             // On Retake, delete photo and swap back to camera view
             String app_folder_path = "";
-            app_folder_path = context.getFilesDir() + "/" + MatchingProperties.getInstance().getMatchingDirectoy();
+            app_folder_path = context.getFilesDir() + "/" + MatchingProperties.getInstance().getDirectory();
             File dir = new File(app_folder_path);
             if (!dir.exists() && !dir.mkdirs()) {
 
@@ -41,9 +41,9 @@ public class MatchingConfirmPhoto extends Activity {
 
         onConfirmFacialCapture.setOnClickListener(v -> {
             Intent intent;
-            boolean fp[] = MatchingProperties.getInstance().getFpOptions();
-            boolean iris[] = MatchingProperties.getInstance().getIrisOptions();
-            if ((MatchingProperties.getInstance().isEnableFP() && (fp[0] || fp[1] || fp[2] || fp[3])) || (MatchingProperties.getInstance().isEnableIris() && (iris[0] || iris[1]))) {
+            Boolean fp[] = MatchingProperties.getInstance().getFpOptions();
+            Boolean iris[] = MatchingProperties.getInstance().getIrisOptions();
+            if ((MatchingProperties.getInstance().isEnableFP() && (fp[0] || fp[1] )) || (MatchingProperties.getInstance().isEnableIris() && (iris[0] || iris[1]))) {
 
 
                 intent = new Intent(MatchingConfirmPhoto.this, InitialScan.class); // Call a secondary view

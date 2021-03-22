@@ -40,6 +40,9 @@ public class EBTSMaker {
         type2Record.setField(33, new Field((String) userData.get("PassportNumber"))); // In this implementation, the finger print set is saved under the passport id with identifiers _FP_0..3
 
         type10Record.setField(2, new Field((String) userData.get("FACE")));
+        type10Record.setField(7, new Field((String) userData.get("FP_LT")));
+        type10Record.setField(8, new Field((String) userData.get("FP_RT")));
+
 
         type17Record.setField(2, new Field((String) userData.get("IRIS_L")));
         type17Record.setField(3, new Field((String) userData.get("IRIS_R")));

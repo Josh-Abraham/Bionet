@@ -110,11 +110,11 @@ public class UploadOnboardData extends Activity {
                             if (dataSent) {
                                 OnboardData.getInstance().resetInstance();
                                 Intent intent;
-                              if (AppProperties.getInstance().getBatchMode()) {
-                                  intent = new Intent(UploadOnboardData.this, OnboardingOne.class); // Call a secondary view
-                              } else {
-                                  intent = new Intent(UploadOnboardData.this, AgentHome.class); // Call a secondary view
-                              }
+                                if (AppProperties.getInstance().getBatchMode()) {
+                                    intent = new Intent(UploadOnboardData.this, OnboardingOne.class); // Call a secondary view
+                                } else {
+                                    intent = new Intent(UploadOnboardData.this, AgentHome.class); // Call a secondary view
+                                }
                                 startActivity(intent);
                             }
 
