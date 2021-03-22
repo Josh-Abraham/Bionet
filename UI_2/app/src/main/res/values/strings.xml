@@ -1,0 +1,97 @@
+<resources>
+    <string name="hello">Hello!</string>
+    <string name="app_name">Project TBH</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="employee_id">Employee ID #</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_in_as">Sign in as:</string>
+    <string name="system_admin">System Admin</string>
+    <string name="tsa_manager">TSA Manager</string>
+    <string name="tsa_agent">TSA Agent</string>
+    <string name="page2">page_2</string>
+    <string name="review_user">Review User</string>
+    <string name="left_finger_success"/>
+    <string name="are_fields_correct">Are these fields correct?</string>
+    <string name="edit">Edit Fields</string>
+    <string name="finish_onboarding">Finish Onboarding</string>
+    <string name="welcome">Welcome</string>
+    <string name="user">User</string>
+    <string name="batch_mode">Batch Scan Mode</string>
+    <string name="add_single">Add Single Scan</string>
+    <string name="match_user">1:1 Match User</string>
+    <string name="clear_data">Delete Onboard Data</string>
+    <string name="manager_id">Manager ID:</string>
+    <string name="agent_name">Agent Name:</string>
+
+    <!-- PASSPORT DATA -->
+    <string name="name">Name</string>
+    <string name="ie_john">ie. John</string>
+    <string name="ie_middle">ie. M</string>
+    <string name="ie_smith">ie. Smith</string>
+    <string name="ie_dd.mm.yyyy">ie. 31.12.2000</string>
+    <string name="ie_passport">ie. SS000000</string>
+    <string name="incorrect_credentials">Incorrect Credentials</string>
+    <string name="onboarding_form">Onboarding Form</string>
+    <string name="passport_number">Passport Id</string>
+    <string name="continue_button">Continue</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="middle_initial">Middle Initial</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="address_data">Insert Address Information</string>
+    <string name="street_address">Street Address</string>
+    <string name="ie_street_address">ie. 11 Arboretum Lane</string>
+    <string name="apt_num">Unit Number</string>
+    <string name="ie_apt_num">ie. 105</string>
+    <string name="city">City</string>
+    <string name="ie_city">ie. Toronto</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="ie_postal_code">ie. M3J 2S5</string>
+    <string name="province">Province/State</string>
+    <string name="ie_province">ie. Ontario</string>
+
+    <!-- IMAGE CAPTURE -->
+    <string name="capture">capture</string>
+    <string name="preview_area">preview</string>
+    <string name="facial_recognition_result">Facial Recognition Result</string>
+    <string name="review_image_cap">Review Image</string>
+    <string name="verify_photo">Please confirm image quality</string>
+    <string name="retake_facial_capture">Retake Image</string>
+    <string name="confirm_facial_capture">Confirm Image</string>
+    <string name="finger_print_form">Register Fingerprints</string>
+    <string name="logo">Logo</string>
+    <string name="chevron">chevron</string>
+    <string name="start_scan">Start Scan</string>
+    <string name="scanning">Scanning ...</string>
+
+    <!-- FINGERPRINT SEQUENCE -->
+    <string name="fp_scan_left_thumb">Please place left thumb on sensor</string>
+    <string name="fp_scan_right_thumb">Please place right thumb on sensor</string>
+    <string name="fp_scan_left_index">Please place left index finger on sensor</string>
+    <string name="fp_scan_right_index">Please place right index on sensor</string>
+    <string name="eye_scan_left">Please place left eye in front of sensor</string>
+    <string name="eye_scan_right">Please place right eye in front of sensor</string>
+    <string name="next">Next</string>
+    <string name="confirm_data">Please confirm that all data is correct.</string>
+    <string name="confirm_and_upload">Confirm &amp; Upload</string>
+    <string name="upload_success">User Profile Uploaded!</string>
+    <string name="new_scan">New Scan</string>
+    <string name="home">Home</string>
+
+    <!-- MATCHING -->
+    <string name="matching_form">Matching Form</string>
+    <string name="enable_face">Enable Facial Scan</string>
+    <string name="left_thumb">Left Thumb</string>
+    <string name="left_index">Left Index</string>
+    <string name="right_thumb">Right Thumb</string>
+    <string name="right_index">Right Index</string>
+    <string name="enable_fingerprint_scan">Enable Fingerprint Scan</string>
+    <string name="enable_iris_scan">Enable Iris Scan</string>
+    <string name="right_iris">Right Iris</string>
+    <string name="left_iris">Left Iris</string>
+    <string name="manager_remove_confirmation">Are you sure you want to remove this agent?</string>
+    <string name="enter_password">Enter your password to confirm</string>
+
+</resources>
