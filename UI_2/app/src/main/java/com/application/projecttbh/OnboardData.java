@@ -206,8 +206,6 @@ public class OnboardData {
 
         // FP S3 Locations
         this.s3_fp_data = new String[]{"", "", "", ""};
-
-        AppProperties.getInstance().setSeqNum(0);
     }
 
     private OnboardData() {

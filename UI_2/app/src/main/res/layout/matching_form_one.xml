@@ -132,39 +132,15 @@
                 android:textSize="16sp" />
 
             <CheckBox
-                android:id="@+id/l_index"
-                android:layout_width="119dp"
-                android:theme="@style/checkBoxStyle"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="@string/left_index"
-                android:textColor="#8D8D8D "
-                android:textSize="16sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <CheckBox
                 android:id="@+id/r_thumb"
                 android:layout_width="150dp"
-                android:theme="@style/checkBoxStyle"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:text="@string/right_thumb"
                 android:textColor="#8D8D8D"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:theme="@style/checkBoxStyle" />
 
-            <CheckBox
-                android:id="@+id/r_index"
-                android:theme="@style/checkBoxStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="@string/right_index"
-                android:textColor="#8D8D8D"
-                android:textSize="16sp" />
         </TableRow>
 
     </TableLayout>

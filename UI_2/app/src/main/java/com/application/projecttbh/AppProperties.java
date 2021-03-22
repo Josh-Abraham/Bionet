@@ -6,6 +6,7 @@ public class AppProperties {
     private final Boolean enableFP = true;
     private int seq_num = 0;
     private Boolean batchMode = false;
+    private String type = "";
 
     // Getter/setter
     public String getUsername() {
@@ -48,5 +49,20 @@ public class AppProperties {
 
     public void setBatchMode(boolean batchMode) {
         this.batchMode = batchMode;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void resetInstance() {
+        this.username = "";
+        this.seq_num = 0;
+        this.batchMode = false;
+        this.type = "";
     }
 }
