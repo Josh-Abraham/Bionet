@@ -49,7 +49,7 @@ public class MatchingConfirmPhoto extends Activity {
                 intent = new Intent(MatchingConfirmPhoto.this, InitialScan.class); // Call a secondary view
             } else {
                 //TODO: EDIT THIS
-                intent = new Intent(MatchingConfirmPhoto.this, AgentHome.class); // Call a secondary view
+                intent = new Intent(MatchingConfirmPhoto.this, MatchingStart.class); // Call a secondary view
             }
 
             startActivity(intent);

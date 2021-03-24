@@ -10,7 +10,7 @@ public class MatchingProperties {
     private String[] irisS3 = new String[] {"", ""}; // LI, RI
     private String passportId = "";
     private String facialScan = "";
-    private final String directory = "Matching";
+    private final String directory = "MatchingStart";
 
     private static MatchingProperties instance;
 
