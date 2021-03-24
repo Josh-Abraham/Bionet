@@ -83,8 +83,10 @@ public class UploadOnboardData extends Activity {
         Context context = getApplicationContext();
         EBTSMaker.createRecord(userData, context);
         S3Client.uploadFacialFile(OnboardData.getInstance().getS3_facial_key(), context);
-        S3Client.uploadFP(OnboardData.getInstance().get_S3_fp_data()[0], context);
-        S3Client.uploadFP(OnboardData.getInstance().get_S3_fp_data()[1], context);
+        S3Client.uploadBiometric(OnboardData.getInstance().get_S3_fp_data()[0], context, "FP");
+        S3Client.uploadBiometric(OnboardData.getInstance().get_S3_fp_data()[1], context, "FP");
+        S3Client.uploadBiometric(OnboardData.getInstance().get_S3_iris_data()[0], context, "IRIS");
+        S3Client.uploadBiometric(OnboardData.getInstance().get_S3_iris_data()[1], context, "IRIS");
     }
 
 

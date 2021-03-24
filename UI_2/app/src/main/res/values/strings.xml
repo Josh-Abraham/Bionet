@@ -89,4 +89,7 @@
     <string name="enable_iris_scan">Enable Iris Scan</string>
     <string name="right_iris">Right Iris</string>
     <string name="left_iris">Left Iris</string>
+    <string name="start_matching">Start Matching</string>
+    <string name="confirm_and_match"><![CDATA[Start Authentication]]></string>
+    <string name="matching">Matching ...</string>
 </resources>

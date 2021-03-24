@@ -235,7 +235,7 @@ public class FingerprintScanning extends Activity {
                 dir.mkdir();
             }
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/Matching/" + fileName));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/MatchingStart/" + fileName));
             writer.write(formattedData);
 
             writer.close();
@@ -255,7 +255,7 @@ public class FingerprintScanning extends Activity {
                 }
             }
             if (finished) {
-                intent = new Intent(FingerprintScanning.this, AgentHome.class); // Call a secondary view
+                intent = new Intent(FingerprintScanning.this, MatchingStart.class); // Call a secondary view
             }
             startActivity(intent);
         }
