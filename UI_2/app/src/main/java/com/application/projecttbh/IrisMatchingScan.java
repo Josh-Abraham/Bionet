@@ -13,8 +13,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -25,21 +28,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-public class FingerprintScanning extends Activity {
-    private static final String FINGER_PRINT_CODE = "a";
+public class IrisMatchingScan extends Activity {
     public final String ACTION_USB_PERMISSION = "com.hariharan.arduinousb.USB_PERMISSION";
-    ImageView stillFP, gifFP;
-    Button sendButton, resendButton;
-    TextView scanningTag;
     UsbManager usbManager;
     UsbDevice device;
     UsbSerialDevice serialPort;
     UsbDeviceConnection connection;
+    final String IRIS_SCAN_CODE = "b";
     String allData = "";
+    boolean ff_key, d9_key = false;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
@@ -49,24 +46,26 @@ public class FingerprintScanning extends Activity {
                 hexStringBuffer.append(byteToHex(byteArray[i]));
             }
             String data = hexStringBuffer.toString();
-            allData += data;
-            if (allData.length() >= 115214) {
+            allData += data + "\n";
+            if (hexStringBuffer.toString().equals("ff")) {
+                ff_key = true;
+            }
+            if (ff_key && !d9_key) {
+                ff_key = hexStringBuffer.toString().equals("d9");
+                d9_key = hexStringBuffer.toString().equals("d9");
+            }
+            if (ff_key && d9_key && hexStringBuffer.toString().equals("76")) {
+                // Got all three last keys, so call output function
                 try {
-                    saveData();
+                    saveData(allData);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
+
         }
     };
-
-    public String byteToHex(byte num) {
-        char[] hexDigits = new char[2];
-        hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
-        hexDigits[1] = Character.forDigit((num & 0xF), 16);
-        return new String(hexDigits);
-    }
-
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { //Broadcast Receiver to automatically start and stop the Serial connection.
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -77,7 +76,7 @@ public class FingerprintScanning extends Activity {
                     serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
                     if (serialPort != null) {
                         if (serialPort.open()) { //Set Serial Connection Parameters.
-                            serialPort.setBaudRate(57600);
+                            serialPort.setBaudRate(9600);
                             serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                             serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
@@ -94,62 +93,56 @@ public class FingerprintScanning extends Activity {
                     Log.d("SERIAL", "PERM NOT GRANTED");
                 }
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_ATTACHED)) {
-                onStartUSB();
+                onClickStart();
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
-                onCloseConnection();
-
+                onUsbStop();
             }
         }
-
         ;
     };
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scanning_finger);
-        usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
-        sendButton = findViewById(R.id.buttonSend);
-        resendButton = findViewById(R.id.buttonResend);
-        scanningTag = findViewById(R.id.scanning);
-        stillFP = findViewById(R.id.stillFP);
-        gifFP = findViewById(R.id.gifFP);
+        setContentView(R.layout.iris_scan);
+        // usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
+        Button nextButton = findViewById(R.id.next);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
-        registerReceiver(broadcastReceiver, filter);
+        // registerReceiver(broadcastReceiver, filter);
 
-        onStartUSB();
+//        if (AppProperties.getInstance().getDebugMode()) {
+        nextButton.setVisibility(View.VISIBLE);
+//        }
 
-        sendButton.setOnClickListener(v -> {
-            serialPort.write(FINGER_PRINT_CODE.getBytes());
-            stillFP.getLayoutParams().height = 0;
+        nextButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                if(AppProperties.getInstance().getSeqNum() == 2 && MatchingProperties.getInstance().getIrisOptions()[1]) {
+                    AppProperties.getInstance().setSeqNum(3);
+                    intent = new Intent(IrisMatchingScan.this, InitialMatchingScan.class); // Call a secondary view
+                } else {
+                    intent = new Intent(IrisMatchingScan.this, MatchingStart.class); // Call a secondary view
+                }
 
-            gifFP.getLayoutParams().height = 800;
-            stillFP.requestLayout();
-            gifFP.requestLayout();
-            scanningTag.setVisibility(View.VISIBLE);
-            sendButton.setHeight(0);
-            resendButton.setHeight(50);
-            sendButton.requestLayout();
-            resendButton.requestLayout();
+                startActivity(intent);
+
+            }
         });
 
-        resendButton.setOnClickListener(v -> {
-            allData = "";
-            serialPort.write(FINGER_PRINT_CODE.getBytes());
-        });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        onCloseConnection();
+        onUsbStop();
     }
 
-
-    public void onStartUSB() {
+    public void onClickStart() {
 
         HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
         if (!usbDevices.isEmpty()) {
@@ -157,11 +150,17 @@ public class FingerprintScanning extends Activity {
             for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
                 device = entry.getValue();
                 int deviceVID = device.getVendorId();
-                if (deviceVID == 0x2341) //Arduino Vendor ID
+                if (deviceVID == 0x2341)//Arduino Vendor ID
                 {
                     PendingIntent pi = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
                     usbManager.requestPermission(device, pi);
                     keep = false;
+                    try {
+                        Thread.sleep(2 * 1000);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                    }
+                    serialPort.write(IRIS_SCAN_CODE.getBytes());
                 } else {
                     connection = null;
                     device = null;
@@ -178,61 +177,49 @@ public class FingerprintScanning extends Activity {
 
     }
 
-    public void onCloseConnection() {
-        serialPort.close();
-        Toast.makeText(getApplicationContext(), String.format("%s\n", "Serial Connection Closed"), Toast.LENGTH_LONG).show();
-    }
-
-    private static String hexToAscii(String hexStr) {
-        StringBuilder output = new StringBuilder("");
-
-        for (int i = 0; i < hexStr.length(); i += 2) {
-            String str = hexStr.substring(i, i + 2);
-            output.append((char) Integer.parseInt(str, 16));
+    public void onUsbStop() {
+        if (serialPort != null) {
+            serialPort.close();
         }
-
-        return output.toString();
+        unregisterReceiver(broadcastReceiver);
     }
 
-    public void saveData() throws IOException {
-        String formattedData = "";
-        allData = allData.substring(14);
-        int picData[][] = new int[160][120];
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < allData.length(); i += 6) {
-            String hex0 = String.valueOf(allData.charAt(i)) + String.valueOf(allData.charAt(i+1));
-            String ascii0 = hexToAscii(hex0);
-            String hex1 = String.valueOf(allData.charAt(i+2)) + String.valueOf(allData.charAt(i+3));
-            String ascii1 = hexToAscii(hex1);
-            String hex2 = String.valueOf(allData.charAt(i+4)) + String.valueOf(allData.charAt(i+5));
-            String ascii2 = hexToAscii(hex2);
-            if (x != 159) {
-                formattedData += ascii0 + ascii1 + ascii2 + ",";
-                x++;
+    public String byteToHex(byte num) {
+        char[] hexDigits = new char[2];
+        hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
+        hexDigits[1] = Character.forDigit((num & 0xF), 16);
+        return new String(hexDigits);
+    }
+
+    public void saveData(String allData) throws IOException {
+        Context context = getApplicationContext();
+        int seq_num = AppProperties.getInstance().getSeqNum();
+        if (AppProperties.getInstance().getType().equals("onboarding")) {
+            String tag = OnboardData.getInstance().getPassportId() + "_IRIS_" + seq_num;
+            OnboardData.getInstance().update_S3_iris_data(tag, seq_num-4);
+
+            File dir = new File(context.getFilesDir(), "IRIS");
+            if(!dir.exists()){
+                dir.mkdir();
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/IRIS/" + tag));
+            writer.write(allData);
+
+            writer.close();
+
+
+            int currentScan = seq_num + 1;
+            AppProperties.getInstance().setSeqNum(currentScan);
+            if (AppProperties.getInstance().getSeqNum() == 6) {
+                Intent intent = new Intent(IrisMatchingScan.this, MatchingStart.class); // Call a secondary view
+                startActivity(intent);
             } else {
-                formattedData += ascii0 + ascii1 + ascii2 + "\n";
-                x = 0;
-                y+= 1;
+                Intent intent = new Intent(IrisMatchingScan.this, InitialMatchingScan.class); // Call a secondary view
+                startActivity(intent);
             }
         }
 
-        Context context = getApplicationContext();
-        int seqNum = AppProperties.getInstance().getSeqNum();
-        String fileName = OnboardData.getInstance().getPassportId() + "_FP_" + seqNum + ".txt";
-        OnboardData.getInstance().update_S3_fp_data(fileName, seqNum);
-        File dir = new File(context.getFilesDir(), "FP");
-        if(!dir.exists()){
-            dir.mkdir();
-        }
-        BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/FP/" + fileName));
-        writer.write(formattedData);
 
-        writer.close();
-        allData = "";
 
-        AppProperties.getInstance().setSeqNum(seqNum + 1);
-        Intent intent = new Intent(FingerprintScanning.this, InitialScan.class); // Call a secondary view
-        startActivity(intent);
     }
 }

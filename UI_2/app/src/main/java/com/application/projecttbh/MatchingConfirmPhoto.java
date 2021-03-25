@@ -44,9 +44,7 @@ public class MatchingConfirmPhoto extends Activity {
             Boolean fp[] = MatchingProperties.getInstance().getFpOptions();
             Boolean iris[] = MatchingProperties.getInstance().getIrisOptions();
             if ((MatchingProperties.getInstance().isEnableFP() && (fp[0] || fp[1] )) || (MatchingProperties.getInstance().isEnableIris() && (iris[0] || iris[1]))) {
-
-
-                intent = new Intent(MatchingConfirmPhoto.this, InitialScan.class); // Call a secondary view
+                intent = new Intent(MatchingConfirmPhoto.this, InitialMatchingScan.class); // Call a secondary view
             } else {
                 //TODO: EDIT THIS
                 intent = new Intent(MatchingConfirmPhoto.this, MatchingStart.class); // Call a secondary view

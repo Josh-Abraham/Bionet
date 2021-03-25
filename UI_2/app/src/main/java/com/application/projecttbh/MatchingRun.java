@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,7 +40,7 @@ public class MatchingRun extends Activity {
         // TODO: Encrypt
         JSONObject matchingData = new JSONObject();
         matchingData.put("PassportNumber", MatchingProperties.getInstance().getPassportId());
-        matchingData.put("EnableFacial", MatchingProperties.getInstance().isEnableFace());
+        matchingData.put("FaceS3", MatchingProperties.getInstance().getFacialScan());
         matchingData.put("FingerprintS3", MatchingProperties.getInstance().getFpS3());
         matchingData.put("IrisS3", MatchingProperties.getInstance().getIrisS3());
         return matchingData;
@@ -61,8 +63,20 @@ public class MatchingRun extends Activity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String dataSent = response.getString("result");
-                            System.out.println(dataSent);
+                            String resp = response.getString("result");
+                            Boolean verified = Boolean.valueOf(resp);
+                            ImageView gifMatching;
+                            TextView matchingTag;
+                            gifMatching = findViewById(R.id.gifMatching);
+                            gifMatching.getLayoutParams().height = 0;
+                            gifMatching.requestLayout();
+
+                            matchingTag = findViewById(R.id.matching);
+                            if (verified) {
+                                matchingTag.setText("Valid Match");
+                            } else {
+                                matchingTag.setText("Invalid Match");
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

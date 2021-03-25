@@ -53,7 +53,7 @@ public class OnboardingTwo extends Activity {
 
         cityOnboarding.addTextChangedListener(new TextValidator(cityOnboarding) {
             @Override public void validate(TextView textView, String text) {
-                cityCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
+                cityCheck = text.length() > 0 && text.matches("[a-zA-Z ]+");
                 OnboardData.getInstance().setCity(text);
                 checkContinueButtonEnable();
             }
@@ -61,7 +61,7 @@ public class OnboardingTwo extends Activity {
 
         provinceOnboarding.addTextChangedListener(new TextValidator(provinceOnboarding) {
             @Override public void validate(TextView textView, String text) {
-                provinceCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
+                provinceCheck = text.length() > 0 && text.matches("[a-zA-Z ]+");
                 OnboardData.getInstance().setProvince(text);
                 checkContinueButtonEnable();
             }
@@ -76,7 +76,7 @@ public class OnboardingTwo extends Activity {
 
         postalCodeOnboarding.addTextChangedListener(new TextValidator(postalCodeOnboarding) {
             @Override public void validate(TextView textView, String text) {
-                postalCodeCheck = text.length() > 0 && text.matches("[a-zA-Z]+");
+                postalCodeCheck = text.length() > 0;
                 OnboardData.getInstance().setPostalCode(text);
                 checkContinueButtonEnable();
             }

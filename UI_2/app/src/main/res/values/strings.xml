@@ -92,4 +92,5 @@
     <string name="start_matching">Start Matching</string>
     <string name="confirm_and_match"><![CDATA[Start Authentication]]></string>
     <string name="matching">Matching ...</string>
+    <string name="restart_scan">Restart Scan</string>
 </resources>

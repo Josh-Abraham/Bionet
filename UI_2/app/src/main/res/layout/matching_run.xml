@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifMatching"
         android:layout_width="369dp"
         android:layout_height="384dp"
         android:layout_gravity="center_horizontal"
