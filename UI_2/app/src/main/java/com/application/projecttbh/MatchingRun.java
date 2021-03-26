@@ -2,11 +2,14 @@ package com.application.projecttbh;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +25,7 @@ import org.json.JSONObject;
 public class MatchingRun extends Activity {
     Button uploadBtn;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +39,19 @@ public class MatchingRun extends Activity {
         submitData(matchingData);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private JSONObject createJSON() throws JSONException {
         // MatchingStart data
         // TODO: Encrypt
         JSONObject matchingData = new JSONObject();
-        matchingData.put("PassportNumber", MatchingProperties.getInstance().getPassportId());
-        matchingData.put("FaceS3", MatchingProperties.getInstance().getFacialScan());
-        matchingData.put("FingerprintS3", MatchingProperties.getInstance().getFpS3());
-        matchingData.put("IrisS3", MatchingProperties.getInstance().getIrisS3());
+        MatchingProperties matchingProps = MatchingProperties.getInstance();
+        matchingData.put("PassportNumber", AES.encrypt(MatchingProperties.getInstance().getPassportId()));
+
+        matchingData.put("FaceS3", AES.encrypt(matchingProps.getFacialScan()));
+        matchingData.put("FingerprintS3_0", AES.encrypt(matchingProps.getFpS3()[0]));
+        matchingData.put("FingerprintS3_1", AES.encrypt(matchingProps.getFpS3()[1]));
+        matchingData.put("IrisS3_0", AES.encrypt(matchingProps.getIrisS3()[0]));
+        matchingData.put("IrisS3_1", AES.encrypt(matchingProps.getIrisS3()[1]));
         return matchingData;
     }
 
