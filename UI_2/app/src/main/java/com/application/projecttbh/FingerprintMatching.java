@@ -29,11 +29,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FingerprintScanning extends Activity {
+public class FingerprintMatching extends Activity {
     private static final String FINGER_PRINT_CODE = "a";
     public final String ACTION_USB_PERMISSION = "com.hariharan.arduinousb.USB_PERMISSION";
     ImageView stillFP, gifFP;
-    Button sendButton, resendButton;
+    Button sendButton;
     TextView scanningTag;
     UsbManager usbManager;
     UsbDevice device;
@@ -110,7 +110,6 @@ public class FingerprintScanning extends Activity {
         setContentView(R.layout.scanning_finger);
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
         sendButton = findViewById(R.id.buttonSend);
-        resendButton = findViewById(R.id.buttonResend);
         scanningTag = findViewById(R.id.scanning);
         stillFP = findViewById(R.id.stillFP);
         gifFP = findViewById(R.id.gifFP);
@@ -130,15 +129,7 @@ public class FingerprintScanning extends Activity {
             stillFP.requestLayout();
             gifFP.requestLayout();
             scanningTag.setVisibility(View.VISIBLE);
-            sendButton.setHeight(0);
-            resendButton.setHeight(50);
-            sendButton.requestLayout();
-            resendButton.requestLayout();
-        });
-
-        resendButton.setOnClickListener(v -> {
-            allData = "";
-            serialPort.write(FINGER_PRINT_CODE.getBytes());
+            sendButton.setEnabled(false);
         });
     }
 
@@ -219,20 +210,36 @@ public class FingerprintScanning extends Activity {
 
         Context context = getApplicationContext();
         int seqNum = AppProperties.getInstance().getSeqNum();
-        String fileName = OnboardData.getInstance().getPassportId() + "_FP_" + seqNum + ".txt";
-        OnboardData.getInstance().update_S3_fp_data(fileName, seqNum);
+        String fileName = MatchingProperties.getInstance().getPassportId() + "_FP_" + seqNum + ".txt";
+        int index = AppProperties.getInstance().getSeqNum();
+        MatchingProperties.getInstance().updateFpS3(index, fileName);
         File dir = new File(context.getFilesDir(), "FP");
         if(!dir.exists()){
             dir.mkdir();
         }
-        BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/FP/" + fileName));
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/MatchingStart/" + fileName));
         writer.write(formattedData);
 
         writer.close();
         allData = "";
 
-        AppProperties.getInstance().setSeqNum(seqNum + 1);
-        Intent intent = new Intent(FingerprintScanning.this, InitialScan.class); // Call a secondary view
+
+        List<Boolean> seqList = new ArrayList(Arrays.asList(MatchingProperties.getInstance().getFpOptions()));
+        seqList.addAll(Arrays.asList(MatchingProperties.getInstance().getIrisOptions()));
+        boolean finished = true;
+        Intent intent = null;
+        for (int i = AppProperties.getInstance().getSeqNum() + 1; i < seqList.size(); i++) {
+            if (seqList.get(i)) {
+                finished = false;
+                AppProperties.getInstance().setSeqNum(i);
+                intent = new Intent(FingerprintMatching.this, InitialMatchingScan.class); // Call a secondary view
+                break;
+            }
+        }
+        if (finished) {
+            intent = new Intent(FingerprintMatching.this, MatchingStart.class); // Call a secondary view
+        }
         startActivity(intent);
     }
 }

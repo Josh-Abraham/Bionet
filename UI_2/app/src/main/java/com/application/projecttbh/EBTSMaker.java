@@ -1,6 +1,9 @@
 package com.application.projecttbh;
 
 import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +26,7 @@ import java.util.Map;
 // EBTSMaker Information structured based on: https://www.fbibiospecs.cjis.gov/ebts/Approved
 public class EBTSMaker {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void createRecord(JSONObject userData, Context context) throws JSONException, EbtsBuildingException, IOException {
         Ebts ebts = new Ebts();
         GenericRecord type2Record = new GenericRecord(2); // General Info
@@ -87,6 +91,7 @@ public class EBTSMaker {
             }
         }
         ebtsData = ebtsData + "</Ebts>";
+        ebtsData = AES.encrypt(ebtsData);
         String fileName = "ebts_file.txt";
         File dir = new File(context.getFilesDir(), "EBTS");
         if(!dir.exists()){
