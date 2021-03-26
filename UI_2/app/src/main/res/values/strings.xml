@@ -93,4 +93,5 @@
     <string name="confirm_and_match"><![CDATA[Start Authentication]]></string>
     <string name="matching">Matching ...</string>
     <string name="restart_scan">Restart Scan</string>
+    <string name="restart_onboarding">Reset Onboarding</string>
 </resources>

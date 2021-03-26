@@ -39,7 +39,7 @@ public class OnboardingConfirmPhoto extends Activity {
         });
 
         onConfirmFacialCapture.setOnClickListener(v -> {
-            Intent intent = new Intent(OnboardingConfirmPhoto.this, UploadOnboardData.class); // Call a secondary view
+            Intent intent = new Intent(OnboardingConfirmPhoto.this, InitialScan.class); // Call a secondary view
             startActivity(intent);
         });
     }
