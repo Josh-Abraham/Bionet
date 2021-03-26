@@ -12,7 +12,7 @@
     <string name="tsa_agent">TSA Agent</string>
     <string name="page2">page_2</string>
     <string name="review_user">Review User</string>
-    <string name="left_finger_success"/>
+    <string name="left_finger_success" />
     <string name="are_fields_correct">Are these fields correct?</string>
     <string name="edit">Edit Fields</string>
     <string name="finish_onboarding">Finish Onboarding</string>
@@ -22,6 +22,9 @@
     <string name="add_single">Add Single Scan</string>
     <string name="match_user">1:1 Match User</string>
     <string name="clear_data">Delete Onboard Data</string>
+    <string name="add_agent">Add    Agent</string>
+    <string name="remove_agent">Remove Agent</string>
+    <string name="create_agent">Create Agent</string>
 
     <!-- PASSPORT DATA -->
     <string name="name">Name</string>
@@ -74,6 +77,14 @@
     <string name="next">Next</string>
     <string name="confirm_data">Please confirm that all data is correct.</string>
     <string name="confirm_and_upload">Confirm &amp; Upload</string>
+    <string name="title_activity_add_agent">AddAgent</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="upload_success">User Profile Uploaded!</string>
     <string name="new_scan">New Scan</string>
     <string name="home">Home</string>
