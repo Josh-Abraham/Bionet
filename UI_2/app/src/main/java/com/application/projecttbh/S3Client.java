@@ -1,4 +1,4 @@
- package com.application.projecttbh;
+package com.application.projecttbh;
 
 import android.content.Context;
 import android.os.Environment;
@@ -20,8 +20,8 @@ public class S3Client {
     private static final String FP_CAPTURE = "FP-captures/";
     private static final String MATCHING_CAPTURE = "MatchingStart-captures/";
     private static final String IRIS_CAPTURE = "IRIS-captures/";
-    private static String accessKey = "";
-    private static String secret = "";
+    private static String accessKey = "AKIASSDK5I27GBNEH74M";
+    private static String secret = "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";
 
     public static void uploadFacialFile(String fileName, Context context) {
 

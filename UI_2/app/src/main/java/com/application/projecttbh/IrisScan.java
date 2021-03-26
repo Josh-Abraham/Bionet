@@ -122,17 +122,8 @@ public class IrisScan extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                if (AppProperties.getInstance().getType().equals("onboarding")) {
-                     intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
-                } else if(AppProperties.getInstance().getSeqNum() == 2 && MatchingProperties.getInstance().getIrisOptions()[1]) {
-                    AppProperties.getInstance().setSeqNum(3);
-                    intent = new Intent(IrisScan.this, InitialScan.class); // Call a secondary view
-                } else {
-                    intent = new Intent(IrisScan.this, MatchingStart.class); // Call a secondary view
-                }
-
+                intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
                 startActivity(intent);
-
             }
         });
 
