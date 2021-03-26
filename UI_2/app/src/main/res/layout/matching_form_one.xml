@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    >
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="39dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="123dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="127dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo" />
+
+    </TableRow>
+
+    <EditText
+        android:id="@+id/matching_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:clickable="false"
+        android:ems="10"
+        android:fitsSystemWindows="false"
+        android:focusable="false"
+        android:gravity="center"
+        android:hint="@string/onboarding_form"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:text="@string/matching_form"
+        android:textColor="@color/primary"
+        android:textSize="18sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="31dp" />
+
+    <TextView
+        android:id="@+id/passport_id_panel"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:text="@string/passport_number"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/passport_id_matching"
+        android:layout_width="336dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:height="40dp"
+        android:autofillHints=""
+        android:background="@drawable/text_field"
+        android:ems="10"
+        android:hint="@string/ie_passport"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="34dp" />
+
+    <FrameLayout
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Switch
+            android:id="@+id/face_switch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:checked="true"
+            android:text="@string/enable_face"
+            android:textColor="#8D8D8D"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:theme="@style/Custom.SwitchCompat.WhiteTrack"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </FrameLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <FrameLayout
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Switch
+            android:id="@+id/fp_switch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/enable_fingerprint_scan"
+            android:textColor="#8D8D8D "
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:theme="@style/Custom.SwitchCompat.WhiteTrack"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </FrameLayout>
+
+
+    <TableLayout
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/l_thumb"
+                android:layout_width="150dp"
+                android:theme="@style/checkBoxStyle"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="@string/left_thumb"
+                android:textColor="#8D8D8D "
+                android:textSize="16sp" />
+
+            <CheckBox
+                android:id="@+id/r_thumb"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="@string/right_thumb"
+                android:textColor="#8D8D8D"
+                android:textSize="16sp"
+                android:theme="@style/checkBoxStyle" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
+    <FrameLayout
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Switch
+            android:id="@+id/iris_switch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/enable_iris_scan"
+            android:textColor="#8D8D8D"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:theme="@style/Custom.SwitchCompat.WhiteTrack"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </FrameLayout>
+
+    <TableRow
+        android:layout_width="336dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal">
+
+        <CheckBox
+            android:id="@+id/r_iris"
+            android:theme="@style/checkBoxStyle"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/left_iris"
+            android:textColor="#8D8D8D"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/l_iris"
+            android:theme="@style/checkBoxStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/right_iris"
+            android:textColor="#8D8D8D"
+            android:textSize="16sp" />
+    </TableRow>
+
+    <Button
+        android:id="@+id/continue_button"
+        style="@android:style/Widget.DeviceDefault.Button"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="0px"
+        android:layout_marginStart="0px"
+        android:layout_marginTop="0px"
+        android:height="30dp"
+        android:background="@drawable/button_border"
+        android:enabled="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="45dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:text="@string/continue_button"
+        android:textColor="@color/primary_text"
+        android:textSize="18sp" />
+
+</LinearLayout>

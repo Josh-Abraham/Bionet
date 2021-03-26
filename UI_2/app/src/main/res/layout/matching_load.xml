@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="167dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="169dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo" />
+
+    </TableRow>
+
+    <TextView
+        android:id="@+id/review_title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/start_matching"
+        android:textAlignment="center"
+        android:textColor="@color/primary"
+        android:textSize="20sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="32dp" />
+
+    <TextView
+        android:id="@+id/confirm_fields"
+        android:layout_width="326dp"
+        android:layout_height="107dp"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/confirm_data"
+        android:textColor="#333333"
+        android:textSize="36sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <Button
+        android:id="@+id/start_authentication"
+        android:layout_width="326dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_border"
+        android:minHeight="45dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:text="@string/confirm_and_match"
+        android:textColor="@color/primary_text"
+        android:textSize="18sp" />
+
+</LinearLayout>

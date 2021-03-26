@@ -36,31 +36,48 @@ public class MainActivity extends Activity {
     UsbDevice device;
     UsbSerialDevice serialPort;
     UsbDeviceConnection connection;
-    ArrayList<Byte> allData = new ArrayList<Byte>();
+    String allData = "";
+    int i = 0;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
         @Override
-        public void onReceivedData(byte[] arg0) {
-            String data = null;
-            try {
-                Byte[] byteObj = new Byte[arg0.length];
-                int i = 0;
-                for(byte b: arg0) {
-                    byteObj[i++] = b;
+        public void onReceivedData(byte[] byteArray) {
+//            String data = null;
+//            try {
+//                Byte[] byteObj = new Byte[arg0.length];
+//                int i = 0;
+//                for(byte b: arg0) {
+//                    byteObj[i++] = b;
+//                }
+//                allData.addAll(Arrays.asList(byteObj));
+//                data = new String(arg0, "UTF-8");
+//                data.concat("/n");
+//                // Getting data length
+//                // We want 52116 bytes
+//                tvAppend(textView, String.valueOf(allData.size()));
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+                i++;
+                StringBuffer hexStringBuffer = new StringBuffer();
+                for (int i = 0; i < byteArray.length; i++) {
+                    hexStringBuffer.append(byteToHex(byteArray[i]));
                 }
-                allData.addAll(Arrays.asList(byteObj));
-                data = new String(arg0, "UTF-8");
-                data.concat("/n");
-                // Getting data length
-                // We want 52116 bytes
-                tvAppend(textView, String.valueOf(allData.size()));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
-
+                String data = hexStringBuffer.toString();
+                allData += data;
+                if (allData.length() == 115214) {
+                    onClickClear(stopButton);
+                }
         }
     };
+
+    public String byteToHex(byte num) {
+        char[] hexDigits = new char[2];
+        hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
+        hexDigits[1] = Character.forDigit((num & 0xF), 16);
+        return new String(hexDigits);
+    }
+
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { //Broadcast Receiver to automatically start and stop the Serial connection.
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -72,7 +89,7 @@ public class MainActivity extends Activity {
                     if (serialPort != null) {
                         if (serialPort.open()) { //Set Serial Connection Parameters.
                             setUiEnabled(true);
-                            serialPort.setBaudRate(9600);
+                            serialPort.setBaudRate(57600);
                             serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                             serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
@@ -179,7 +196,32 @@ public class MainActivity extends Activity {
     }
 
     public void onClickClear(View view) {
-        textView.setText(" ");
+
+       //- tvAppend(textView, String.valueOf(y));
+        // splitData = Arrays.copyOfRange(splitData,0, splitData.length - 7);
+        String formattedData = "";
+        allData = allData.substring(0, allData.length() - 14);
+        int picData[][] = new int[160][120];
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < allData.length(); i += 6) {
+            int val1 = Integer.parseInt(String.valueOf(allData.charAt(i)))*10 + Integer.parseInt(String.valueOf(allData.charAt(i+1)));
+            int val2 = Integer.parseInt(String.valueOf(allData.charAt(i+2)))*10 + Integer.parseInt(String.valueOf(allData.charAt(i+3)));
+            int val3 = Integer.parseInt(String.valueOf(allData.charAt(i+4)))*10 + Integer.parseInt(String.valueOf(allData.charAt(i+5)));
+
+            //int pixVal = Integer.parseInt(splitData[i]) + Integer.parseInt(splitData[i+1]) + Integer.parseInt(splitData[i+2]);
+            picData[x][y] = (val1 + val2 + val3);
+            if (x != 159) {
+                formattedData += picData[x][y] + ", ";
+                x++;
+            } else {
+                formattedData += picData[x][y] + "\n";
+                x = 0;
+                y+= 1;
+            }
+        }
+        tvAppend(textView, "DONE");
+        allData = "";
     }
 
     private void tvAppend(TextView tv, CharSequence text) {

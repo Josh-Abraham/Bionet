@@ -15,50 +15,26 @@ import java.io.File;
 
 
 public class S3Client {
-    private static final String FACIAL = "facial";
-    private static final String FACIAL_CAPTURE = "facial-captures/";
+    private static final String FACIAL_CAPTURE = "Facial-captures/";
     private static final String EBTS_CAPTURE = "EBTS-captures/";
+    private static final String FP_CAPTURE = "FP-captures/";
+    private static final String MATCHING_CAPTURE = "MatchingStart-captures/";
+    private static final String IRIS_CAPTURE = "IRIS-captures/";
     private static String accessKey = "";
     private static String secret = "";
 
-    public static void uploadFile(String fileName, String fileDir, Context context, String type) {
+    public static void uploadFacialFile(String fileName, Context context) {
 
         BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secret);
         AmazonS3Client s3 = new AmazonS3Client(credentials);
         s3.setRegion(Region.getRegion(Regions.US_EAST_2));
 
         TransferUtility transferUtility = TransferUtility.builder().context(context).s3Client(s3).build();
-        String location = context.getFilesDir() + "/Images/" + fileName;
-        File myObj = new File(location);
-        System.out.println(myObj);
+        File dir = new File(context.getFilesDir(), "Images");
+        File faceFile = new File(dir, fileName);
         TransferObserver observer = null;
-        if (type.equals(FACIAL)) {
-            observer = transferUtility.upload("profiles-capstone", FACIAL_CAPTURE + fileName, myObj);
-        }
 
-
-        observer.setTransferListener(new TransferListener() {
-
-            @Override
-            public void onStateChanged(int id, TransferState state) {
-                if (state.toString().equals("COMPLETED")) {
-                    // callback logic for loading vs complete
-                    if (type.equals(FACIAL)) {
-                        OnboardData.getInstance().setS3_facial_key(FACIAL_CAPTURE + fileName);
-                    }
-                }
-            }
-
-            @Override
-            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-
-            }
-
-            @Override
-            public void onError(int id, Exception ex) {
-
-            }
-        });
+        observer = transferUtility.upload("profiles-capstone", FACIAL_CAPTURE + fileName, faceFile);
     }
 
     public static void uploadEBTS(File ebts, Context context) throws EbtsBuildingException {
@@ -68,20 +44,43 @@ public class S3Client {
         TransferUtility transferUtility = TransferUtility.builder().context(context).s3Client(s3).build();
         TransferObserver observer = null;
 
-        observer = transferUtility.upload("profiles-capstone", EBTS_CAPTURE + OnboardData.getInstance().getPassportId() + "_EBTS.txt", ebts);
+        if (AppProperties.getInstance().getDebugMode()) {
+            observer = transferUtility.upload("profiles-capstone", EBTS_CAPTURE + "DEBUG_MODE_EBTS.txt", ebts);
+        } else {
+            observer = transferUtility.upload("profiles-capstone", EBTS_CAPTURE + OnboardData.getInstance().getPassportId() + "_EBTS.txt", ebts);
+        }
     }
 
+    public static void uploadBiometric(String fpFileName, Context context, String dirName) {
+        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secret);
+        AmazonS3Client s3 = new AmazonS3Client(credentials);
+        s3.setRegion(Region.getRegion(Regions.US_EAST_2));
+        TransferUtility transferUtility = TransferUtility.builder().context(context).s3Client(s3).build();
+        File dir = new File(context.getFilesDir(), dirName);
+        File fpFile = new File(dir, fpFileName);
+        String S3Dir = FP_CAPTURE;
 
-        public static String getBatchDirectoryName() {
-
-        String app_folder_path = "";
-        app_folder_path = Environment.getExternalStorageDirectory().toString() + "/TSA";
-        File dir = new File(app_folder_path);
-        if (!dir.exists() && !dir.mkdirs()) {
-
+        if (dirName.equals("IRIS")) {
+            S3Dir = IRIS_CAPTURE;
         }
+        if (AppProperties.getInstance().getDebugMode()) {
+            transferUtility.upload("profiles-capstone", S3Dir + "DEBUG_MODE_FP.txt", fpFile);
+        } else {
+            transferUtility.upload("profiles-capstone", S3Dir + fpFileName, fpFile);
+        }
+    }
 
-        return app_folder_path;
+    public static void uploadMatchingFile(String fileName, Context context) {
+
+        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secret);
+        AmazonS3Client s3 = new AmazonS3Client(credentials);
+        s3.setRegion(Region.getRegion(Regions.US_EAST_2));
+
+        TransferUtility transferUtility = TransferUtility.builder().context(context).s3Client(s3).build();
+        File dir = new File(context.getFilesDir(), MatchingProperties.getInstance().getDirectory());
+        File faceFile = new File(dir, fileName);
+
+        transferUtility.upload("profiles-capstone", MATCHING_CAPTURE + fileName, faceFile);
     }
 
 }

@@ -3,7 +3,6 @@ package com.application.projecttbh;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,13 +26,14 @@ public class OnboardingOne extends Activity {
         setContentView(R.layout.onboarding_one);
 
         // Add UI items
-        passportIdOnboarding = (TextView) findViewById(R.id.passport_id_onboarding);
-        firstNameOnboarding = (TextView) findViewById(R.id.first_name_onboarding);
-        middleInitialOnboarding = (TextView) findViewById(R.id.middle_initial_onboarding);
-        lastNameOnboarding = (TextView) findViewById(R.id.last_name_onboarding);
-        dobOnboarding = (TextView) findViewById(R.id.dob_onboarding);
+        passportIdOnboarding = findViewById(R.id.passport_id_onboarding);
+        firstNameOnboarding =  findViewById(R.id.first_name_onboarding);
+        middleInitialOnboarding = findViewById(R.id.middle_initial_onboarding);
+        lastNameOnboarding = findViewById(R.id.last_name_onboarding);
+        dobOnboarding = findViewById(R.id.dob_onboarding);
 
-        continueButton = (Button) findViewById(R.id.login_button);
+        continueButton = findViewById(R.id.continue_btn);
+        Button homeButton = findViewById(R.id.homeButton);
 
         passportIdOnboarding.addTextChangedListener(new TextValidator(passportIdOnboarding) {
             @Override public void validate(TextView textView, String text) {
@@ -75,13 +75,11 @@ public class OnboardingOne extends Activity {
             }
         });
 
-        continueButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+        continueButton.setOnClickListener(v -> onContinueClick());
 
-                System.out.println( OnboardData.getInstance().getPassportId());
-                onContinueClick();
-            }
+        homeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(OnboardingOne.this, AgentHome.class); // Call a secondary view
+            startActivity(intent);
         });
     }
 

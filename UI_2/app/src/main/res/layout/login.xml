@@ -111,7 +111,7 @@
                 android:layout_height="35dp" />
 
             <Button
-                android:id="@+id/login_button"
+                android:id="@+id/homeButton"
                 style="@android:style/Widget.DeviceDefault.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/start_scan"
+                    android:id="@+id/sys_admin"
                     style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
                     android:layout_width="148dp"
                     android:layout_height="61dp"

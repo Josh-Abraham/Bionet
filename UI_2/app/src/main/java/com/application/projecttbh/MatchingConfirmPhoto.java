@@ -10,36 +10,48 @@ import android.widget.Button;
 import android.widget.ImageView;
 import java.io.File;
 
-public class OnboardingConfirmPhoto extends Activity {
+public class MatchingConfirmPhoto extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_confirm_photo);
         Context context = getApplicationContext();
-        String pathName = context.getFilesDir() + "/Images/" + OnboardData.getInstance().getFile();
+        String pathName = context.getFilesDir() + "/" + MatchingProperties.getInstance().getDirectory() + "/" + MatchingProperties.getInstance().getFacialScan();
         setImagePreview(pathName);
         Button onRetakeFacialCap = findViewById(R.id.retake_facial_capture);
         Button onConfirmFacialCapture = findViewById(R.id.confirm_and_upload);
 
 
         onRetakeFacialCap.setOnClickListener(v -> {
-           // On Retake, delete photo and swap back to camera view
+            // On Retake, delete photo and swap back to camera view
             String app_folder_path = "";
-            app_folder_path = context.getFilesDir() + "/" + OnboardData.getInstance().getDirectory();
+            app_folder_path = context.getFilesDir() + "/" + MatchingProperties.getInstance().getDirectory();
             File dir = new File(app_folder_path);
             if (!dir.exists() && !dir.mkdirs()) {
 
             }
-            File file = new File(dir, OnboardData.getInstance().getFile());
+            String id = MatchingProperties.getInstance().getPassportId();
+            String fileName = id + "_face" + ".jpg";
+            File file = new File(dir, fileName);
             boolean deleted = file.delete();
-            OnboardData.getInstance().setFile("");
-            OnboardData.getInstance().setDirectory("");
+            MatchingProperties.getInstance().setFacialScan("");
             finish();
         });
 
         onConfirmFacialCapture.setOnClickListener(v -> {
-            Intent intent = new Intent(OnboardingConfirmPhoto.this, InitialScan.class); // Call a secondary view
+            Intent intent;
+            Boolean fp[] = MatchingProperties.getInstance().getFpOptions();
+            Boolean iris[] = MatchingProperties.getInstance().getIrisOptions();
+            if ((MatchingProperties.getInstance().isEnableFP() && (fp[0] || fp[1] )) || (MatchingProperties.getInstance().isEnableIris() && (iris[0] || iris[1]))) {
+
+
+                intent = new Intent(MatchingConfirmPhoto.this, InitialScan.class); // Call a secondary view
+            } else {
+                //TODO: EDIT THIS
+                intent = new Intent(MatchingConfirmPhoto.this, MatchingStart.class); // Call a secondary view
+            }
+
             startActivity(intent);
         });
     }
