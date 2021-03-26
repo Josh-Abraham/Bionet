@@ -34,7 +34,7 @@ public class UploadOnboardData extends Activity {
         setContentView(R.layout.upload_onboarding_data);
 
         uploadBtn = findViewById(R.id.confirm_and_upload);
-        uploadBtn = findViewById(R.id.restart);
+        restartBtn = findViewById(R.id.restart);
         confirmField = findViewById(R.id.confirm_fields);
         uploadBtn.setHeight(150);
         uploadBtn.requestLayout();
@@ -105,7 +105,10 @@ public class UploadOnboardData extends Activity {
     private void uploadS3Data(JSONObject userData) throws IOException, EbtsBuildingException, JSONException {
         Context context = getApplicationContext();
         EBTSMaker.createRecord(userData, context);
-        S3Client.uploadFacialFile(OnboardData.getInstance().getS3_facial_key(), context);
+        if (!OnboardData.getInstance().getS3_facial_key().equals("")) {
+            S3Client.uploadFacialFile(OnboardData.getInstance().getS3_facial_key(), context);
+        }
+
         if (!OnboardData.getInstance().get_S3_fp_data()[0].equals("")) {
             S3Client.uploadBiometric(OnboardData.getInstance().get_S3_fp_data()[0], context, "FP");
         }

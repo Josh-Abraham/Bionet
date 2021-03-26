@@ -47,21 +47,21 @@ public class IrisScan extends Activity {
             }
             String data = hexStringBuffer.toString();
             allData += data + "\n";
-            if (hexStringBuffer.toString().equals("ff")) {
-                ff_key = true;
-            }
-            if (ff_key && !d9_key) {
-                ff_key = hexStringBuffer.toString().equals("d9");
-                d9_key = hexStringBuffer.toString().equals("d9");
-            }
-            if (ff_key && d9_key && hexStringBuffer.toString().equals("76")) {
-                // Got all three last keys, so call output function
-                try {
-                    saveData(allData);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+//            if (hexStringBuffer.toString().equals("ff")) {
+//                ff_key = true;
+//            }
+//            if (ff_key && !d9_key) {
+//                ff_key = hexStringBuffer.toString().equals("d9");
+//                d9_key = hexStringBuffer.toString().equals("d9");
+//            }
+//            if (ff_key && d9_key && hexStringBuffer.toString().equals("76")) {
+//                // Got all three last keys, so call output function
+//                try {
+//                    saveData(allData);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
 
         }
@@ -118,13 +118,10 @@ public class IrisScan extends Activity {
            nextButton.setVisibility(View.VISIBLE);
 //        }
 
-        nextButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent;
-                intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
-                startActivity(intent);
-            }
+        nextButton.setOnClickListener(v -> {
+            Intent intent;
+            intent = new Intent(IrisScan.this, UploadOnboardData.class); // Call a secondary view
+            startActivity(intent);
         });
 
     }

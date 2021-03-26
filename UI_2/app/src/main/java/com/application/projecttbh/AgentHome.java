@@ -33,8 +33,10 @@ public class AgentHome extends Activity {
             startActivity(intent);
         });
 
-        Button clearData = findViewById(R.id.clearData);
 
+
+        Button clearData = findViewById(R.id.clearData);
+        
         // Reset Instance Data
         OnboardData.getInstance().resetInstance();
         MatchingProperties.getInstance().resetInstance();
