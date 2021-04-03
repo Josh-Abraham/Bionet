@@ -1,17 +1,23 @@
 package com.application.projecttbh;
 
 import android.content.Context;
-import android.os.Environment;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+import android.os.StrictMode;
+
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.util.IOUtils;
+
 import org.mitre.jet.exceptions.EbtsBuildingException;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class S3Client {
@@ -83,4 +89,24 @@ public class S3Client {
         transferUtility.upload("profiles-capstone", MATCHING_CAPTURE + fileName, faceFile);
     }
 
+    public static String downloadFP(String fileName, Context context) throws IOException {
+
+        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secret);
+        AmazonS3Client s3 = new AmazonS3Client(credentials);
+        s3.setRegion(Region.getRegion(Regions.US_EAST_2));
+        TransferUtility transferUtility =
+                TransferUtility.builder()
+                        .context(context)
+                        .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                        .s3Client(s3)
+                        .build();
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        S3Object fp_obj = s3.getObject(new GetObjectRequest("profiles-capstone", FP_CAPTURE + fileName));
+        InputStream fp_data = fp_obj.getObjectContent();
+        String result = IOUtils.toString(fp_data);
+
+        return result;
+    }
 }

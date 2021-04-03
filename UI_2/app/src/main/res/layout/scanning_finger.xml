@@ -23,22 +23,6 @@
         android:textColor="@color/primary_text"
         android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/buttonResend"
-        style="@android:style/Widget.DeviceDefault.Button"
-        android:layout_width="300dp"
-
-        android:layout_height="0dp"
-        android:layout_margin="0px"
-        android:layout_marginStart="0px"
-        android:layout_marginTop="0px"
-        android:height="35dp"
-        android:background="@drawable/button_border"
-        android:minHeight="45dp"
-        android:text="@string/restart_scan"
-        android:textColor="@color/primary_text"
-        android:textSize="18sp" />
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="18dp" />
@@ -59,11 +43,11 @@
     <TextView
         android:id="@+id/scanning"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="200dp"
         android:gravity="center"
         android:text="@string/scanning"
         android:textColor="@color/primary"
-        android:textSize="34sp"
+        android:textSize="20sp"
         android:visibility="invisible" />
 
 </LinearLayout>

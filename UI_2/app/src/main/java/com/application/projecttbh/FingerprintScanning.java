@@ -1,5 +1,6 @@
 package com.application.projecttbh;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -9,6 +10,7 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,21 +21,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.RequiresApi;
 
 public class FingerprintScanning extends Activity {
     private static final String FINGER_PRINT_CODE = "a";
     public final String ACTION_USB_PERMISSION = "com.hariharan.arduinousb.USB_PERMISSION";
     ImageView stillFP, gifFP;
-    Button sendButton, resendButton;
+    Button sendButton;
     TextView scanningTag;
     UsbManager usbManager;
     UsbDevice device;
@@ -42,30 +42,44 @@ public class FingerprintScanning extends Activity {
     String allData = "";
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
+        @SuppressLint("SetTextI18n")
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onReceivedData(byte[] byteArray) {
-            StringBuffer hexStringBuffer = new StringBuffer();
-            for (int i = 0; i < byteArray.length; i++) {
-                hexStringBuffer.append(byteToHex(byteArray[i]));
-            }
-            String data = hexStringBuffer.toString();
+            String data = new String(byteArray, StandardCharsets.UTF_8);
             allData += data;
-            if (allData.length() >= 115214) {
+            if (allData.contains("Finger")) {
+                allData = allData.replace("Finger", "");
+                scanningTag.setText("Place Finger on Sensor");
+            } else if (allData.contains("Remove")) {
+                allData = allData.replace("Remove", "");
+                scanningTag.setText("Remove finger");
+            } else if (allData.contains("Failed") || allData.contains("Exists") || allData.contains("Error")) {
+                allData = "";
+                scanningTag.setText("Error Reading Finger");
+            } else if (allData.contains("Enroll Complete")) {
+                scanningTag.setText("Enrollment Complete");
+                sendButton.setEnabled(false);
+                allData = "";
+            }
+            String[] split = allData.split(" ");
+            if (split.length == 498) {
                 try {
-                    saveData();
+                    if ((allData.charAt(allData.length() -1) == ('1') && allData.charAt(allData.length() -2) == (' ')) || (allData.charAt(allData.length() -1) == (' ') && allData.charAt(allData.length() -2) == ('1') && allData.charAt(allData.length() -3) == (' ') )) {
+                        allData = "";
+                        scanningTag.setText("Error Reading Finger");
+                    } else {
+                        if (allData.charAt(allData.length() - 1) != (' ')) {
+                            allData += " ";
+                        }
+                        saveData();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     };
-
-    public String byteToHex(byte num) {
-        char[] hexDigits = new char[2];
-        hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
-        hexDigits[1] = Character.forDigit((num & 0xF), 16);
-        return new String(hexDigits);
-    }
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { //Broadcast Receiver to automatically start and stop the Serial connection.
         @Override
@@ -77,7 +91,7 @@ public class FingerprintScanning extends Activity {
                     serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
                     if (serialPort != null) {
                         if (serialPort.open()) { //Set Serial Connection Parameters.
-                            serialPort.setBaudRate(57600);
+                            serialPort.setBaudRate(9600);
                             serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                             serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
@@ -110,7 +124,6 @@ public class FingerprintScanning extends Activity {
         setContentView(R.layout.scanning_finger);
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
         sendButton = findViewById(R.id.buttonSend);
-        resendButton = findViewById(R.id.buttonResend);
         scanningTag = findViewById(R.id.scanning);
         stillFP = findViewById(R.id.stillFP);
         gifFP = findViewById(R.id.gifFP);
@@ -123,22 +136,19 @@ public class FingerprintScanning extends Activity {
         onStartUSB();
 
         sendButton.setOnClickListener(v -> {
-            serialPort.write(FINGER_PRINT_CODE.getBytes());
-            stillFP.getLayoutParams().height = 0;
+            try {
+                serialPort.write(FINGER_PRINT_CODE.getBytes());
+                stillFP.getLayoutParams().height = 0;
 
-            gifFP.getLayoutParams().height = 800;
-            stillFP.requestLayout();
-            gifFP.requestLayout();
-            scanningTag.setVisibility(View.VISIBLE);
-            sendButton.setHeight(0);
-            resendButton.setHeight(50);
-            sendButton.requestLayout();
-            resendButton.requestLayout();
-        });
+                gifFP.getLayoutParams().height = 800;
+                stillFP.requestLayout();
+                gifFP.requestLayout();
+                scanningTag.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        resendButton.setOnClickListener(v -> {
-            allData = "";
-            serialPort.write(FINGER_PRINT_CODE.getBytes());
+            // sendButton.setEnabled(false);
         });
     }
 
@@ -174,12 +184,11 @@ public class FingerprintScanning extends Activity {
         } else {
             Toast.makeText(getApplicationContext(), String.format("%s\n", "No Devices"), Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     public void onCloseConnection() {
         serialPort.close();
+        unregisterReceiver(broadcastReceiver);
         Toast.makeText(getApplicationContext(), String.format("%s\n", "Serial Connection Closed"), Toast.LENGTH_LONG).show();
     }
 
@@ -195,27 +204,7 @@ public class FingerprintScanning extends Activity {
     }
 
     public void saveData() throws IOException {
-        String formattedData = "";
-        allData = allData.substring(14);
-        int picData[][] = new int[160][120];
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < allData.length(); i += 6) {
-            String hex0 = String.valueOf(allData.charAt(i)) + String.valueOf(allData.charAt(i+1));
-            String ascii0 = hexToAscii(hex0);
-            String hex1 = String.valueOf(allData.charAt(i+2)) + String.valueOf(allData.charAt(i+3));
-            String ascii1 = hexToAscii(hex1);
-            String hex2 = String.valueOf(allData.charAt(i+4)) + String.valueOf(allData.charAt(i+5));
-            String ascii2 = hexToAscii(hex2);
-            if (x != 159) {
-                formattedData += ascii0 + ascii1 + ascii2 + ",";
-                x++;
-            } else {
-                formattedData += ascii0 + ascii1 + ascii2 + "\n";
-                x = 0;
-                y+= 1;
-            }
-        }
+
 
         Context context = getApplicationContext();
         int seqNum = AppProperties.getInstance().getSeqNum();
@@ -226,7 +215,7 @@ public class FingerprintScanning extends Activity {
             dir.mkdir();
         }
         BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/FP/" + fileName));
-        writer.write(formattedData);
+        writer.write(allData);
 
         writer.close();
         allData = "";

@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,11 +21,14 @@ import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 
 public class MainActivity extends Activity {
@@ -40,34 +44,47 @@ public class MainActivity extends Activity {
     int i = 0;
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onReceivedData(byte[] byteArray) {
-//            String data = null;
-//            try {
-//                Byte[] byteObj = new Byte[arg0.length];
-//                int i = 0;
-//                for(byte b: arg0) {
-//                    byteObj[i++] = b;
-//                }
-//                allData.addAll(Arrays.asList(byteObj));
-//                data = new String(arg0, "UTF-8");
-//                data.concat("/n");
-//                // Getting data length
-//                // We want 52116 bytes
-//                tvAppend(textView, String.valueOf(allData.size()));
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
+
+            // FINGER PRINT LOGIC
+            String data = new String(byteArray, StandardCharsets.UTF_8);
+            allData += data;
+            if (allData.contains("Finger")) {
+                allData = allData.replace("Finger", "");
+                tvAppend(textView, "Place Finger on Sensor\n");
+            } else if (allData.contains("Remove")) {
+                allData = allData.replace("Remove", "");
+                tvAppend(textView, "Remove finger from sensor\n");
+            } else if (allData.contains("Failed") || allData.contains("Exists") || allData.contains("Error")) {
+                allData = "";
+                tvAppend(textView, "Error Reading Finger\n");
+            } else if (allData.contains("Enroll Complete")) {
+                // tvAppend(textView, "Enrollment Complete\n");
+                int cutOff = allData.indexOf("Enroll Complete") + 15;
+                allData = "";
+            }
+            String[] split = allData.split(" ");
+            if (split.length == 498) {
+                onClickClear(stopButton);
+            }
+
+//            String data = new String(byteArray, StandardCharsets.UTF_8);
+//            allData += data;
+//            if (allData.contains("No Camera")) {
+//                allData = "";
+//                tvAppend(textView, "No Camera Found");
+//            } else if (allData.contains("Snap in 3")) {
+//                allData = "";
+//                tvAppend(textView, "Picture in 3");
+//            } else if (allData.contains("Failed")) {
+//                allData = "";
+//                tvAppend(textView, "Failed to capture");
+//            } else if (allData.contains("Done")) {
+//                allData = allData.substring(0, allData.length() - 4);
+//                onClickClear(stopButton);
 //            }
-                i++;
-                StringBuffer hexStringBuffer = new StringBuffer();
-                for (int i = 0; i < byteArray.length; i++) {
-                    hexStringBuffer.append(byteToHex(byteArray[i]));
-                }
-                String data = hexStringBuffer.toString();
-                allData += data;
-                if (allData.length() == 115214) {
-                    onClickClear(stopButton);
-                }
         }
     };
 
@@ -89,7 +106,7 @@ public class MainActivity extends Activity {
                     if (serialPort != null) {
                         if (serialPort.open()) { //Set Serial Connection Parameters.
                             setUiEnabled(true);
-                            serialPort.setBaudRate(57600);
+                            serialPort.setBaudRate(9600);
                             serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                             serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
@@ -185,7 +202,7 @@ public class MainActivity extends Activity {
         String string = editText.getText().toString();
         serialPort.write(string.getBytes());
         tvAppend(textView, "\nData Sent : " + string + "\n");
-
+        allData = "";
     }
 
     public void onClickStop(View view) {
@@ -200,27 +217,17 @@ public class MainActivity extends Activity {
        //- tvAppend(textView, String.valueOf(y));
         // splitData = Arrays.copyOfRange(splitData,0, splitData.length - 7);
         String formattedData = "";
-        allData = allData.substring(0, allData.length() - 14);
-        int picData[][] = new int[160][120];
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < allData.length(); i += 6) {
-            int val1 = Integer.parseInt(String.valueOf(allData.charAt(i)))*10 + Integer.parseInt(String.valueOf(allData.charAt(i+1)));
-            int val2 = Integer.parseInt(String.valueOf(allData.charAt(i+2)))*10 + Integer.parseInt(String.valueOf(allData.charAt(i+3)));
-            int val3 = Integer.parseInt(String.valueOf(allData.charAt(i+4)))*10 + Integer.parseInt(String.valueOf(allData.charAt(i+5)));
+        // allData = allData.substring(0, allData.length() - 14);
+//        int picData[][] = new int[160][120];
+//        int x = 0;
+//        int y = 0;
+//        for (int i = 0; i < allData.length(); i += 1) {
+//            char  val1 = allData.charAt(i);
+//            tvAppend(textView, val1 + "\n");
+//
+//        }
+        tvAppend(textView, allData + "\n");
 
-            //int pixVal = Integer.parseInt(splitData[i]) + Integer.parseInt(splitData[i+1]) + Integer.parseInt(splitData[i+2]);
-            picData[x][y] = (val1 + val2 + val3);
-            if (x != 159) {
-                formattedData += picData[x][y] + ", ";
-                x++;
-            } else {
-                formattedData += picData[x][y] + "\n";
-                x = 0;
-                y+= 1;
-            }
-        }
-        tvAppend(textView, "DONE");
         allData = "";
     }
 
