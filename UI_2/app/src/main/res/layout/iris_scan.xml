@@ -7,6 +7,22 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/buttonSend"
+        style="@android:style/Widget.DeviceDefault.Button"
+        android:layout_width="300dp"
+
+        android:layout_height="45dp"
+        android:layout_margin="0px"
+        android:layout_marginStart="0px"
+        android:layout_marginTop="0px"
+        android:height="35dp"
+        android:background="@drawable/button_border"
+        android:minHeight="45dp"
+        android:text="@string/start_scan"
+        android:textColor="@color/primary_text"
+        android:textSize="18sp" />
+
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="331dp"
         android:layout_height="426dp"
