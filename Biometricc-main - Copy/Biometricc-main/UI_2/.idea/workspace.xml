@@ -6,7 +6,9 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0cd2b2d2-7707-4d9d-a154-4e93c05c2b56" name="Default Changelist" comment="" />
+    <list default="true" id="0cd2b2d2-7707-4d9d-a154-4e93c05c2b56" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +28,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="ProjectId" id="1ndNmKjLf1rvFlDYOuFhO15E7XW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -37,7 +42,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../UI_2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
@@ -53,9 +58,7 @@
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method v="2" />
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="Project_TBH.app" />
@@ -110,9 +113,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method v="2" />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -141,9 +142,10 @@
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
     <state x="1309" y="332" key="AndroidCreateXmlResourceDialog/0.0.2752.1112@0.0.2752.1112" timestamp="1611898877407" />
-    <state x="2033" y="341" key="FileChooserDialogImpl" timestamp="1611889163951">
-      <screen x="0" y="0" width="2752" height="1112" />
+    <state x="1418" y="319" key="FileChooserDialogImpl" timestamp="1617591577864">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="1418" y="319" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1617591577864" />
     <state x="2033" y="341" key="FileChooserDialogImpl/0.0.2752.1112@0.0.2752.1112" timestamp="1611889163951" />
     <state x="1272" y="302" key="chooseDestDirectoryDialog" timestamp="1611905036588">
       <screen x="0" y="0" width="2752" height="1112" />

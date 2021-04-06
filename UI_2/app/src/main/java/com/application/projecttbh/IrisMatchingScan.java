@@ -1,5 +1,6 @@
 package com.application.projecttbh;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -9,63 +10,71 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.RequiresApi;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
-
-import java.io.BufferedWriter;
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class IrisMatchingScan extends Activity {
     public final String ACTION_USB_PERMISSION = "com.hariharan.arduinousb.USB_PERMISSION";
+    Button sendButton;
+    CountDownTimer cTimer = null;
     UsbManager usbManager;
+    TextView scanningTag;
     UsbDevice device;
     UsbSerialDevice serialPort;
     UsbDeviceConnection connection;
     final String IRIS_SCAN_CODE = "b";
     String allData = "";
-    boolean ff_key, d9_key = false;
+    int countTime = 3;
+
 
     UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() { //Defining a Callback which triggers whenever data is read.
+        @SuppressLint("SetTextI18n")
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onReceivedData(byte[] byteArray) {
-            StringBuffer hexStringBuffer = new StringBuffer();
-            for (int i = 0; i < byteArray.length; i++) {
-                hexStringBuffer.append(byteToHex(byteArray[i]));
-            }
-            String data = hexStringBuffer.toString();
-            allData += data + "\n";
-            if (hexStringBuffer.toString().equals("ff")) {
-                ff_key = true;
-            }
-            if (ff_key && !d9_key) {
-                ff_key = hexStringBuffer.toString().equals("d9");
-                d9_key = hexStringBuffer.toString().equals("d9");
-            }
-            if (ff_key && d9_key && hexStringBuffer.toString().equals("76")) {
-                // Got all three last keys, so call output function
+            String data = new String(byteArray, StandardCharsets.UTF_8);
+            allData += data;
+            if (allData.contains("No Camera")) {
+                allData = "";
+                scanningTag.setText("No Camera Found");
+            } else if (allData.contains("Snap in 3")) {
+                allData = "";
+                scanningTag.setText("Picture in 3 ...");
+            } else if (allData.contains("Failed")) {
+                allData = "";
+                scanningTag.setText("Failed to capture");
+            } else if (allData.contains("Done")) {
+                allData = allData.replaceAll("Done", "");
+                scanningTag.setText("Done!");
                 try {
-                    saveData(allData);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        createCapture();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
-
         }
     };
+
+
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { //Broadcast Receiver to automatically start and stop the Serial connection.
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -76,7 +85,7 @@ public class IrisMatchingScan extends Activity {
                     serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
                     if (serialPort != null) {
                         if (serialPort.open()) { //Set Serial Connection Parameters.
-                            serialPort.setBaudRate(9600);
+                            serialPort.setBaudRate(57600);
                             serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                             serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
@@ -93,56 +102,77 @@ public class IrisMatchingScan extends Activity {
                     Log.d("SERIAL", "PERM NOT GRANTED");
                 }
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_ATTACHED)) {
-                onClickStart();
+                onStartUSB();
             } else if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
-                onUsbStop();
+                onCloseConnection();
             }
         }
         ;
     };
 
 
+
+    @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.iris_scan);
-        // usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
-        Button nextButton = findViewById(R.id.next);
+        usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
+        sendButton = findViewById(R.id.buttonSend);
+        scanningTag = findViewById(R.id.scanning);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
-        // registerReceiver(broadcastReceiver, filter);
+        registerReceiver(broadcastReceiver, filter);
+        onStartUSB();
+        countTime = 3;
+        scanningTag.setText("Begin Scan...");
+        allData = "";
 
-//        if (AppProperties.getInstance().getDebugMode()) {
-        nextButton.setVisibility(View.VISIBLE);
-//        }
 
-        nextButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent;
-                if(AppProperties.getInstance().getSeqNum() == 2 && MatchingProperties.getInstance().getIrisOptions()[1]) {
-                    AppProperties.getInstance().setSeqNum(3);
-                    intent = new Intent(IrisMatchingScan.this, InitialMatchingScan.class); // Call a secondary view
-                } else {
-                    intent = new Intent(IrisMatchingScan.this, MatchingStart.class); // Call a secondary view
-                }
-
-                startActivity(intent);
-
-            }
+        sendButton.setOnClickListener(v -> {
+            serialPort.write(IRIS_SCAN_CODE.getBytes());
+            scanningTag.setVisibility(View.VISIBLE);
+            startTimer();
+            // sendButton.setEnabled(false);
         });
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        onUsbStop();
+        countTime = 3;
+        scanningTag.setText("Begin Scan...");
+        allData = "";
+        cancelTimer();
+        onCloseConnection();
     }
 
-    public void onClickStart() {
+    void startTimer() {
+        cTimer = new CountDownTimer(3001, 1000) {
+            @SuppressLint("SetTextI18n")
+            public void onTick(long millisUntilFinished) {
+                scanningTag.setText("Picture in " + countTime + " ...");
+                countTime -= 1;
+            }
+            @SuppressLint("SetTextI18n")
+            public void onFinish() {
+                // sendButton.setEnabled(false);
+                scanningTag.setText("Processing ...");
+            }
+        };
+        cTimer.start();
+    }
+
+
+    //cancel timer
+    void cancelTimer() {
+        if(cTimer!=null)
+            cTimer.cancel();
+    }
+
+    public void onStartUSB() {
 
         HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
         if (!usbDevices.isEmpty()) {
@@ -150,17 +180,11 @@ public class IrisMatchingScan extends Activity {
             for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
                 device = entry.getValue();
                 int deviceVID = device.getVendorId();
-                if (deviceVID == 0x2341)//Arduino Vendor ID
+                if (deviceVID == 0x2341) //Arduino Vendor ID
                 {
                     PendingIntent pi = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
                     usbManager.requestPermission(device, pi);
                     keep = false;
-                    try {
-                        Thread.sleep(2 * 1000);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
-                    }
-                    serialPort.write(IRIS_SCAN_CODE.getBytes());
                 } else {
                     connection = null;
                     device = null;
@@ -173,53 +197,48 @@ public class IrisMatchingScan extends Activity {
         } else {
             Toast.makeText(getApplicationContext(), String.format("%s\n", "No Devices"), Toast.LENGTH_LONG).show();
         }
-
-
     }
 
-    public void onUsbStop() {
+    public void onCloseConnection() {
         if (serialPort != null) {
             serialPort.close();
+            unregisterReceiver(broadcastReceiver);
+            Toast.makeText(getApplicationContext(), String.format("%s\n", "Serial Connection Closed"), Toast.LENGTH_LONG).show();
         }
-        unregisterReceiver(broadcastReceiver);
     }
 
-    public String byteToHex(byte num) {
-        char[] hexDigits = new char[2];
-        hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
-        hexDigits[1] = Character.forDigit((num & 0xF), 16);
-        return new String(hexDigits);
-    }
+    public void createCapture() throws IOException {
 
-    public void saveData(String allData) throws IOException {
+        String data = allData.trim();
+        MatchingProperties.getInstance().setIris_image(data);
+        String[] dataArray = data.split(" ");
+        ArrayList<Integer> cleanData = new ArrayList<Integer>();
+        for(int i = 0; i < dataArray.length; i++) {
+            int intdata = Integer.parseInt(dataArray[i], 16);
+            cleanData.add(intdata);
+        }
+
         Context context = getApplicationContext();
-        int seq_num = AppProperties.getInstance().getSeqNum();
-        if (AppProperties.getInstance().getType().equals("onboarding")) {
-            String tag = OnboardData.getInstance().getPassportId() + "_IRIS_" + seq_num;
-            OnboardData.getInstance().update_S3_iris_data(tag, seq_num-4);
+        File dir = new File(context.getFilesDir(), "Iris");
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        File file = new File(dir, "output.jpg");
 
-            File dir = new File(context.getFilesDir(), "IRIS");
-            if(!dir.exists()){
-                dir.mkdir();
-            }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(context.getFilesDir() + "/IRIS/" + tag));
-            writer.write(allData);
-
-            writer.close();
-
-
-            int currentScan = seq_num + 1;
-            AppProperties.getInstance().setSeqNum(currentScan);
-            if (AppProperties.getInstance().getSeqNum() == 6) {
-                Intent intent = new Intent(IrisMatchingScan.this, MatchingStart.class); // Call a secondary view
-                startActivity(intent);
+        FileOutputStream fos = new FileOutputStream(file);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        int y = 0;
+        for (int x = 0; x < cleanData.size(); x++) {
+            y = y + 1;
+            if (y % 33 == 0) {
+                continue;
             } else {
-                Intent intent = new Intent(IrisMatchingScan.this, InitialMatchingScan.class); // Call a secondary view
-                startActivity(intent);
+                bos.write(cleanData.get(x));
             }
         }
 
-
-
+        Intent intent = new Intent(IrisMatchingScan.this, ConfirmIrisMatch.class); // Call a secondary view
+        startActivity(intent);
     }
+
 }

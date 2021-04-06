@@ -174,7 +174,7 @@
         android:layout_gravity="center_horizontal">
 
         <CheckBox
-            android:id="@+id/r_iris"
+            android:id="@+id/l_iris"
             android:theme="@style/checkBoxStyle"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -184,7 +184,7 @@
             android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/l_iris"
+            android:id="@+id/r_iris"
             android:theme="@style/checkBoxStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

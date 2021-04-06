@@ -8,11 +8,14 @@ public class MatchingProperties {
     private boolean enableIris = false;
     private Boolean[] irisOptions = new Boolean[] {false, false}; // IL, IR
     private String[] irisS3 = new String[] {"", ""}; // LI, RI
+    private Integer[] fullSeq = new Integer[]{};
     private String passportId = "";
     private String facialScan = "";
-    private final String directory = "MatchingStart";
+    private final String directory = "Matching";
+    private Boolean[] FpMatches = new Boolean[] {false, false};
 
     private static MatchingProperties instance;
+    private String irisImage;
 
     public static MatchingProperties getInstance() {
         if (instance == null)
@@ -116,5 +119,34 @@ public class MatchingProperties {
         this.irisS3 = new String[] {"", ""}; // LI, RI
         this.passportId = "";
         this.facialScan = "";
+        this.fullSeq = new Integer[]{};
+    }
+
+    public Integer[] getFullSeq() {
+        return fullSeq;
+    }
+
+    public void setFullSeq(Integer[] fullSeq) {
+        this.fullSeq = fullSeq;
+    }
+
+    public Boolean[] getFpMatches() {
+        return FpMatches;
+    }
+
+    public void setFpMatches(Boolean[] fpMatches) {
+        this.FpMatches = fpMatches;
+    }
+
+    public void setFPMatchIndex(int index, Boolean newVal) {
+        this.FpMatches[index] = newVal;
+    }
+
+    public void setIris_image(String data) {
+        this.irisImage = data;
+    }
+
+    public String getIris_image() {
+        return this.irisImage;
     }
 }

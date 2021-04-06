@@ -26,6 +26,7 @@ public class OnboardData {
 
     // Iris Data S3 Locations
     private String[] s3_iris_data = new String[] {"", ""};
+    private String iris_image = "";
 
     // Getter/setter
     public String getPassportId() {
@@ -210,5 +211,13 @@ public class OnboardData {
 
     private OnboardData() {
         this.resetInstance();
+    }
+
+    public String getIris_image() {
+        return iris_image;
+    }
+
+    public void setIris_image(String iris_image) {
+        this.iris_image = iris_image;
     }
 }

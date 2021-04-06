@@ -9,6 +9,9 @@ import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MatchingForm extends Activity {
     private TextView passportIdMatching;
     private CheckBox lThumb, rThumb, rIris, lIris;
@@ -85,35 +88,44 @@ public class MatchingForm extends Activity {
         });
 
         continueButton.setOnClickListener(v -> {
+
             if (continueButton.isEnabled()) {
+                AppProperties.getInstance().setSeqNum(0);
+                setSeq();
                 if (MatchingProperties.getInstance().isEnableFace()) {
                     Intent intent = new Intent(MatchingForm.this, MatchingCamera.class); // Call a secondary view
                     startActivity(intent);
                 } else if (MatchingProperties.getInstance().isEnableFP()) {
                     // FP SENSOR
-                    if (MatchingProperties.getInstance().getFpOptions()[0]) {
-                        AppProperties.getInstance().setSeqNum(0);
-                        Intent intent = new Intent(MatchingForm.this, FingerprintScanning.class); // Call a secondary view
-                        startActivity(intent);
-                    } else if (MatchingProperties.getInstance().getFpOptions()[1]) {
-                        AppProperties.getInstance().setSeqNum(1);
-                        Intent intent = new Intent(MatchingForm.this, FingerprintScanning.class); // Call a secondary view
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(MatchingForm.this, FingerprintScanning.class); // Call a secondary view
+                    startActivity(intent);
+
                 }  else {
                     // IRIS SENSOR
-                    if (MatchingProperties.getInstance().getIrisOptions()[0]) {
-                        AppProperties.getInstance().setSeqNum(2);
-                        Intent intent = new Intent(MatchingForm.this, IrisScan.class); // Call a secondary view
-                        startActivity(intent);
-                    } else if (MatchingProperties.getInstance().getIrisOptions()[1]) {
-                        AppProperties.getInstance().setSeqNum(3);
-                        Intent intent = new Intent(MatchingForm.this, IrisScan.class); // Call a secondary view
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(MatchingForm.this, IrisScan.class); // Call a secondary view
+                    startActivity(intent);
                 }
             }
         });
+    }
+
+    private void setSeq() {
+        List<Integer> al = new ArrayList<Integer>();
+        if(MatchingProperties.getInstance().getFpOptions()[0]) {
+            al.add(0);
+        }
+        if(MatchingProperties.getInstance().getFpOptions()[1]) {
+            al.add(1);
+        }
+        if(MatchingProperties.getInstance().getIrisOptions()[0]) {
+            al.add(2);
+        }
+        if(MatchingProperties.getInstance().getIrisOptions()[1]) {
+            al.add(3);
+        }
+        Integer[] arg = (Integer[]) al.toArray(new Integer[0]);
+
+        MatchingProperties.getInstance().setFullSeq(arg);
     }
 
     private boolean checkContinueButton() {
