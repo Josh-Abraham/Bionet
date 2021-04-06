@@ -10,7 +10,7 @@ GT5X_DeviceInfo ginfo;
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(57600);
   // Serial.println("ENROLL test");
 
   pinMode(LED_BUILTIN, OUTPUT);
@@ -32,6 +32,7 @@ void loop()
       } else {
         while (1) yield();
       }
+      
       finger.delete_id(0);
       uint16_t fid = 0;
 
@@ -52,7 +53,6 @@ void loop()
       cam_get();
       digitalWrite(LED_BUILTIN, LOW);
     } else if (inByte == 99) {
-      
       fserial.begin(9600);
       if (finger.begin(&ginfo)) {
       } else {
@@ -68,7 +68,7 @@ void loop()
       char j;
 
       while ( k < 498) {
-        delay(1);
+        
         if (Serial.available()) {
           j = Serial.read();
 
@@ -372,7 +372,7 @@ void cam_get() {
     Serial.print("Error");
   }
   cam.setImageSize(VC0706_640x480);        // biggest
-  //cam.setImageSize(VC0706_320x240);        // medium
+  // cam.setImageSize(VC0706_320x240);        // medium
   //cam.setImageSize(VC0706_160x120);          // small
   uint8_t imgsize = cam.getImageSize();
 
@@ -393,10 +393,15 @@ void cam_get() {
     uint8_t bytesToRead = min((uint16_t)32, jpglen); // change 32 to 64 for a speedup but may not work with all setups!
     buffer = cam.readPicture(bytesToRead);
 
+
+    // Loop through the 32 bytes in the buffer
     char foo [20];
-    sprintf(foo, "%02x", (*buffer));
-    Serial.print(foo);
-    Serial.print(" ");
+    int i = 0;
+    for(i=0;i<=bytesToRead;i++){
+      sprintf(foo,"%02x",*(buffer+i));
+      Serial.print(foo);
+      Serial.print(" ");
+    }
     jpglen -= bytesToRead;
   }
   Serial.println("Done");

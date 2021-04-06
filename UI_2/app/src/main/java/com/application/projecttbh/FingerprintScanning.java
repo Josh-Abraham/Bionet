@@ -72,7 +72,9 @@ public class FingerprintScanning extends Activity {
                         if (allData.charAt(allData.length() - 1) != (' ')) {
                             allData += " ";
                         }
-                        saveData();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            saveData();
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -91,7 +93,7 @@ public class FingerprintScanning extends Activity {
                     serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
                     if (serialPort != null) {
                         if (serialPort.open()) { //Set Serial Connection Parameters.
-                            serialPort.setBaudRate(9600);
+                            serialPort.setBaudRate(57600);
                             serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                             serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
@@ -187,9 +189,11 @@ public class FingerprintScanning extends Activity {
     }
 
     public void onCloseConnection() {
-        serialPort.close();
-        unregisterReceiver(broadcastReceiver);
-        Toast.makeText(getApplicationContext(), String.format("%s\n", "Serial Connection Closed"), Toast.LENGTH_LONG).show();
+        if (serialPort != null) {
+            serialPort.close();
+            unregisterReceiver(broadcastReceiver);
+            Toast.makeText(getApplicationContext(), String.format("%s\n", "Serial Connection Closed"), Toast.LENGTH_LONG).show();
+        }
     }
 
     private static String hexToAscii(String hexStr) {
@@ -203,6 +207,7 @@ public class FingerprintScanning extends Activity {
         return output.toString();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void saveData() throws IOException {
 
 

@@ -48,18 +48,6 @@ public class AES {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-            byte[] bytes = (cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
-            int[] newBytes = new int[bytes.length];
-            for(int i = 0; i < bytes.length; i++) {
-                if(bytes[i] < 0) {
-                    newBytes[i] = (127 + (bytes[i] * -1));
-                } else {
-                    newBytes[i] = bytes[i];
-                }
-            }
-
-            // return intArrayToString(newBytes);
-
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
 
         }
@@ -78,6 +66,7 @@ public class AES {
         return builder.toString();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String decrypt(String strToDecrypt)
     {
         String secret = AES.keyStr;
@@ -87,17 +76,17 @@ public class AES {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
-            byte[] toDecrypt = new byte[strToDecrypt.length()];
-            for(int i = 0; i < strToDecrypt.length(); i++) {
-                char c = strToDecrypt.charAt(i);
-                if(c >= 128) {
-                    c -= 127;
-                    c *= -1;
-                }
-                toDecrypt[i] = (byte)c;
-            }
-            // cipher.doFinal(Base64.getDecoder().decode(strToDecrypt))
-            return new String(toDecrypt);
+//            byte[] toDecrypt = new byte[strToDecrypt.length()];
+//            for(int i = 0; i < strToDecrypt.length(); i++) {
+//                char c = strToDecrypt.charAt(i);
+//                if(c >= 128) {
+//                    c -= 127;
+//                    c *= -1;
+//                }
+//                toDecrypt[i] = (byte)c;
+//            }
+
+            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         }
         catch (Exception e)
         {

@@ -7,6 +7,7 @@ public class AppProperties {
     private int seq_num = 0;
     private Boolean batchMode = false;
     private String type = "";
+    private boolean ran = false;
 
     // Getter/setter
     public String getUsername() {
@@ -64,5 +65,13 @@ public class AppProperties {
         this.seq_num = 0;
         this.batchMode = false;
         this.type = "";
+    }
+
+    public boolean isRan() {
+        return ran;
+    }
+
+    public void setRan(boolean ran) {
+        this.ran = ran;
     }
 }

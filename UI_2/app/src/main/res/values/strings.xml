@@ -105,4 +105,7 @@
     <string name="matching">Matching ...</string>
     <string name="restart_scan">Restart Scan</string>
     <string name="restart_onboarding">Reset Onboarding</string>
+    <string name="verify_iris">Confirm Iris Scan</string>
+    <string name="retake_iris">Retake Iris Scan</string>
+    <string name="review_scan_cap">Review Scan</string>
 </resources>

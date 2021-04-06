@@ -28,6 +28,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,9 +61,13 @@ public class FingerprintMatching extends Activity {
             }  else if (allData.contains("Error")) {
                 scanningTag.setText("Error");
             } else if (allData.contains("No Match")) {
-               scanningTag.setText("No Match");
+               allData.replace("No Match", "");
+               scanningTag.setText("Done Processing Fingerprint");
+              matchNoMatch(false);
             } else if (allData.contains("Match")) {
-                scanningTag.setText("Match");
+               allData.replace("Match", "");
+                scanningTag.setText("Done Processing Fingerprint");
+               matchNoMatch(true);
             }
 
         }
@@ -77,7 +83,7 @@ public class FingerprintMatching extends Activity {
                     serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
                     if (serialPort != null) {
                         if (serialPort.open()) { //Set Serial Connection Parameters.
-                            serialPort.setBaudRate(9600);
+                            serialPort.setBaudRate(57600);
                             serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                             serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                             serialPort.setParity(UsbSerialInterface.PARITY_NONE);
@@ -104,8 +110,10 @@ public class FingerprintMatching extends Activity {
         ;
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppProperties.getInstance().setRan(false);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scanning_finger);
         usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
@@ -122,13 +130,14 @@ public class FingerprintMatching extends Activity {
         onStartUSB();
 
         sendButton.setOnClickListener(v -> {
+            scanningTag.setVisibility(View.VISIBLE);
+            scanningTag.setText("Press finger on sensor");
             try {
-                scanningTag.setVisibility(View.VISIBLE);
-                scanningTag.setText("Press finger on sensor");
                 loadFP();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         });
     }
 
@@ -168,11 +177,14 @@ public class FingerprintMatching extends Activity {
     }
 
     public void onCloseConnection() {
-        serialPort.close();
-        unregisterReceiver(broadcastReceiver);
-        Toast.makeText(getApplicationContext(), String.format("%s\n", "Serial Connection Closed"), Toast.LENGTH_LONG).show();
+        if (serialPort != null) {
+            serialPort.close();
+            unregisterReceiver(broadcastReceiver);
+            Toast.makeText(getApplicationContext(), String.format("%s\n", "Serial Connection Closed"), Toast.LENGTH_LONG).show();
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void loadFP() throws IOException {
         int seqNum = AppProperties.getInstance().getSeqNum();
         String fileName = MatchingProperties.getInstance().getPassportId() + "_FP_" + seqNum + ".txt";
@@ -180,7 +192,6 @@ public class FingerprintMatching extends Activity {
         String result = S3Client.downloadFP(fileName, context);
         serialPort.write(FINGER_PRINT_CODE.getBytes());
         startTimer(result);
-
     }
 
     void startTimer(String result) {
@@ -191,7 +202,17 @@ public class FingerprintMatching extends Activity {
             }
 
             public void onFinish() {
-                serialPort.write(result.getBytes());
+                String[] temp = result.split(" ");
+                for (int i = 0; i < temp.length; i++) {
+                    String hex = temp[i] + " ";
+                    serialPort.write(hex.getBytes());
+                    try {
+                        Thread.sleep(2);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         };
         cTimer.start();
@@ -201,5 +222,29 @@ public class FingerprintMatching extends Activity {
     void cancelTimer() {
         if(cTimer!=null)
             cTimer.cancel();
+    }
+
+    public void matchNoMatch(Boolean match) {
+            if (!AppProperties.getInstance().isRan()) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                int key = AppProperties.getInstance().getSeqNum();
+//            int seq = MatchingProperties.getInstance().getFullSeq()[key];
+                MatchingProperties.getInstance().setFPMatchIndex(key, match);
+                key += 1;
+                Intent intent;
+                AppProperties.getInstance().setRan(true);
+                if (key < MatchingProperties.getInstance().getFullSeq().length) {
+                    AppProperties.getInstance().setSeqNum(key);
+                    intent = new Intent(FingerprintMatching.this, InitialMatchingScan.class); // Call a secondary view
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(FingerprintMatching.this, MatchingStart.class); // Call a secondary view
+                    startActivity(intent);
+                }
+            }
     }
 }

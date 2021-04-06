@@ -36,7 +36,8 @@ public class InitialMatchingScan extends Activity {
         startScan = findViewById(R.id.sys_admin);
         scanTag = findViewById(R.id.sensorTag);
         int key = AppProperties.getInstance().getSeqNum();
-        scanTag.setText(keys[key]);
+        int seq = MatchingProperties.getInstance().getFullSeq()[key];
+        scanTag.setText(keys[seq]);
         animateChevron1 (chevron1);
         animateChevron2 (chevron2);
         animateChevron3(chevron3);
@@ -45,7 +46,7 @@ public class InitialMatchingScan extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent;// Call a secondary view
-                if (key < 2) {
+                if (seq < 2) {
                     intent = new Intent(InitialMatchingScan.this, FingerprintMatching.class);
                 } else {
                     intent = new Intent(InitialMatchingScan.this, IrisMatchingScan.class);

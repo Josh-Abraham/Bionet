@@ -30,13 +30,13 @@ public class MatchingStart extends Activity {
             S3Client.uploadMatchingFile(instance.getFacialScan(), context);
         }
 
-        if (instance.isEnableFP() && !instance.getFpS3()[0].equals("")) {
-            S3Client.uploadMatchingFile(instance.getFpS3()[0], context);
-        }
-
-        if (instance.isEnableFP() && !instance.getFpS3()[1].equals("")) {
-            S3Client.uploadMatchingFile(instance.getFpS3()[1], context);
-        }
+//        if (instance.isEnableFP() && !instance.getFpS3()[0].equals("")) {
+//            S3Client.uploadMatchingFile(instance.getFpS3()[0], context);
+//        }
+//
+//        if (instance.isEnableFP() && !instance.getFpS3()[1].equals("")) {
+//            S3Client.uploadMatchingFile(instance.getFpS3()[1], context);
+//        }
 
         if (instance.isEnableIris() && !instance.getIrisS3()[0].equals("")) {
             S3Client.uploadMatchingFile(instance.getIrisS3()[0], context);

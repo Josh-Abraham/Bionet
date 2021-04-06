@@ -36,6 +36,11 @@ public class AgentHome extends Activity {
 
 
         Button clearData = findViewById(R.id.clearData);
+        clearData.setOnClickListener(v -> {
+
+            Intent intent = new Intent(AgentHome.this, IrisScan.class); // Call a secondary view
+            startActivity(intent);
+        });
         
         // Reset Instance Data
         OnboardData.getInstance().resetInstance();

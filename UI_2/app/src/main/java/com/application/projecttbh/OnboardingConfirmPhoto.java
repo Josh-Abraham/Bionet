@@ -15,6 +15,7 @@ public class OnboardingConfirmPhoto extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppProperties.getInstance().setSeqNum(0);
         setContentView(R.layout.onboarding_confirm_photo);
         Context context = getApplicationContext();
         String pathName = context.getFilesDir() + "/Images/" + OnboardData.getInstance().getFile();
