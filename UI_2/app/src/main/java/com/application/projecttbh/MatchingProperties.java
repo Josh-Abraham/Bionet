@@ -1,5 +1,7 @@
 package com.application.projecttbh;
 
+import org.json.JSONObject;
+
 public class MatchingProperties {
     private boolean enableFace = true;
     private boolean enableFP = false;
@@ -17,6 +19,7 @@ public class MatchingProperties {
     private static MatchingProperties instance;
     private String irisImage;
 
+    private JSONObject matchingData = new JSONObject();
     public static MatchingProperties getInstance() {
         if (instance == null)
             instance = new MatchingProperties();
@@ -94,7 +97,7 @@ public class MatchingProperties {
     }
 
     public String[] getIrisS3() {
-        return irisS3;
+        return this.irisS3;
     }
 
     public void setIrisS3(String[] irisS3) {
@@ -120,6 +123,7 @@ public class MatchingProperties {
         this.passportId = "";
         this.facialScan = "";
         this.fullSeq = new Integer[]{};
+        this.matchingData = new JSONObject();
     }
 
     public Integer[] getFullSeq() {
@@ -148,5 +152,13 @@ public class MatchingProperties {
 
     public String getIris_image() {
         return this.irisImage;
+    }
+
+    public JSONObject getMatchingData() {
+        return matchingData;
+    }
+
+    public void setMatchingData(JSONObject matchingData) {
+        this.matchingData = matchingData;
     }
 }

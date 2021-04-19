@@ -114,7 +114,7 @@ public class MatchingCamera extends AppCompatActivity {
         captureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = OnboardData.getInstance().getPassportId();
+                String id = MatchingProperties.getInstance().getPassportId();
                 String fileName = id + "_face" + ".jpg";
 
                 // Deals with storing in s3 for testing, doesn't create extra objects

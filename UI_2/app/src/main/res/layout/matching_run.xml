@@ -23,50 +23,5 @@
         android:textColor="@color/primary"
         android:textSize="34sp" />
 
-    <TextView
-        android:id="@+id/face"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/primary"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/fp_tag_0"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/primary"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/fp_tag_1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/primary"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/iris_tag_0"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/primary"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/iris_tag_1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/primary"
-        android:textSize="24sp" />
-
 
 </LinearLayout>
