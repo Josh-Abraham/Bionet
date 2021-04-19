@@ -97,12 +97,12 @@ public class MatchingForm extends Activity {
                     startActivity(intent);
                 } else if (MatchingProperties.getInstance().isEnableFP()) {
                     // FP SENSOR
-                    Intent intent = new Intent(MatchingForm.this, FingerprintScanning.class); // Call a secondary view
+                    Intent intent = new Intent(MatchingForm.this, InitialMatchingScan.class); // Call a secondary view
                     startActivity(intent);
 
                 }  else {
                     // IRIS SENSOR
-                    Intent intent = new Intent(MatchingForm.this, IrisScan.class); // Call a secondary view
+                    Intent intent = new Intent(MatchingForm.this, InitialMatchingScan.class); // Call a secondary view
                     startActivity(intent);
                 }
             }
@@ -129,7 +129,7 @@ public class MatchingForm extends Activity {
     }
 
     private boolean checkContinueButton() {
-        boolean someBiometric = MatchingProperties.getInstance().isEnableIris() || MatchingProperties.getInstance().isEnableIris() || MatchingProperties.getInstance().isEnableFace();
+        boolean someBiometric = MatchingProperties.getInstance().isEnableFP() || MatchingProperties.getInstance().isEnableIris() || MatchingProperties.getInstance().isEnableFace();
         boolean valid = true;
         if (MatchingProperties.getInstance().isEnableIris()) {
             valid = valid && (MatchingProperties.getInstance().getIrisOptions()[0] || MatchingProperties.getInstance().getIrisOptions()[1]);

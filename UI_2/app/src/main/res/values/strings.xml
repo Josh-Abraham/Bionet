@@ -108,4 +108,5 @@
     <string name="verify_iris">Confirm Iris Scan</string>
     <string name="retake_iris">Retake Iris Scan</string>
     <string name="review_scan_cap">Review Scan</string>
+    <string name="matching_status">Authentication Results</string>
 </resources>
