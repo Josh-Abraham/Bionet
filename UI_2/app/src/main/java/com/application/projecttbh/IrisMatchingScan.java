@@ -126,14 +126,14 @@ public class IrisMatchingScan extends Activity {
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         registerReceiver(broadcastReceiver, filter);
         onStartUSB();
-        countTime = 3;
-        scanningTag.setText("Begin Scan...");
-        allData = "";
 
+        scanningTag.setText("Begin Scan...");
 
         sendButton.setOnClickListener(v -> {
             serialPort.write(IRIS_SCAN_CODE.getBytes());
             scanningTag.setVisibility(View.VISIBLE);
+            countTime = 3;
+            allData = "";
             startTimer();
             // sendButton.setEnabled(false);
         });

@@ -56,6 +56,7 @@ public class MatchingCamera extends AppCompatActivity {
         captureImage = findViewById(R.id.captureImg);
 
         if (allPermissionsGranted()) {
+            AppProperties.getInstance().setSeqNum(0); // Reset to 0
             startCamera();
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);

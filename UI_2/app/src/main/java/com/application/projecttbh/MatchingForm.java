@@ -90,8 +90,9 @@ public class MatchingForm extends Activity {
         continueButton.setOnClickListener(v -> {
 
             if (continueButton.isEnabled()) {
-                AppProperties.getInstance().setSeqNum(0);
                 setSeq();
+                int firstKey = MatchingProperties.getInstance().getFullSeq()[0];
+                AppProperties.getInstance().setSeqNum(0);
                 if (MatchingProperties.getInstance().isEnableFace()) {
                     Intent intent = new Intent(MatchingForm.this, MatchingCamera.class); // Call a secondary view
                     startActivity(intent);
@@ -111,17 +112,20 @@ public class MatchingForm extends Activity {
 
     private void setSeq() {
         List<Integer> al = new ArrayList<Integer>();
-        if(MatchingProperties.getInstance().getFpOptions()[0]) {
+        if(MatchingProperties.getInstance().isEnableFace()) {
             al.add(0);
         }
-        if(MatchingProperties.getInstance().getFpOptions()[1]) {
+        if(MatchingProperties.getInstance().isEnableFP() && MatchingProperties.getInstance().getFpOptions()[0]) {
             al.add(1);
         }
-        if(MatchingProperties.getInstance().getIrisOptions()[0]) {
+        if(MatchingProperties.getInstance().isEnableFP() && MatchingProperties.getInstance().getFpOptions()[1]) {
             al.add(2);
         }
-        if(MatchingProperties.getInstance().getIrisOptions()[1]) {
+        if(MatchingProperties.getInstance().isEnableIris() && MatchingProperties.getInstance().getIrisOptions()[0]) {
             al.add(3);
+        }
+        if(MatchingProperties.getInstance().isEnableIris() && MatchingProperties.getInstance().getIrisOptions()[1]) {
+            al.add(4);
         }
         Integer[] arg = (Integer[]) al.toArray(new Integer[0]);
 
