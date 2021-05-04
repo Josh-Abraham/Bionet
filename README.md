@@ -1,6 +1,5 @@
-# BioNet
-## Multimodal Biomtric device
-## ENG 4000 - Capstone Project
+# BioNet - Multimodal Biomtric device
+### ENG 4000 - Capstone Project
 
 Biometric Capture & Matching device
 Including: Fingerprint, iris, and facial scan
