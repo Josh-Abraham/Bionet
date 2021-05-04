@@ -60,7 +60,7 @@ public class ConfirmIrisMatch extends Activity {
             Context context = getApplicationContext();
             String tag = MatchingProperties.getInstance().getPassportId() + "_IRIS_" + 0 + ".txt";
 
-            if (MatchingProperties.getInstance().getFullSeq()[AppProperties.getInstance().getSeqNum()] == 2) {
+            if (MatchingProperties.getInstance().getFullSeq()[AppProperties.getInstance().getSeqNum()] == 3) {
                 MatchingProperties.getInstance().updateIrisS3(0, tag);
             } else {
                 tag = MatchingProperties.getInstance().getPassportId() + "_IRIS_" + 1 + ".txt";

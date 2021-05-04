@@ -17,17 +17,18 @@ public class InitialMatchingScan extends Activity {
     ImageView chevron3;
     private Button startScan;
     private TextView scanTag;
-    private String[] keys = new String[4];
+    private String[] keys = new String[5];
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inital_scan);
-        keys[0] = getString(R.string.fp_scan_left_thumb);
-        keys[1] = getString(R.string.fp_scan_right_thumb);
-        keys[2] = getString(R.string.eye_scan_left);
-        keys[3] = getString(R.string.eye_scan_right);
+        keys[0] = "";
+        keys[1] = getString(R.string.fp_scan_left_thumb);
+        keys[2] = getString(R.string.fp_scan_right_thumb);
+        keys[3] = getString(R.string.eye_scan_left);
+        keys[4] = getString(R.string.eye_scan_right);
 
 
         chevron1 = findViewById(R.id.chevron1);
@@ -46,7 +47,8 @@ public class InitialMatchingScan extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent;// Call a secondary view
-                if (seq < 2) {
+                if (seq == 1 || seq == 2) {
+                    AppProperties.getInstance().setRan(false);
                     intent = new Intent(InitialMatchingScan.this, FingerprintMatching.class);
                 } else {
                     intent = new Intent(InitialMatchingScan.this, IrisMatchingScan.class);

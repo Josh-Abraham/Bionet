@@ -63,10 +63,10 @@ public class FingerprintMatching extends Activity {
             } else if (allData.contains("No Match")) {
                allData.replace("No Match", "");
                scanningTag.setText("Done Processing Fingerprint");
-              matchNoMatch(false);
+               matchNoMatch(false);
             } else if (allData.contains("Match")) {
                allData.replace("Match", "");
-                scanningTag.setText("Done Processing Fingerprint");
+               scanningTag.setText("Done Processing Fingerprint");
                matchNoMatch(true);
             }
 
@@ -187,7 +187,21 @@ public class FingerprintMatching extends Activity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void loadFP() throws IOException {
         int seqNum = AppProperties.getInstance().getSeqNum();
-        String fileName = MatchingProperties.getInstance().getPassportId() + "_FP_" + seqNum + ".txt";
+        int key = 0;
+        if (MatchingProperties.getInstance().isEnableFace()) {
+            if (MatchingProperties.getInstance().getFpOptions()[0] && MatchingProperties.getInstance().getFullSeq()[seqNum] == 1) {
+                key = 0;
+            } else {
+                key = 1;
+            }
+        } else {
+            if (MatchingProperties.getInstance().getFpOptions()[0] && MatchingProperties.getInstance().getFullSeq()[seqNum] == 0) {
+                key = 0;
+            } else {
+                key = 1;
+            }
+        }
+        String fileName = MatchingProperties.getInstance().getPassportId() + "_FP_" + key + ".txt";
         Context context = getApplicationContext();
         String result = S3Client.downloadFP(fileName, context);
         serialPort.write(FINGER_PRINT_CODE.getBytes());
@@ -226,19 +240,35 @@ public class FingerprintMatching extends Activity {
 
     public void matchNoMatch(Boolean match) {
             if (!AppProperties.getInstance().isRan()) {
+                allData = "";
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                int key = AppProperties.getInstance().getSeqNum();
-//            int seq = MatchingProperties.getInstance().getFullSeq()[key];
+                int seqNum = AppProperties.getInstance().getSeqNum();
+                int key = 0;
+                if (MatchingProperties.getInstance().isEnableFace()) {
+                    if (MatchingProperties.getInstance().getFpOptions()[0] && MatchingProperties.getInstance().getFullSeq()[seqNum] == 1) {
+                        key = 0;
+                    } else {
+                        key = 1;
+                    }
+                } else {
+                    if (MatchingProperties.getInstance().getFpOptions()[0] && MatchingProperties.getInstance().getFullSeq()[seqNum] == 0) {
+                        key = 0;
+                    } else {
+                        key = 1;
+                    }
+                }
                 MatchingProperties.getInstance().setFPMatchIndex(key, match);
-                key += 1;
+
+
+                seqNum += 1;
                 Intent intent;
                 AppProperties.getInstance().setRan(true);
-                if (key < MatchingProperties.getInstance().getFullSeq().length) {
-                    AppProperties.getInstance().setSeqNum(key);
+                if (seqNum < MatchingProperties.getInstance().getFullSeq().length) {
+                    AppProperties.getInstance().setSeqNum(seqNum);
                     intent = new Intent(FingerprintMatching.this, InitialMatchingScan.class); // Call a secondary view
                     startActivity(intent);
                 } else {

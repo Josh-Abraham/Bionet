@@ -15,6 +15,7 @@ public class MatchingConfirmPhoto extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppProperties.getInstance().setSeqNum(0); // Reset
         setContentView(R.layout.onboarding_confirm_photo);
         Context context = getApplicationContext();
         String pathName = context.getFilesDir() + "/" + MatchingProperties.getInstance().getDirectory() + "/" + MatchingProperties.getInstance().getFacialScan();
@@ -41,9 +42,8 @@ public class MatchingConfirmPhoto extends Activity {
 
         onConfirmFacialCapture.setOnClickListener(v -> {
             Intent intent;
-            Boolean fp[] = MatchingProperties.getInstance().getFpOptions();
-            Boolean iris[] = MatchingProperties.getInstance().getIrisOptions();
-            if ((MatchingProperties.getInstance().isEnableFP() && (fp[0] || fp[1] )) || (MatchingProperties.getInstance().isEnableIris() && (iris[0] || iris[1]))) {
+            AppProperties.getInstance().setSeqNum(1);
+            if (MatchingProperties.getInstance().getFullSeq().length > 1) {
                 intent = new Intent(MatchingConfirmPhoto.this, InitialMatchingScan.class); // Call a secondary view
             } else {
                 intent = new Intent(MatchingConfirmPhoto.this, MatchingStart.class); // Call a secondary view

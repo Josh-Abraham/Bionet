@@ -63,10 +63,10 @@ public class MatchingResults extends Activity {
                     verified = verified && MatchingProperties.getInstance().getFpMatches()[0];
                     fpTag0 = findViewById(R.id.fp_tag_0);
                     if (MatchingProperties.getInstance().getFpMatches()[0]) {
-                        fpTag0.setText("Left Thumb Scan: Valid");
+                        fpTag0.setText("Left Thumb\nScan: Valid");
                         fpTag0.setTextColor(Color.rgb(0, 200, 0));
                     } else {
-                        fpTag0.setText("Left Thumb Scan: Invalid");
+                        fpTag0.setText("Left Thumb\nScan: Invalid");
                         fpTag0.setTextColor(Color.rgb(200, 0, 0));
                     }
                     fpTag0.setHeight(60);
@@ -77,10 +77,10 @@ public class MatchingResults extends Activity {
                     verified = verified && MatchingProperties.getInstance().getFpMatches()[1];
                     fpTag1 = findViewById(R.id.fp_tag_1);
                     if (MatchingProperties.getInstance().getFpMatches()[1]) {
-                        fpTag1.setText("Right Thumb Scan: Valid");
+                        fpTag1.setText("Right Thumb\nScan: Valid");
                         fpTag1.setTextColor(Color.rgb(0, 200, 0));
                     } else {
-                        fpTag1.setText("Right Thumb Scan: Invalid");
+                        fpTag1.setText("Right Thumb\nScan: Invalid");
                         fpTag1.setTextColor(Color.rgb(200, 0, 0));
                     }
                     fpTag1.setHeight(60);
@@ -94,10 +94,10 @@ public class MatchingResults extends Activity {
                     irisTag0 = findViewById(R.id.iris_tag_0);
                     verified = verified && Boolean.parseBoolean(resp.getString("iris_0"));
                     if (Boolean.parseBoolean(resp.getString("iris_0"))) {
-                        irisTag0.setText("Left Iris Scan: Valid");
+                        irisTag0.setText("Right Iris\nScan: Valid");
                         irisTag0.setTextColor(Color.rgb(0, 200, 0));
                     } else {
-                        irisTag0.setText("Left Iris Scan: Invalid");
+                        irisTag0.setText("Right Iris\nScan: Invalid");
                         irisTag0.setTextColor(Color.rgb(200, 0, 0));
                     }
                     irisTag0.setHeight(60);
@@ -108,10 +108,10 @@ public class MatchingResults extends Activity {
                     irisTag1 = findViewById(R.id.iris_tag_1);
                     verified = verified && Boolean.parseBoolean(resp.getString("iris_1"));
                     if (Boolean.parseBoolean(resp.getString("iris_1"))) {
-                        irisTag1.setText("Right Iris Scan: Valid");
+                        irisTag1.setText("Right Iris\nScan: Valid");
                         irisTag1.setTextColor(Color.rgb(0, 200, 0));
                     } else {
-                        irisTag1.setText("Right Iris Scan: Invalid");
+                        irisTag1.setText("Right Iris\nScan: Invalid");
                         irisTag1.setTextColor(Color.rgb(200, 0, 0));
                     }
                     irisTag1.setHeight(60);
